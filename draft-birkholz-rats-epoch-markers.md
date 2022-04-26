@@ -50,7 +50,7 @@ Abstract Text
 
 # Introduction
 
-Systems that are required to interact via secure interactions often require a shared understand of the freshness of conveyed information, especially in the domain of remote attestation procedures.
+Systems that are required to interact via secure interactions often require a shared understanding of the freshness of conveyed information, especially in the domain of remote attestation procedures.
 Establishing a notion of freshness between various involved entities taking on roles that rely on information that is not outdated is not simple.
 In general, establishing a shared understanding of freshness in a secure manner is not simple.
 The RATS architecture dedicates an extensive appendix solely on the topic of freshness considerations and that fact alone should be considered a telltale sign on how necessary yet complex establishing a trusted and shared understanding of freshness between system actually is.
