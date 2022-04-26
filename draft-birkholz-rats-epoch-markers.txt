@@ -5,12 +5,12 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 27 October 2022                                     Arm Limited
+Expires: 28 October 2022                                     Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
-                                                 Universitaet Bremen TZI
-                                                           25 April 2022
+                                                  Universität Bremen TZI
+                                                           26 April 2022
 
 
                              Epoch Markers
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 October 2022.
+   This Internet-Draft will expire on 28 October 2022.
 
 Copyright Notice
 
@@ -286,7 +286,7 @@ Authors' Addresses
 
 
    Carsten Bormann
-   Universitaet Bremen TZI
+   Universität Bremen TZI
    Bibliothekstr. 1
    D-28359 Bremen
    Germany
