@@ -42,6 +42,10 @@ normative:
 
 informative:
 
+venue:
+  mail: rats@ietf.org
+  github: ietf-rats/draft-birkholz-rats-epoch-marker
+
 --- abstract
 
 Abstract Text
