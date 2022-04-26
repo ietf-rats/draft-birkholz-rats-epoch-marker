@@ -1,21 +1,20 @@
 ---
+v: 3
+
 title: Epoch Markers
 abbrev: Epoch Markers
 docname: draft-birkholz-rats-epoch-markers-latest
 stand_alone: true
-ipr: trust200902
 area: Security
 wg: RATS Working Group
 kw: Internet-Draft
+
 cat: std
-pi:
-  toc: yes
-  sortrefs: yes
-  symrefs: yes
+consensus: true
+submissiontype: IETF
 
 author:
-- ins: H. Birkholz
-  name: Henk Birkholz
+- name: Henk Birkholz
   org: Fraunhofer SIT
   abbrev: Fraunhofer SIT
   email: henk.birkholz@sit.fraunhofer.de
@@ -23,18 +22,15 @@ author:
   code: '64295'
   city: Darmstadt
   country: Germany
-- ins: T. Fossati
-  name: Thomas Fossati
+- name: Thomas Fossati
   organization: Arm Limited
   email: Thomas.Fossati@arm.com
   country: UK
-- ins: W. Pan
-  name: Wei Pan
+- name: Wei Pan
   org: Huawei Technologies
   email: william.panwei@huawei.com
-- ins: C. Bormann
-  name: Carsten Bormann
-  org: Universitaet Bremen TZI
+- name: Carsten Bormann
+  org: Universität Bremen TZI
   street: Bibliothekstr. 1
   city: Bremen
   code: D-28359
@@ -43,7 +39,6 @@ author:
   email: cabo@tzi.org
 
 normative:
-  RFC2119:
 
 informative:
 
