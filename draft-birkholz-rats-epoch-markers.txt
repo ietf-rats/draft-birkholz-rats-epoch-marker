@@ -5,12 +5,12 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 28 October 2022                                     Arm Limited
+Expires: 29 October 2022                                     Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
                                                   Universität Bremen TZI
-                                                           26 April 2022
+                                                           27 April 2022
 
 
                              Epoch Markers
@@ -20,9 +20,16 @@ Abstract
 
    Abstract Text
 
-Discussion Venues
+About This Document
 
    This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-birkholz-rats-epoch-markers/.
+
+   Discussion of this document takes place on the rats Working Group
+   mailing list (mailto:rats@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/rats/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker.
@@ -42,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 October 2022.
+   This Internet-Draft will expire on 29 October 2022.
 
 Copyright Notice
 
@@ -65,26 +72,30 @@ Table of Contents
    2.  Epoch IDs
    3.  Interaction Models
    4.  Epoch Marker CDDL
-     4.1.  Native TSTInfo
-   5.  Normative References
+     4.1.  RFC 3161 TSTInfo
+   5.  References
+     5.1.  Normative References
+     5.2.  Informative References
+   Acknowledgements
    Authors' Addresses
 
 1.  Introduction
 
    Systems that are required to interact via secure interactions often
-   require a shared understand of the freshness of conveyed information,
-   especially in the domain of remote attestation procedures.
-   Establishing a notion of freshness between various involved entities
-   taking on roles that rely on information that is not outdated is not
-   simple.  In general, establishing a shared understanding of freshness
-   in a secure manner is not simple.  The RATS architecture dedicates an
-   extensive appendix solely on the topic of freshness considerations
-   and that fact alone should be considered a telltale sign on how
-   necessary yet complex establishing a trusted and shared understanding
-   of freshness between system actually is.
+   require a shared understanding of the freshness of conveyed
+   information, especially in the domain of remote attestation
+   procedures.  Establishing a notion of freshness between various
+   involved entities taking on roles that rely on information that is
+   not outdated is not simple.  In general, establishing a shared
+   understanding of freshness in a secure manner is not simple.  The
+   RATS architecture [I-D.ietf-rats-architecture] dedicates an extensive
+   appendix solely on the topic of freshness considerations and that
+   fact alone should be considered a telltale sign on how necessary yet
+   complex establishing a trusted and shared understanding of freshness
+   between systems actually is.
 
    This document provides a prominent way to establish a notion of
-   freshness between systems: Epoch Markers.  Epoch Markers messages
+   freshness between systems: Epoch Markers.  Epoch Markers are messages
    that are like time ticks produced and conveyed by a system in a
    freshness domain: the Epoch Bell.  Systems that receive Epoch Markers
    do not have to track freshness with their own local understanding of
@@ -94,35 +105,35 @@ Table of Contents
    receptions of Epoch Markers are like the ticks of a clock where the
    ticks are conveyed by the Internet.
 
-   The layout of the freshness domain, in which Epoch Markers are
-   conveyed like the ticks of a clock introduces a domain-specific
+   The layout of the freshness domain in which Epoch Markers are
+   conveyed like the ticks of a clock, introduces a domain-specific
    latency -- and therefore a certain uncertainty about tick accuracy.
 
    While all Epoch Markers share the common characteristic of being like
    clock ticks in a freshness domain, there are various payload types
    that can make up the content of an Epoch Marker.  These different
    types of Epoch Marker payloads address several specific use cases and
-   are laid out on this document.  While Epoch Markers are encoded in
-   CBOR and many of the payload types are encoded in CBOR as well, the
-   most prominent payload is the Time Stamp Token content as defined by
-   RFC 3161: a DER-encoded TSTInfo value.  Time Stamp Tokens (TST)
+   are laid out in this document.  While Epoch Markers are encoded in
+   CBOR and many of the payload types are encoded in CBOR as well, a
+   prominent payload is the Time Stamp Token content as defined by
+   [RFC3161]: a DER-encoded TSTInfo value.  Time Stamp Tokens (TST)
    produced by Time Stamp Authorities (TSA) are conveyed by the Time
-   Stamp Protocol (TSP).  TSAs are the most common world-wide
-   implemented secure timestamp token systems -- at the time of the
-   writing of this document.  Reusing the essential TST payload
-   structure as a payload type for CBOR encoded Epoch Markers makes
-   sense with respect to migration paths and general interoperability.
-   But there is more than one way to represent a signed timestamp and
-   other kinds of freshness ticks that can be used for Epoch Markers.
+   Stamp Protocol (TSP).  At the time of writing, TSAs are the most
+   common world-wide implemented secure timestamp token systems.
+   Reusing the essential TST payload structure as a payload type for
+   CBOR encoded Epoch Markers makes sense with respect to migration
+   paths and general interoperability.  But there is more than one way
+   to represent a signed timestamp and other kinds of freshness ticks
+   that can be used for Epoch Markers.
 
    In this document, basic interaction models on how to convey Epoch
    Marchers are illustrated as they impact the message design of a
    generic Epoch Marker.  Then, the structure of Epoch Markers is
    specified using CDDL and the corresponding payload types are
-   introduced and elaborated on.  Epoch Markers also provide the option
-   to include (concise) remote attestation evidence or corresponding
-   remote attestation results to increase the level of trustworthiness
-   in the Epoch Bell and the system that produces Epoch Markers.
+   introduced and elaborated on.  To increase the level of
+   trustworthiness in the Epoch Bell and the system that produces them,
+   Epoch Markers also provide the option to include (concise) remote
+   attestation evidence or corresponding remote attestation results.
 
 1.1.  Requirements Notation
 
@@ -137,10 +148,9 @@ Table of Contents
    The RATS architecture introduces the concept of Epoch IDs that mark
    certain events during remote attestation procedures ranging from
    simple handshakes to rather complex interactions including elaborate
-   freshness proofs.  Epoch Markers are a tangible solution
-   specification that includes the lessons learned from TSAs and
-   provides several means to identify a new freshness epochs as
-   illustrated by the RATS architecture.
+   freshness proofs.  Epoch Markers are a solution that includes the
+   lessons learned from TSAs and provides several means to identify a
+   new freshness epoch as illustrated by the RATS architecture.
 
 3.  Interaction Models
 
@@ -159,15 +169,19 @@ Table of Contents
 4.  Epoch Marker CDDL
 
    epoch-marker = [
-   header,
-   $payload,
+     header,
+     $payload,
    ]
 
    header = {
-   ? challenge-response-nonce,
-   ? remote-attestation-evidence, ; could be EAT or Concise Evidence
-   ? remote attestation-results, ; hopefully EAT with AR4SI Claims
+     ? challenge-response-nonce,
+     ? remote-attestation-evidence, ; could be EAT or Concise Evidence
+     ? remote-attestation-results, ; hopefully EAT with AR4SI Claims
    }
+
+   challenge-response-nonce = (1: "PLEASE DEFINE")
+   remote-attestation-evidence = (2: "PLEASE DEFINE")
+   remote-attestation-results = (3: "PLEASE DEFINE")
 
    ;payload types independent on interaction model
    $payload /= native-rfc3161-TST-info
@@ -178,6 +192,8 @@ Table of Contents
    $payload /= strictly-monotonically-increasing-counter
 
    native-rfc3161-TST-info = bytes ;  DER-encoded value of TSTInfo
+
+   TST-info-based-on-CBOR-time-tag = "PLEASE DEFINE"
 
    ; ~~~
    ; ~~~ verbatim translation of ASN.1 TSTInfo into CDDL
@@ -227,13 +243,16 @@ Table of Contents
    ? nonce
    ]
 
+   time-tag = "PLEASE DEFINE"
+   nonce = "PLEASE DEFINE"
+
    multi-nonce = tstr / bstr / int
 
    multi-nonce-list = [+ multi-nonce]
 
    strictly-monotonically-increasing-counter = uint ; counter context? per issuer? per indicator?
 
-4.1.  Native TSTInfo
+4.1.  RFC 3161 TSTInfo
 
    TSTInfo ::= SEQUENCE  {
       version                      INTEGER  { v1(1) },
@@ -253,16 +272,37 @@ Table of Contents
       tsa                          [0] GeneralName          OPTIONAL,
       extensions                   [1] IMPLICIT Extensions   OPTIONAL  }
 
-5.  Normative References
+5.  References
+
+5.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC3161]  Adams, C., Cain, P., Pinkas, D., and R. Zuccherato,
+              "Internet X.509 Public Key Infrastructure Time-Stamp
+              Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
+              2001, <https://www.rfc-editor.org/rfc/rfc3161>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+5.2.  Informative References
+
+   [I-D.ietf-rats-architecture]
+              Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote Attestation Procedures Architecture", Work
+              in Progress, Internet-Draft, draft-ietf-rats-architecture-
+              15, 8 February 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              architecture-15>.
+
+Acknowledgements
+
+   TBD
 
 Authors' Addresses
 
