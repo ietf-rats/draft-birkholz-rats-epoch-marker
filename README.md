@@ -1,4 +1,4 @@
-# Epoch Handles
+# Epoch Markers
 
 This is the working area for the individual Internet-Draft, "Epoch Handles".
 
