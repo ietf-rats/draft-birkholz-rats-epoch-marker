@@ -130,46 +130,44 @@ $payload /= strictly-monotonically-increasing-counter
 
 native-rfc3161-TST-info = bytes ;  DER-encoded value of TSTInfo
 
-TST-info-based-on-CBOR-time-tag = "PLEASE DEFINE"
 
 ; ~~~
-; ~~~ verbatim translation of ASN.1 TSTInfo into CDDL
-; ~~~ (GeneralName is TODO atm, due to its terrible callousness)
+; ~~~ translation with a few poetic licenses of ASN.1 TSTInfo into CDDL
 ; ~~~
-
-TSTInfo = {
-  &(version : 0) => int .default 1
+TST-info-based-on-CBOR-time-tag = {
+  &(version : 0) => int .default 1 ; obsolete?
   &(policy : 1) => oid
   &(messageImprint : 2) => MessageImprint
   &(serialNumber : 3) => int
-  &(genTime : 4) => GeneralizedTime
-  ? &(accuracy : 5) => Accuracy
+  &(eTime : 4) => profiled-etime
+  ? &(accuracy : 5) => rfc3161-accuracy
   &(ordering : 6) => bool .default false
   ? &(nonce : 7) => int
   ? &(tsa : 8) => GeneralName
   * $$TSTInfoExtensions
 }
 
+; based on COSE_Hash_Find (draft-ietf-cose-hash-algs)
 MessageImprint = [
-  hashAlgorithm: AlgorithmIdentifier
-  hashedMessage: bytes
+  hashAlg : int
+  hashValue : bstr
 ]
 
-AlgorithmIdentifier = [
-  algorithm:  oid
-  ? parameters: any
-]
-
-Accuracy = non-empty<{
+rfc3161-accuracy = non-empty<{
   ? &(seconds : 0) => int
   ? &(millis: 1) => 1..999
   ? &(micros: 2) => 1..999
 }>
 
-; https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5.2
-GeneralizedTime = tstr .regexp '[0-9]{14}(\.[0-9]+)?Z'
+; timeMap profiles etime from https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
+profiled-etime = #6.1001(timeMap)
+timeMap = {
+  1 => #6.1(int / float) ; TIME_T
+  * int => any
+}
 
-GeneralName = "todo"
+; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
+GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
 
 ; stuff
 oid = #6.111(bstr)
