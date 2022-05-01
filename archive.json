@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-04-28T01:08:59.861245+00:00",
+  "timestamp": "2022-05-01T01:03:57.055333+00:00",
   "repo": "ietf-rats/draft-birkholz-rats-epoch-marker",
   "labels": [
     {
@@ -49,7 +49,55 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOHOmBp85IqjQr",
+      "title": "Random Generator EPOCH",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/2",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "EPOCH data model should have a mechanism to exchange a Random Number based on\r\nan agreed protocol between the Sender and the Receiver.\r\n\r\n",
+      "createdAt": "2022-04-28T18:30:07Z",
+      "updatedAt": "2022-04-28T18:35:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Like a symmetric private key that is known only by the Epoch Bell and a requster, established out-of-band, and functioning like... \"extradata\" when processing the nonce from a challenge-response quested by the Epoch Bell? We might need a tad bit more detail on the usage scenario.",
+          "createdAt": "2022-04-28T18:34:11Z",
+          "updatedAt": "2022-04-28T18:34:11Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "NONE",
+          "body": "Correct. I will try to draw a scenario and we can discuss further!",
+          "createdAt": "2022-04-28T18:35:48Z",
+          "updatedAt": "2022-04-28T18:35:48Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOHOmBp85Iqm8d",
+      "title": "Problems verifying the trust relationship between a digital signer and a supplier of a digitally signed object",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/3",
+      "state": "OPEN",
+      "author": "rjb4standards",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "this information is contained in two articles on Energy Central, but I'll summarize here.\r\nhttps://energycentral.com/c/ec/we-cannot-secure-software-supply-chain-without-sbom \r\nhttps://energycentral.com/c/ec/who-ya-gonna-trust \r\n\r\nToday's digital signing methods allow anyone with a valid signing certificate/key to sign any object, without requiring authorization from the party that originated the artifact. Software consumers have no way to \"validate\" that a digitally signed object, i.e., Program A produced by supplier S that is signed using a certificate owned by party D is legitimate. Software consumers that need to establish trust in Program A need a reliable method to confirm that Supplier S authorized signer D to sign Program A as part of digital signature verification during a software supply chain risk assessment.  \r\n\r\nCurrent digital signature verification practices only check that the signers certificate is valid and the MAC in the signature matches the computed hash of the signed artifact i.e. Program A (integrity verification), but does not provide any assurance as to the trustworthiness of the relationship between a signer in the digital signature and the supplier of an artifact. Anyone can sign anything today, without authorization from the originator of an artifact and the digital signature verification check will pass. \r\n",
+      "createdAt": "2022-04-28T18:44:21Z",
+      "updatedAt": "2022-04-28T18:45:27Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -92,6 +140,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOHOmBp843D0qQ",
+      "title": "Thomas and Henk interactive session",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/4",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "massaging good old TSTInfo",
+      "createdAt": "2022-04-29T13:06:37Z",
+      "updatedAt": "2022-04-29T13:06:58Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "44001484f97f6ffd00b62699041a370ace3775a2",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "interactive",
+      "headRefOid": "c204022616f9b5746c82f525fd986663608cd479",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
