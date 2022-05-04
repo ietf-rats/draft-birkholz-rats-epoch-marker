@@ -5,12 +5,12 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 31 October 2022                                     Arm Limited
+Expires: 5 November 2022                                     Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
                                                   Universität Bremen TZI
-                                                           29 April 2022
+                                                              4 May 2022
 
 
                              Epoch Markers
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 October 2022.
+   This Internet-Draft will expire on 5 November 2022.
 
 Copyright Notice
 
@@ -72,10 +72,10 @@ Table of Contents
    2.  Epoch IDs
    3.  Interaction Models
    4.  Epoch Marker CDDL
-     4.1.  RFC 3161 TSTInfo
    5.  References
      5.1.  Normative References
      5.2.  Informative References
+   Appendix A.  RFC 3161 TSTInfo
    Acknowledgements
    Authors' Addresses
 
@@ -148,9 +148,11 @@ Table of Contents
    The RATS architecture introduces the concept of Epoch IDs that mark
    certain events during remote attestation procedures ranging from
    simple handshakes to rather complex interactions including elaborate
-   freshness proofs.  Epoch Markers are a solution that includes the
-   lessons learned from TSAs and provides several means to identify a
-   new freshness epoch as illustrated by the RATS architecture.
+   freshness proofs.  The Epoch Markers defined in this document are a
+   solution that includes the lessons learned from TSAs, the concept of
+   Epoch IDs and provides several means to identify a new freshness
+   epoch.  Some of these methods are introduced and discussed in
+   Section 10.3 by the RATS architecture [I-D.ietf-rats-architecture].
 
 3.  Interaction Models
 
@@ -158,13 +160,17 @@ Table of Contents
    the RATS Reference Interaction Models.  In general there are three of
    them:
 
-   *  unsolicited distribution (e.g., via uni-directional methods, such
-      as broad- or multicasting from Epoch Bells)
-
-   *  solicited distribution (e.g., via a subscription to Epoch Bells)
-
    *  ad-hoc requests (e.g., via challenge-response requests addressed
-      at Epoch Bells)
+      at Epoch Bells), corresponding to Section 7.1 in
+      [I-D.ietf-rats-reference-interaction-models]
+
+   *  unsolicited distribution (e.g., via uni-directional methods, such
+      as broad- or multicasting from Epoch Bells), corresponding to
+      Section 7.2 in [I-D.ietf-rats-reference-interaction-models]
+
+   *  solicited distribution (e.g., via a subscription to Epoch Bells),
+      corresponding to Section 7.3 in
+      [I-D.ietf-rats-reference-interaction-models]
 
 4.  Epoch Marker CDDL
 
@@ -250,26 +256,6 @@ Table of Contents
 
    strictly-monotonically-increasing-counter = uint ; counter context? per issuer? per indicator?
 
-4.1.  RFC 3161 TSTInfo
-
-   TSTInfo ::= SEQUENCE  {
-      version                      INTEGER  { v1(1) },
-      policy                       TSAPolicyId,
-      messageImprint               MessageImprint,
-        -- MUST have the same value as the similar field in
-        -- TimeStampReq
-      serialNumber                 INTEGER,
-       -- Time-Stamping users MUST be ready to accommodate integers
-       -- up to 160 bits.
-      genTime                      GeneralizedTime,
-      accuracy                     Accuracy                 OPTIONAL,
-      ordering                     BOOLEAN             DEFAULT FALSE,
-      nonce                        INTEGER                  OPTIONAL,
-        -- MUST be present if the similar field was present
-        -- in TimeStampReq.  In that case it MUST have the same value.
-      tsa                          [0] GeneralName          OPTIONAL,
-      extensions                   [1] IMPLICIT Extensions   OPTIONAL  }
-
 5.  References
 
 5.1.  Normative References
@@ -297,6 +283,38 @@ Table of Contents
               15, 8 February 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               architecture-15>.
+
+   [I-D.ietf-rats-reference-interaction-models]
+              Birkholz, H., Eckel, M., Pan, W., and E. Voit, "Reference
+              Interaction Models for Remote Attestation Procedures",
+              Work in Progress, Internet-Draft, draft-ietf-rats-
+              reference-interaction-models-05, 26 January 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              reference-interaction-models-05>.
+
+Appendix A.  RFC 3161 TSTInfo
+
+   As a reference for the definition of TST-info-based-on-CBOR-time-tag
+   the code block below depects the original layout of the TSTInfo
+   structure from [RFC3161].
+
+   TSTInfo ::= SEQUENCE  {
+      version                      INTEGER  { v1(1) },
+      policy                       TSAPolicyId,
+      messageImprint               MessageImprint,
+        -- MUST have the same value as the similar field in
+        -- TimeStampReq
+      serialNumber                 INTEGER,
+       -- Time-Stamping users MUST be ready to accommodate integers
+       -- up to 160 bits.
+      genTime                      GeneralizedTime,
+      accuracy                     Accuracy                 OPTIONAL,
+      ordering                     BOOLEAN             DEFAULT FALSE,
+      nonce                        INTEGER                  OPTIONAL,
+        -- MUST be present if the similar field was present
+        -- in TimeStampReq.  In that case it MUST have the same value.
+      tsa                          [0] GeneralName          OPTIONAL,
+      extensions                   [1] IMPLICIT Extensions   OPTIONAL  }
 
 Acknowledgements
 
