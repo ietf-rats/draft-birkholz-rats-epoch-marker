@@ -92,7 +92,7 @@ Epoch Markers also provide the option to include (concise) remote attestation ev
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 by the RATS architecture {{-rats-arch}}.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in {{Section 10.3 of -rats-arch}}.
 
 # Interaction Models
 
@@ -192,10 +192,10 @@ strictly-monotonically-increasing-counter = uint ; counter context? per issuer? 
 --- back
 
 ## RFC 3161 TSTInfo
-As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from {{-TSA}}.
+As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depicts the original layout of the TSTInfo structure from {{-TSA}}.
 
 
-~~~~ DER
+~~~~ ASN.1
 TSTInfo ::= SEQUENCE  {
    version                      INTEGER  { v1(1) },
    policy                       TSAPolicyId,
