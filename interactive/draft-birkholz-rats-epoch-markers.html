@@ -1215,7 +1215,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-epoch-ids" class="section-name selfRef">Epoch IDs</a>
       </h2>
 <p id="section-2-1">The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 by the RATS architecture <span>[<a href="#I-D.ietf-rats-architecture" class="xref">I-D.ietf-rats-architecture</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-architecture-15#section-10.3" class="relref">Section 10.3</a> of [<a href="#I-D.ietf-rats-architecture" class="xref">I-D.ietf-rats-architecture</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="interaction-models">
@@ -1371,9 +1371,9 @@ strictly-monotonically-increasing-counter = uint ; counter context? per issuer? 
       <h2 id="name-rfc-3161-tstinfo">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-rfc-3161-tstinfo" class="section-name selfRef">RFC 3161 TSTInfo</a>
       </h2>
-<p id="appendix-A-1">As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from <span>[<a href="#RFC3161" class="xref">RFC3161</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depicts the original layout of the TSTInfo structure from <span>[<a href="#RFC3161" class="xref">RFC3161</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div id="appendix-A-2">
-<pre class="lang-DER sourcecode">
+<pre class="lang-ASN.1 sourcecode">
 TSTInfo ::= SEQUENCE  {
    version                      INTEGER  { v1(1) },
    policy                       TSAPolicyId,

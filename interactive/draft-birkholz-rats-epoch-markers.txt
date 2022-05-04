@@ -152,7 +152,7 @@ Table of Contents
    solution that includes the lessons learned from TSAs, the concept of
    Epoch IDs and provides several means to identify a new freshness
    epoch.  Some of these methods are introduced and discussed in
-   Section 10.3 by the RATS architecture [I-D.ietf-rats-architecture].
+   Section 10.3 of [I-D.ietf-rats-architecture].
 
 3.  Interaction Models
 
@@ -295,7 +295,7 @@ Table of Contents
 Appendix A.  RFC 3161 TSTInfo
 
    As a reference for the definition of TST-info-based-on-CBOR-time-tag
-   the code block below depects the original layout of the TSTInfo
+   the code block below depicts the original layout of the TSTInfo
    structure from [RFC3161].
 
    TSTInfo ::= SEQUENCE  {
