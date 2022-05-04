@@ -39,10 +39,11 @@ author:
   email: cabo@tzi.org
 
 normative:
-  RFC3161:
-  
+  RFC3161: TSA
+
 informative:
   I-D.ietf-rats-architecture: rats-arch
+  I-D.ietf-rats-reference-interaction-models: rats-models
 
 venue:
   mail: rats@ietf.org
@@ -91,16 +92,16 @@ Epoch Markers also provide the option to include (concise) remote attestation ev
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-Epoch Markers are a solution that includes the lessons learned from TSAs and provides several means to identify a new freshness epoch as illustrated by the RATS architecture.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 by the RATS architecture {{-rats-arch}}.
 
 # Interaction Models
 
 The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
 In general there are three of them:
 
-* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells)
-* solicited distribution (e.g., via a subscription to Epoch Bells)
-* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells)
+* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to Section 7.1 in {{-rats-models}}
+* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
+* solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
 
 # Epoch Marker CDDL
 
@@ -130,46 +131,44 @@ $payload /= strictly-monotonically-increasing-counter
 
 native-rfc3161-TST-info = bytes ;  DER-encoded value of TSTInfo
 
-TST-info-based-on-CBOR-time-tag = "PLEASE DEFINE"
 
 ; ~~~
-; ~~~ verbatim translation of ASN.1 TSTInfo into CDDL
-; ~~~ (GeneralName is TODO atm, due to its terrible callousness)
+; ~~~ translation with a few poetic licenses of ASN.1 TSTInfo into CDDL
 ; ~~~
-
-TSTInfo = {
-  &(version : 0) => int .default 1
+TST-info-based-on-CBOR-time-tag = {
+  &(version : 0) => int .default 1 ; obsolete?
   &(policy : 1) => oid
   &(messageImprint : 2) => MessageImprint
   &(serialNumber : 3) => int
-  &(genTime : 4) => GeneralizedTime
-  ? &(accuracy : 5) => Accuracy
+  &(eTime : 4) => profiled-etime
+  ? &(accuracy : 5) => rfc3161-accuracy
   &(ordering : 6) => bool .default false
   ? &(nonce : 7) => int
   ? &(tsa : 8) => GeneralName
   * $$TSTInfoExtensions
 }
 
+; based on COSE_Hash_Find (draft-ietf-cose-hash-algs)
 MessageImprint = [
-  hashAlgorithm: AlgorithmIdentifier
-  hashedMessage: bytes
+  hashAlg : int
+  hashValue : bstr
 ]
 
-AlgorithmIdentifier = [
-  algorithm:  oid
-  ? parameters: any
-]
-
-Accuracy = non-empty<{
+rfc3161-accuracy = non-empty<{
   ? &(seconds : 0) => int
   ? &(millis: 1) => 1..999
   ? &(micros: 2) => 1..999
 }>
 
-; https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5.2
-GeneralizedTime = tstr .regexp '[0-9]{14}(\.[0-9]+)?Z'
+; timeMap profiles etime from https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
+profiled-etime = #6.1001(timeMap)
+timeMap = {
+  1 => #6.1(int / float) ; TIME_T
+  * int => any
+}
 
-GeneralName = "todo"
+; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
+GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
 
 ; stuff
 oid = #6.111(bstr)
@@ -190,7 +189,11 @@ multi-nonce-list = [+ multi-nonce]
 strictly-monotonically-increasing-counter = uint ; counter context? per issuer? per indicator?
 ~~~~
 
+--- back
+
 ## RFC 3161 TSTInfo
+As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from {{-TSA}}.
+
 
 ~~~~ DER
 TSTInfo ::= SEQUENCE  {
@@ -211,8 +214,6 @@ TSTInfo ::= SEQUENCE  {
    tsa                          [0] GeneralName          OPTIONAL,
    extensions                   [1] IMPLICIT Extensions   OPTIONAL  }
 ~~~~
-
---- back
 
 # Acknowledgements
 {:unnumbered}
