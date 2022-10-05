@@ -151,7 +151,7 @@ Thomas (FIXME): Typically, a nonce is a number only used once. In the context of
 
 ### Multi-Nonce-List
 
-Thomes: A list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
+A list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
 
 ~~~~ CDDL
 {::include cddl/multi-nonce-list.cddl}
