@@ -143,7 +143,7 @@ Thomas tells us here what beautiful things we concocted here with CBOR magic
 
 ### Multi-Nonce
 
-Thomas (FIXME): Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
+Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
 
 ~~~~ CDDL
 {::include cddl/multi-nonce.cddl}
