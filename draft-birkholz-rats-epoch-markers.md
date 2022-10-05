@@ -94,7 +94,7 @@ Epoch Markers also provide the option to include (concise) remote attestation ev
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
 The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 by the RATS architecture {{-rats-arch}}.
 
-# Interaction Models
+# Interaction Models {#interaction-models}
 
 The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
 In general there are three of them:
@@ -103,99 +103,95 @@ In general there are three of them:
 * unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
 * solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
 
-# Epoch Marker CDDL
+# Epoch Marker
+
+At the top level, an Epoch Marker is a CBOR array with a header carrying a protocol/interaction-specific message ({{interaction-models}}), and a payload
 
 ~~~~ CDDL
-epoch-marker = [
-  header,
-  $payload,
-]
-
-header = {
-  ? challenge-response-nonce,
-  ? remote-attestation-evidence, ; could be EAT or Concise Evidence
-  ? remote-attestation-results, ; hopefully EAT with AR4SI Claims
-}
-
-challenge-response-nonce = (1: "PLEASE DEFINE")
-remote-attestation-evidence = (2: "PLEASE DEFINE")
-remote-attestation-results = (3: "PLEASE DEFINE")
-
-;payload types independent on interaction model
-$payload /= native-rfc3161-TST-info
-$payload /= TST-info-based-on-CBOR-time-tag
-$payload /= CBOR-time-tag
-$payload /= multi-nonce
-$payload /= multi-nonce-list
-$payload /= strictly-monotonically-increasing-counter
-
-native-rfc3161-TST-info = bytes ;  DER-encoded value of TSTInfo
-
-
-; ~~~
-; ~~~ translation with a few poetic licenses of ASN.1 TSTInfo into CDDL
-; ~~~
-TST-info-based-on-CBOR-time-tag = {
-  &(version : 0) => int .default 1 ; obsolete?
-  &(policy : 1) => oid
-  &(messageImprint : 2) => MessageImprint
-  &(serialNumber : 3) => int
-  &(eTime : 4) => profiled-etime
-  ? &(accuracy : 5) => rfc3161-accuracy
-  &(ordering : 6) => bool .default false
-  ? &(nonce : 7) => int
-  ? &(tsa : 8) => GeneralName
-  * $$TSTInfoExtensions
-}
-
-; based on COSE_Hash_Find (draft-ietf-cose-hash-algs)
-MessageImprint = [
-  hashAlg : int
-  hashValue : bstr
-]
-
-rfc3161-accuracy = non-empty<{
-  ? &(seconds : 0) => int
-  ? &(millis: 1) => 1..999
-  ? &(micros: 2) => 1..999
-}>
-
-; timeMap profiles etime from https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
-profiled-etime = #6.1001(timeMap)
-timeMap = {
-  1 => #6.1(int / float) ; TIME_T
-  * int => any
-}
-
-; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
-GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
-
-; stuff
-oid = #6.111(bstr)
-non-empty<M> = (M) .and ({ + any => any })
-
-CBOR-time-tag = [
-time-tag,
-? nonce
-]
-
-time-tag = "PLEASE DEFINE"
-nonce = "PLEASE DEFINE"
-
-multi-nonce = tstr / bstr / int
-
-multi-nonce-list = [+ multi-nonce]
-
-strictly-monotonically-increasing-counter = uint ; counter context? per issuer? per indicator?
+{::include cddl/epoch-marker.cddl}
 ~~~~
+{: #fig-epoch-marker-cddl artwork-align="left"
+   title="Epoch Marker definition"}
+
+## Epoch Marker Payloads
+
+This memo comes with a set of predefined payloads.
+
+### CBOR Time Tag (etime)
+
+Thomas: a versatile CBOR time representation, potentially bundled with a Nonce
+
+~~~~ CDDL
+{::include cddl/cbor-time-tag.cddl}
+~~~~
+
+### Classical RFC 3161 TST Info
+
+Thomas: DER-encoded value of TSTInfo
+
+~~~~ CDDL
+{::include cddl/classical-rfc3161-tst-info.cddl}
+~~~~
+
+### CBOR-encoded RFC3161 TST Info
+
+Thomas tells us here what beautiful things we concocted here with CBOR magic
+
+~~~~ CDDL
+{::include cddl/tst-info.cddl}
+~~~~
+
+### Multi-Nonce
+
+Thomas (FIXME): Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
+
+~~~~ CDDL
+{::include cddl/multi-nonce.cddl}
+~~~~
+
+### Multi-Nonce-List
+
+Thomes: A list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
+
+~~~~ CDDL
+{::include cddl/multi-nonce-list.cddl}
+~~~~
+
+### Strictly Monotonically Increasing Counter
+
+Thomas beautiful context fable
+
+; Strictly Monotonically Increasing Counter
+; counter++
+; counter context? per issuer? per indicator?
+
+~~~~ CDDL
+{::include cddl/multi-nonce-list.cddl}
+~~~~
+
+# Security Considerations
+
+TODO
+
+# IANA Considerations
+
+TODO
 
 --- back
 
+# Examples
+
+TODO
+
+~~~~ CBOR-DIAG
+{::include cddl/examples/1.diag}
+~~~~
+
 ## RFC 3161 TSTInfo
+
 As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from {{-TSA}}.
 
-
-~~~~ DER
+~~~~ ASN.1
 TSTInfo ::= SEQUENCE  {
    version                      INTEGER  { v1(1) },
    policy                       TSAPolicyId,
@@ -219,3 +215,4 @@ TSTInfo ::= SEQUENCE  {
 {:unnumbered}
 
 TBD
+

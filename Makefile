@@ -9,3 +9,12 @@ else
 	git clone -q --depth 10 $(CLONE_ARGS) \
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
+
+include cddl/frag.mk
+
+$(drafts_xml):: cddl/epoch-marker-autogen.cddl
+
+cddl/epoch-marker-autogen.cddl: $(addprefix cddl/,$(EPOCH_MARKER_FRAGS))
+	$(MAKE) -C cddl check-epoch-marker check-epoch-marker-examples
+
+clean:: ; $(MAKE) -C cddl clean

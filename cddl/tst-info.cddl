@@ -1,0 +1,35 @@
+; CBOR-encoded RFC 3161 TST Info
+
+TST-info-based-on-CBOR-time-tag = {
+  &(version : 0) => int .default 1 ; obsolete?
+  &(policy : 1) => oid
+  &(messageImprint : 2) => MessageImprint
+  &(serialNumber : 3) => int
+  &(eTime : 4) => profiled-etime
+  &(ordering : 5) => bool .default false
+  ? &(nonce : 6) => int
+  ? &(tsa : 7) => GeneralName
+  * $$TSTInfoExtensions
+}
+
+oid = #6.110(bstr) / #6.111(bstr) / #6.112(bstr)
+
+; based on COSE_Hash_Find (draft-ietf-cose-hash-algs)
+MessageImprint = [
+  hashAlg : int
+  hashValue : bstr
+]
+
+; timeMap profiles etime from https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
+profiled-etime = #6.1001(timeMap)
+timeMap = {
+  1 => #6.1(int / float) ; TIME_T
+  -8 => profiled-duration ; guarantee aka RFC 3161 accuracy
+  * int => any
+}
+profiled-duration = #6.1002({* int => any})
+
+; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
+GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
+
+

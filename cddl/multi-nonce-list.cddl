@@ -1,0 +1,4 @@
+; Multi-Nonce-List
+
+; a list of nonces potentially used by multiple entities
+multi-nonce-list = [+ multi-nonce]

@@ -1,0 +1,6 @@
+; Multi-Nonce
+
+; a single nonce used by multiple entities
+multi-nonce = tstr / bstr / int
+
+

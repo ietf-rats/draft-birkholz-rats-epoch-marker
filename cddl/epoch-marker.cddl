@@ -1,0 +1,24 @@
+epoch-marker = [
+  authenticity-proof
+  $tagged-payload
+]
+
+; veracity of the bell
+authenticity-proof = {
+  ? remote-attestation-evidence ; could be EAT or Concise Evidence
+  ? remote-attestation-result ; hopefully EAT with AR4SI Claims
+  ? scitt-receipt ; SCITT receipt
+}
+
+remote-attestation-evidence = (1: "PLEASE DEFINE")
+remote-attestation-result = (2: "PLEASE DEFINE")
+scitt-receipt = (3: "PLEASE DEFINE")
+
+; payload types independent on interaction model
+
+$tagged-payload /= cbor-epoch-id
+$tagged-payload /= #6.26980(classical-rfc3161-TST-info)
+$tagged-payload /= #6.26981(TST-info-based-on-CBOR-time-tag)
+$tagged-payload /= #6.26982(multi-nonce)
+$tagged-payload /= #6.26983(multi-nonce-list)
+$tagged-payload /= #6.26984(strictly-monotonic-counter)
