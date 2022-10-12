@@ -20,7 +20,8 @@ MessageImprint = [
   hashValue : bstr
 ]
 
-; timeMap profiles etime from https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
+; timeMap profiles etime, see:
+; https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
 profiled-etime = #6.1001(timeMap)
 timeMap = {
   1 => #6.1(int / float) ; TIME_T
