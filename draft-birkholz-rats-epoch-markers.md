@@ -181,11 +181,14 @@ TODO
 
 # Examples
 
-TODO
+The example in {{fig-ex-1}} shows an epoch marker with a cbor-epoch-id and no
+bell veracity proof.
 
 ~~~~ CBOR-DIAG
 {::include cddl/examples/1.diag}
 ~~~~
+{: #fig-ex-1 artwork-align="center"
+   title="CBOR epoch id without bell veracity proof"}
 
 ## RFC 3161 TSTInfo
 

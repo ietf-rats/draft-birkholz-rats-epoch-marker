@@ -1,0 +1,3 @@
+; The non-empty macro makes sure that there is at least one
+; item in an object with only optional fields.
+non-empty<M> = (M) .within ({ + any => any })

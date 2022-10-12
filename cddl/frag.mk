@@ -5,5 +5,6 @@ EPOCH_MARKER_FRAGS += multi-nonce-list.cddl
 EPOCH_MARKER_FRAGS += multi-nonce.cddl
 EPOCH_MARKER_FRAGS += strictly-monotonic-counter.cddl
 EPOCH_MARKER_FRAGS += tst-info.cddl
+EPOCH_MARKER_FRAGS += non-empty.cddl
 
 EPOCH_MARKER_EXAMPLES := $(wildcard examples/*.diag)

@@ -31,5 +31,3 @@ profiled-duration = #6.1002({* int => any})
 
 ; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
 GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
-
-

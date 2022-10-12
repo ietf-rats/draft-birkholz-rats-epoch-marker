@@ -1,8 +1,8 @@
 ; CBOR Time Tag (etime)
 
 cbor-epoch-id = [
-   etime,
-   ? nonce,
+   etime
+   ? nonce
 ]
 
 etime = #6.1001({* (int/tstr) => any})
