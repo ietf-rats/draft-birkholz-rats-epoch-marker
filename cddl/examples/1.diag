@@ -1,0 +1,11 @@
+[
+  / cbor-epoch-id / [
+    / 1996-12-19T16:39:57-08:00[America//Los_Angeles][u-ca=hebrew] /
+    / etime / 1001({
+        1: 851042397,
+      -10: "America/Los_Angeles",
+      -11: { "u-ca": "hebrew" }
+    })
+  ]
+  / no bell veracity proof /
+]
