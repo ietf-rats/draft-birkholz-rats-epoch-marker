@@ -66,7 +66,8 @@ This document defines Epoch Markers as a way to establish a notion of freshness 
 
 # Introduction
 
-Systems that need to interact securely often require a shared understanding of the freshness of conveyed information. This is certainly the case in the domain of remote attestation procedures.
+Systems that need to interact securely often require a shared understanding of the freshness of conveyed information.
+This is certainly the case in the domain of remote attestation procedures.
 In general, securely establishing a shared notion of freshness of the exchanged information among entities in a distributed system is not a simple task.
 
 The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
@@ -84,39 +85,37 @@ While all Epoch Markers share the same core property of behaving like clock tick
 
 While Epoch Markers are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
 Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
-At the time of writing,
-TSAs are the most common providers of secure time-stamping services.
+At the time of writing, TSAs are the most common providers of secure time-stamping services.
 Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
-There are, however, several other ways to represent a signed timestamp, and therefore other inds of payloads that can be used to implement Epoch Markers.
+There are, however, several other ways to represent a signed timestamp, and therefore other kinds of payloads that can be used to implement Epoch Markers.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The top-level structure of Epoch Markers alongside an initial set of epoch id types are specified using CDDL {{-CDDL}}.
-To increase trustworthiness in the Epoch Bell,
-Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipt {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
+The top-level structure of Epoch Markers and an initial set of epoch id types are specified using CDDL {{-CDDL}}.
+To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipts {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
 
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use CBOR diagnostic notation defined in {{Section 8 of -CBOR}} and {{Appendix G of -CDDL}}.
+In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use CBOR diagnostic notation as defined in {{Section 8 of -CBOR}} and {{Appendix G of -CDDL}}.
 
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 by the RATS architecture {{-rats-arch}}.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture {{-rats-arch}}.
 
 # Interaction Models {#interaction-models}
 
 The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
-In general there are three of them:
+In general, there are three interaction models:
 
 * ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to Section 7.1 in {{-rats-models}}
 * unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
 * solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
 
-# Epoch Marker
+# Epoch Marker Structure
 
-At the top level, an Epoch Marker is a CBOR array with a header carrying a protocol/interaction-specific message ({{interaction-models}}), and a payload
+At the top level, an Epoch Marker is a CBOR array with a header carrying an optional veracity proof about the Epoch Bell and a payload.
 
 ~~~~ CDDL
 {::include cddl/epoch-marker.cddl}
