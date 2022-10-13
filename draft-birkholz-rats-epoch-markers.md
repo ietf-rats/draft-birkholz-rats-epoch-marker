@@ -66,19 +66,32 @@ This document defines Epoch Markers as a way to establish a notion of freshness 
 
 # Introduction
 
-Systems that need to interact securely often require a shared understanding of the freshness of conveyed information. This is certainly the case in the domain of remote attestation procedures. In general, securely establishing a shared notion of freshness of the exchanged information among entities in a distributed system is not a simple task. The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
+Systems that need to interact securely often require a shared understanding of the freshness of conveyed information. This is certainly the case in the domain of remote attestation procedures.
+In general, securely establishing a shared notion of freshness of the exchanged information among entities in a distributed system is not a simple task.
+The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients. In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.  In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell. This introduces skew that needs to be taken into consideration when Epoch Markers are used.
+
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell.
+Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.
+
+In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.  This introduces skew that needs to be taken into consideration when Epoch Markers are used.
 
 While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" types are defined to accommodate different use cases and diverse kinds of Epoch Bells.
 
-While Epoch Markers are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}. Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
-
-At the time of writing, TSAs are the most common providers of secure time-stamping services. Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability. There are, however, several other ways to represent a signed timestamp, and therefore other inds of payloads that can be used to implement Epoch Markers.
+While Epoch Markers are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
+Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
+At the time of writing,
+TSAs are the most common providers of secure time-stamping services.
+Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
+There are, however, several other ways to represent a signed timestamp, and therefore other inds of payloads that can be used to implement Epoch Markers.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-
-The top-level structure of Epoch Markers alongside an initial set of epoch id types are specified using CDDL {{-CDDL}}. To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipt {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
+The top-level structure of Epoch Markers alongside an initial set of epoch id types are specified using CDDL {{-CDDL}}.
+To increase trustworthiness in the Epoch Bell,
+Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipt {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
 
 ## Requirements Notation
 
