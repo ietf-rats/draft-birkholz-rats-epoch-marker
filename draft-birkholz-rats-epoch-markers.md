@@ -68,6 +68,7 @@ This document defines Epoch Markers as a way to establish a notion of freshness 
 
 Systems that need to interact securely often require a shared understanding of the freshness of conveyed information. This is certainly the case in the domain of remote attestation procedures.
 In general, securely establishing a shared notion of freshness of the exchanged information among entities in a distributed system is not a simple task.
+
 The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
 
 
