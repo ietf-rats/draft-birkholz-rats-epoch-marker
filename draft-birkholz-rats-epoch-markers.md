@@ -48,6 +48,18 @@ normative:
   STD96:
     -: COSE
     =: RFC9052
+  I-D.ietf-cbor-time-tag: CBOR-ETIME
+  X.690:
+    title: >
+      Information technology — ASN.1 encoding rules:
+      Specification of Basic Encoding Rules (BER), Canonical Encoding
+      Rules (CER) and Distinguished Encoding Rules (DER)
+    author:
+      org: International Telecommunications Union
+    date: 2015-08
+    seriesinfo:
+      ITU-T: Recommendation X.690
+    target: https://www.itu.int/rec/T-REC-X.690
 
 informative:
   I-D.ietf-rats-architecture: rats-arch
@@ -129,7 +141,10 @@ This memo comes with a set of predefined payloads.
 
 ### CBOR Time Tag (etime)
 
-Thomas: a versatile CBOR time representation, potentially bundled with a Nonce
+CBOR extended time tag (1001) optionally bundled with a nonce.
+
+See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
+time format.
 
 ~~~~ CDDL
 {::include cddl/cbor-time-tag.cddl}
@@ -137,7 +152,7 @@ Thomas: a versatile CBOR time representation, potentially bundled with a Nonce
 
 ### Classical RFC 3161 TST Info
 
-Thomas: DER-encoded value of TSTInfo
+DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 
 ~~~~ CDDL
 {::include cddl/classical-rfc3161-tst-info.cddl}
@@ -145,7 +160,8 @@ Thomas: DER-encoded value of TSTInfo
 
 ### CBOR-encoded RFC3161 TST Info
 
-Thomas tells us here what beautiful things we concocted here with CBOR magic
+Semantically equivalent to classical RFC3161 TSTInfo rewritten using the CBOR
+type system.
 
 ~~~~ CDDL
 {::include cddl/tst-info.cddl}
@@ -169,14 +185,12 @@ A list of nonces send to multiple consumers. The consumers use each Nonce in the
 
 ### Strictly Monotonically Increasing Counter
 
-Thomas beautiful context fable
+A strictly monotonically increasing counter.
 
-; Strictly Monotonically Increasing Counter
-; counter++
-; counter context? per issuer? per indicator?
+The counter context is defined by the Epoch bell.
 
 ~~~~ CDDL
-{::include cddl/multi-nonce-list.cddl}
+{::include cddl/strictly-monotonic-counter.cddl}
 ~~~~
 
 # Security Considerations
@@ -200,7 +214,7 @@ bell veracity proof.
 {: #fig-ex-1 artwork-align="center"
    title="CBOR epoch id without bell veracity proof"}
 
-## RFC 3161 TSTInfo
+## RFC 3161 TSTInfo {#classic-tstinfo}
 
 As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from {{-TSA}}.
 

@@ -1,5 +1,3 @@
-; CBOR Time Tag (etime)
-
 cbor-epoch-id = [
    etime
    ? nonce
