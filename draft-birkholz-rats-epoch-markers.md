@@ -76,7 +76,7 @@ venue:
 
 --- abstract
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
 
 --- middle
 
@@ -90,7 +90,7 @@ The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness
 
 
 This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
-Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
 Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
 In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.
