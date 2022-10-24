@@ -9,6 +9,10 @@ area: Security
 wg: RATS Working Group
 kw: Internet-Draft
 
+venue:
+  email: rats@ietf.org
+  github: https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker
+
 cat: std
 consensus: true
 submissiontype: IETF
