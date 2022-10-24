@@ -9,6 +9,10 @@ area: Security
 wg: RATS Working Group
 kw: Internet-Draft
 
+venue:
+  email: rats@ietf.org
+  github: https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker
+
 cat: std
 consensus: true
 submissiontype: IETF
@@ -72,7 +76,7 @@ venue:
 
 --- abstract
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
 
 --- middle
 
@@ -86,7 +90,7 @@ The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness
 
 
 This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
-Epoch Markers are similar to "time ticks" produced and distributed by a dedicated system, the Epoch Bell.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
 Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
 In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.
@@ -114,7 +118,7 @@ In this document, CDDL {{-CDDL}} is used to describe the data formats.  The exam
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture {{-rats-arch}}.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture {{-rats-arch}}.
 
 # Interaction Models {#interaction-models}
 
