@@ -197,6 +197,18 @@ The counter context is defined by the Epoch bell.
 {::include cddl/strictly-monotonic-counter.cddl}
 ~~~~
 
+### Stateless Nonce
+
+In a highly available service (e.g., a cloud attestation verifier) having to
+keep per-session nonce state poses scalablity problems.  An alternative is to
+use time synchronised servers that share a symmetric key and let which produce
+and consume nonces based on coarse-grained clock ticks signed using the shared
+secret.
+
+~~~~ CDDL
+{::include cddl/stateless-nonce.cddl}
+~~~~
+
 # Security Considerations
 
 TODO
