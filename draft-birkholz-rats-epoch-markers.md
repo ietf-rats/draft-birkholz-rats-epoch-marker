@@ -212,6 +212,27 @@ shared secret.
 {::include cddl/stateless-nonce.cddl}
 ~~~~
 
+{:vspace}
+
+Version:
+: version of the TimeToken encoded as a single byte.  The value MUST be 0x01.
+
+KeyID:
+: opaque identifier shared across the server pool for the signing key used to
+compute AuthTag.  It is semantically equivalent to the TID field defined in
+{{Section 3.1.3 of ?RFC6896}}.
+
+Timestamp:
+: the timestamp associated with the current epoch encoded as CBOR tag for Posix
+time.  It MUST use the int format.
+
+Pad:
+: pad bytes used to make the stateless nonce the desired size.
+
+AuthTag:
+: HMAC w/ SHA-1 computed over the CBOR serialisation of TimeToken encoded as a
+20-bytes string.
+
 # Security Considerations
 
 TODO
