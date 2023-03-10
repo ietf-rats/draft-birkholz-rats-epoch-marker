@@ -3,17 +3,11 @@ stateless-nonce = [
   AuthTag: bstr .size 20
 ]
 
-; AuthTag is the HMAC w/ SHA-1 computed over the CBOR serialisation
-; of TimeToken
-
 TimeToken = (
   Version: bytes .size 1
   KeyID: bytes .size 1
   Timestamp: posix-time
   Pad: bytes
 )
-
-; Pad carries no meaning; it is just pad bytes to make
-; stateless-nonce the desired size
 
 posix-time = #6.1(int)
