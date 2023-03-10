@@ -1,32 +1,31 @@
 TST-info-based-on-CBOR-time-tag = {
-  &(version : 0) => int .default 1 ; obsolete?
+  &(version : 0) => v1
   &(policy : 1) => oid
   &(messageImprint : 2) => MessageImprint
-  &(serialNumber : 3) => int
+  &(serialNumber : 3) => integer
   &(eTime : 4) => profiled-etime
-  &(ordering : 5) => bool .default false
-  ? &(nonce : 6) => int
-  ? &(tsa : 7) => GeneralName
+  ? &(ordering : 5) => bool .default false
+  ? &(nonce : 6) => integer
+  ? &(tsa : 7) => SingleEntryGeneralNames
   * $$TSTInfoExtensions
 }
 
-oid = #6.110(bstr) / #6.111(bstr) / #6.112(bstr)
+v1 = 1
 
-; based on COSE_Hash_Find (draft-ietf-cose-hash-algs)
+oid = #6.111(bstr) / #6.112(bstr)
+
 MessageImprint = [
   hashAlg : int
   hashValue : bstr
 ]
 
-; timeMap profiles etime, see:
-; https://datatracker.ietf.org/doc/html/draft-ietf-cbor-time-tag
 profiled-etime = #6.1001(timeMap)
 timeMap = {
-  1 => #6.1(int / float) ; TIME_T
-  -8 => profiled-duration ; guarantee aka RFC 3161 accuracy
+  1 => int / float ; TIME_T
+  ? -8 => profiled-duration
   * int => any
 }
-profiled-duration = #6.1002({* int => any})
+profiled-duration = {* int => any}
 
-; Section 11.8 of I-D.ietf-cose-cbor-encoded-cert
-GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
+GeneralName = ( GeneralNameType : int, GeneralNameValue : any )
+SingleEntryGeneralNames = [ 1*1 GeneralName ]
