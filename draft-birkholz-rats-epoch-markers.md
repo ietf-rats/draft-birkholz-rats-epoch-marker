@@ -74,6 +74,9 @@ venue:
   mail: rats@ietf.org
   github: ietf-rats/draft-birkholz-rats-epoch-marker
 
+entity:
+  SELF: "RFCthis"
+
 --- abstract
 
 This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
@@ -154,7 +157,7 @@ time format.
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
-### Classical RFC 3161 TST Info
+### Classical RFC 3161 TST Info {#sec-rfc3161-classic}
 
 DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 
@@ -162,7 +165,7 @@ DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 {::include cddl/classical-rfc3161-tst-info.cddl}
 ~~~~
 
-### CBOR-encoded RFC3161 TST Info
+### CBOR-encoded RFC3161 TST Info {#sec-rfc3161-fancy}
 
 Semantically equivalent to classical RFC3161 TSTInfo rewritten using the CBOR
 type system.
@@ -171,7 +174,7 @@ type system.
 {::include cddl/tst-info.cddl}
 ~~~~
 
-### Multi-Nonce
+### Multi-Nonce {#sec-multi-nonce}
 
 Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
 
@@ -179,7 +182,7 @@ Typically, a nonce is a number only used once. In the context of Epoch Markers, 
 {::include cddl/multi-nonce.cddl}
 ~~~~
 
-### Multi-Nonce-List
+### Multi-Nonce-List {#sec-multi-nonce-list}
 
 A list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
 
@@ -187,7 +190,7 @@ A list of nonces send to multiple consumers. The consumers use each Nonce in the
 {::include cddl/multi-nonce-list.cddl}
 ~~~~
 
-### Strictly Monotonically Increasing Counter
+### Strictly Monotonically Increasing Counter {#sec-strictly-monotonic}
 
 A strictly monotonically increasing counter.
 
@@ -197,13 +200,13 @@ The counter context is defined by the Epoch bell.
 {::include cddl/strictly-monotonic-counter.cddl}
 ~~~~
 
-### Stateless Nonce
+### Stateless Nonce {#sec-stateless-nonce}
 
 In a highly available service (e.g., a cloud attestation verifier) having to
 keep per-session nonce state poses scalablity problems.  An alternative is to
-use time synchronised servers that share a symmetric key and let which produce
-and consume nonces based on coarse-grained clock ticks signed using the shared
-secret.
+use time-synchronised servers that share a symmetric key, which produce and
+consume nonces based on coarse-grained clock ticks that are signed using the
+shared secret.
 
 ~~~~ CDDL
 {::include cddl/stateless-nonce.cddl}
@@ -213,9 +216,27 @@ secret.
 
 TODO
 
-# IANA Considerations
+# IANA Considerations {#sec-iana-cons}
 
-TODO
+[^rfced-replace]
+
+[^rfced-replace]: RFC Editor: please replace {{&SELF}} with the RFC
+    number of this RFC and remove this note.
+
+## New CBOR Tags {#sec-iana-cbor-tags}
+
+IANA is requested to allocate the following tags in the "CBOR Tags" registry
+{{!IANA.cbor-tags}}, preferably with the specific CBOR tag value requested:
+
+| Tag | Data Item | Semantics | Reference |
+| -- | -- | -- | -- |
+| 26980 | bytes | DER-encoded RFC3161 TSTInfo | {{sec-rfc3161-classic}} of {{&SELF}} |
+| 26981 | map | CBOR-encoding of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
+| 26982 | tstr / bstr / int | a nonce that is shared among many participants but that can only be used once by each participant | {{sec-multi-nonce}} of {{&SELF}} |
+| 26983 | array | a list of multi-nonce | {{sec-multi-nonce-list}} of {{&SELF}} |
+| 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
+| 26985 | array | stateless nonce | {{sec-stateless-nonce}} of {{&SELF}} |
+{: #tbl-cbor-tags align="left" title="New CBOR Tags"}
 
 --- back
 
