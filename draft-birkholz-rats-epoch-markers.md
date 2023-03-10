@@ -212,6 +212,8 @@ shared secret.
 {::include cddl/stateless-nonce.cddl}
 ~~~~
 
+The following describes each member of the stateless-nonce array:
+
 {:vspace}
 
 Version:
