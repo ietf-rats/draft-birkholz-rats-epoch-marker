@@ -218,6 +218,11 @@ TODO
 
 # IANA Considerations {#sec-iana-cons}
 
+[^rfced-replace]
+
+[^rfced-replace]: RFC Editor: please replace {{&SELF}} with the RFC
+    number of this RFC and remove this note.
+
 ## New CBOR Tags {#sec-iana-cbor-tags}
 
 IANA is requested to allocate the following tags in the "CBOR Tags" registry
