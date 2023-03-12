@@ -206,7 +206,13 @@ In a highly available service (e.g., a cloud attestation verifier) having to
 keep per-session nonce state poses scalablity problems.  An alternative is to
 use time-synchronised servers that share a symmetric key, which produce and
 consume nonces based on coarse-grained clock ticks that are signed using the
-shared secret.
+shared secret.  This way, a nonce minted by a server in the pool can be
+processed by any other server in pool, which avoids the need for session
+"stickiness."
+
+A stateless-nonce supports the above use case by encoding a Posix time (i.e.,
+the epoch identifier), alongside a minimal set of metadata, authenticated with
+a symmetric key in a self-contained and compact (starting at 40 bytes) token.
 
 ~~~~ CDDL
 {::include cddl/stateless-nonce.cddl}
@@ -229,11 +235,11 @@ Timestamp:
 time.  It MUST use the int format.
 
 Pad:
-: pad bytes used to make the stateless nonce the desired size.
+: zero or more pad bytes, used to make the stateless nonce the desired size.
 
 AuthTag:
-: HMAC w/ SHA-1 computed over the CBOR serialisation of TimeToken encoded as a
-20-bytes string.
+: HMAC w/ SHA-224 computed over the CBOR serialisation of TimeToken encoded as
+a 28-bytes string.
 
 # Security Considerations
 
