@@ -47,6 +47,8 @@ normative:
   RFC5652: CMS
   RFC8610: CDDL
   RFC2104: HMAC
+  RFC9090: CBOR-OID
+  RFC9054: COSE-HASH-ALGS
   STD94:
     -: CBOR
     =: RFC8949
@@ -54,6 +56,7 @@ normative:
     -: COSE
     =: RFC9052
   I-D.ietf-cbor-time-tag: CBOR-ETIME
+  I-D.ietf-cose-cbor-encoded-cert: C509
   X.690:
     title: >
       Information technology — ASN.1 encoding rules:
@@ -168,12 +171,71 @@ DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 
 ### CBOR-encoded RFC3161 TST Info {#sec-rfc3161-fancy}
 
-Semantically equivalent to classical RFC3161 TSTInfo rewritten using the CBOR
-type system.
+[^issue] https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/18
+
+[^issue]: Issue tracked at:
+
+The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical
+{{-TSA}} TSTInfo, rewritten using the CBOR type system.
 
 ~~~~ CDDL
 {::include cddl/tst-info.cddl}
 ~~~~
+
+The following describes each member of the TST-info-based-on-CBOR-time-tag map.
+
+{:vspace}
+version:
+: The integer value 1.  Cf. version, {{Section 2.4.2 of -TSA}}.
+
+policy:
+: A {{-CBOR-OID}} object identifier tag (111 or 112) representing the TSA's
+policy under which the tst-info was produced.  Cf. policy, {{Section 2.4.2 of
+-TSA}}.
+
+messageImprint:
+: A {{-COSE-HASH-ALGS}} COSE_Hash_Find array carrying the hash algorithm
+identifier and the hash value of the time-stamped datum.  Cf. messageImprint,
+{{Section 2.4.2 of -TSA}}.
+
+serialNumber:
+: A unique integer value assigned by the TSA to each issued tst-info.  Cf.
+serialNumber, {{Section 2.4.2 of -TSA}}.
+
+eTime:
+: The time at which the tst-info has been created by the TSA.  Cf. genTime,
+{{Section 2.4.2 of -TSA}}.
+Encoded as extended time {{-CBOR-ETIME}}, indicated by CBOR tag 1001, profiled
+as follows:
+
+- The "base time" is encoded using key 1, indicating Posix time as int or float.
+- The stated "accuracy" is encoded using key -8, which indicates the maximum
+  allowed deviation from the value indicated by "base time".  The duration map
+  is profiled to disallow string keys.  This is an optional field.
+- The map MAY also contain one or more integer keys, which may encode
+  supplementary information [^tf1].
+
+[^tf1]: Allowing unsigned integer (i.e., critical) keys goes counter interoperability
+
+{:vspace}
+ordering:
+: boolean indicating whether tst-info issued by the TSA can be ordered solely
+based on the "base time". This is an optional field, whose default value is
+"false".  Cf. ordering, {{Section 2.4.2 of -TSA}}.
+
+nonce:
+: int value echoing the nonce supplied by the requestor.  Cf. nonce, {{Section
+2.4.2 of -TSA}}.
+
+tsa:
+: a single-entry GeneralNames array {{Section 11.8 of -C509}} providing a hint
+in identifying the name of the TSA.  Cf. tsa, {{Section 2.4.2 of -TSA}}.
+
+$$TSTInfoExtensions:
+: A CDDL socket ({{Section 3.9 of -CDDL}}) to allow extensibility of the data
+format.  Note that any extensions appearing here MUST match an extension in the
+corresponding request.  Cf. extensions, {{Section 2.4.2 of -TSA}}.
+
 
 ### Multi-Nonce {#sec-multi-nonce}
 
@@ -309,4 +371,3 @@ TSTInfo ::= SEQUENCE  {
 {:unnumbered}
 
 TBD
-
