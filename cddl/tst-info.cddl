@@ -21,7 +21,7 @@ MessageImprint = [
 
 profiled-etime = #6.1001(timeMap)
 timeMap = {
-  1 => int / float ; TIME_T
+  1 => ~time
   ? -8 => profiled-duration
   * int => any
 }
