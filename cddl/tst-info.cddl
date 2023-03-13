@@ -6,7 +6,7 @@ TST-info-based-on-CBOR-time-tag = {
   &(eTime : 4) => profiled-etime
   ? &(ordering : 5) => bool .default false
   ? &(nonce : 6) => integer
-  ? &(tsa : 7) => SingleEntryGeneralNames
+  ? &(tsa : 7) => GeneralName
   * $$TSTInfoExtensions
 }
 
@@ -21,11 +21,11 @@ MessageImprint = [
 
 profiled-etime = #6.1001(timeMap)
 timeMap = {
-  1 => int / float ; TIME_T
+  1 => ~time
   ? -8 => profiled-duration
   * int => any
 }
 profiled-duration = {* int => any}
 
-GeneralName = ( GeneralNameType : int, GeneralNameValue : any )
-SingleEntryGeneralNames = [ 1*1 GeneralName ]
+GeneralNameAttr = ( GeneralNameType : int, GeneralNameValue : any )
+GeneralName = [ + GeneralNameAttr ]
