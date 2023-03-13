@@ -49,6 +49,7 @@ normative:
   RFC2104: HMAC
   RFC9090: CBOR-OID
   RFC9054: COSE-HASH-ALGS
+  RFC9334: RATS-ARCH
   STD94:
     -: CBOR
     =: RFC8949
@@ -161,6 +162,16 @@ time format.
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
+The following describes each member of the cbor-epoch-id map.
+
+etime:
+
+: An extended time value as defined by {{-CBOR-ETIME}}.
+
+nonce:
+
+: A non-predictable byte string used as extra data in challenge-response interaction models (see {{-rats-models}}).
+
 ### Classical RFC 3161 TST Info {#sec-rfc3161-classic}
 
 DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
@@ -168,6 +179,12 @@ DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 ~~~~ CDDL
 {::include cddl/classical-rfc3161-tst-info.cddl}
 ~~~~
+
+The following describes the classical-rfc3161-TST-info type.
+
+classical-rfc3161-TST-info:
+
+: The response message of a Time Stamp Authority including a {{-TSA}} Time Stamp Token Info structure.
 
 ### CBOR-encoded RFC3161 TST Info {#sec-rfc3161-fancy}
 
@@ -236,7 +253,6 @@ $$TSTInfoExtensions:
 format.  Note that any extensions appearing here MUST match an extension in the
 corresponding request.  Cf. extensions, {{Section 2.4.2 of -TSA}}.
 
-
 ### Multi-Nonce {#sec-multi-nonce}
 
 Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
@@ -245,13 +261,25 @@ Typically, a nonce is a number only used once. In the context of Epoch Markers, 
 {::include cddl/multi-nonce.cddl}
 ~~~~
 
+The following describes the multi-nonce type.
+
+multi-nonce:
+
+: A non-predictable byte string used by RATS roles in a trust domain as extra data included in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch.
+
 ### Multi-Nonce-List {#sec-multi-nonce-list}
 
-A list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
+A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
 
 ~~~~ CDDL
 {::include cddl/multi-nonce-list.cddl}
 ~~~~
+
+The following describes the multi-nonce type.
+
+multi-nonce-list:
+
+: A sequence of non-predictable byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess, if that nonce is the appropriate next unused nonce from the multi-nonce-list.
 
 ### Strictly Monotonically Increasing Counter {#sec-strictly-monotonic}
 
@@ -262,6 +290,12 @@ The counter context is defined by the Epoch bell.
 ~~~~ CDDL
 {::include cddl/strictly-monotonic-counter.cddl}
 ~~~~
+
+The following describes the strictly-monotonic-counter type.
+
+strictly-monotonic-counter:
+
+: An unsigned integer used by RATS roles in a trust domain as extra data in the production of of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.
 
 ### Stateless Nonce {#sec-stateless-nonce}
 
