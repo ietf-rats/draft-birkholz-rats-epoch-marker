@@ -170,7 +170,7 @@ etime:
 
 nonce:
 
-: A non-predictable byte string used as extra data in challenge-response interaction models (see {{-rats-models}}).
+: A never-repeating byte string used as extra data in challenge-response interaction models (see {{-rats-models}}).
 
 ### Classical RFC 3161 TST Info {#sec-rfc3161-classic}
 
@@ -265,7 +265,7 @@ The following describes the multi-nonce type.
 
 multi-nonce:
 
-: A non-predictable byte string used by RATS roles in a trust domain as extra data included in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch.
+: A never-repeating byte string used by RATS roles in a trust domain as extra data included in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch.
 
 ### Multi-Nonce-List {#sec-multi-nonce-list}
 
@@ -279,7 +279,7 @@ The following describes the multi-nonce type.
 
 multi-nonce-list:
 
-: A sequence of non-predictable byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess, if that nonce is the appropriate next unused nonce from the multi-nonce-list.
+: A sequence of never-repeating byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-RATS-ARCH}} to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess, if that nonce is the appropriate next unused nonce from the multi-nonce-list.
 
 ### Strictly Monotonically Increasing Counter {#sec-strictly-monotonic}
 
