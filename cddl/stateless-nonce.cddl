@@ -1,6 +1,6 @@
 stateless-nonce = [
   TimeToken
-  AuthTag: bstr .size 28
+  AuthTag: bstr .size 32
 ]
 
 TimeToken = (

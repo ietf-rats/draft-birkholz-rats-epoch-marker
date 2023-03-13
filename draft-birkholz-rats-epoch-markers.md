@@ -46,6 +46,7 @@ normative:
   RFC3161: TSA
   RFC5652: CMS
   RFC8610: CDDL
+  RFC2104: HMAC
   STD94:
     -: CBOR
     =: RFC8949
@@ -212,7 +213,7 @@ processed by any other server in pool, which avoids the need for session
 
 A stateless-nonce supports the above use case by encoding a Posix time (i.e.,
 the epoch identifier), alongside a minimal set of metadata, authenticated with
-a symmetric key in a self-contained and compact (starting at 40 bytes) token.
+a symmetric key in a self-contained and compact token.
 
 ~~~~ CDDL
 {::include cddl/stateless-nonce.cddl}
@@ -238,8 +239,8 @@ Pad:
 : zero or more pad bytes, used to make the stateless nonce the desired size.
 
 AuthTag:
-: HMAC w/ SHA-224 computed over the CBOR serialisation of TimeToken encoded as
-a 28-bytes string.
+: HMAC {{-HMAC}} w/ SHA-256 computed over the CBOR serialisation of TimeToken
+encoded as a 32-bytes string.
 
 # Security Considerations
 
