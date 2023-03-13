@@ -27,5 +27,5 @@ timeMap = {
 }
 profiled-duration = {* int => any}
 
-GeneralNameAttr = ( GeneralNameType : int, GeneralNameValue : any )
-GeneralName = [ + GeneralNameAttr ]
+GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
+; See Section 4.2.1.6 of RFC 5280 for type/value
