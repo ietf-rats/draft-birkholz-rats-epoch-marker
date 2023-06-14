@@ -153,10 +153,10 @@ This memo comes with a set of predefined payloads.
 
 ### CBOR Time Tag (etime)
 
-CBOR extended time tag (1001) optionally bundled with a nonce.
+A CBOR time representation choosing from #6.0/tdate (ISO 8601), #6.1/time (IEEE 1003-1.2017 Seconds since Epoch), or #6.1001/etime, and option bundled with a nonce.
 
 See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
-time format.
+time format. See {{-CBOR}} for time and tdate.
 
 ~~~~ CDDL
 {::include cddl/cbor-time-tag.cddl}
