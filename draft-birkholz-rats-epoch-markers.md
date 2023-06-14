@@ -151,7 +151,7 @@ At the top level, an Epoch Marker is a CBOR array with a header carrying an opti
 
 This memo comes with a set of predefined payloads.
 
-### CBOR Time Tag (etime)
+### CBOR Time Tags
 
 A CBOR time representation choosing from #6.0/tdate (ISO 8601), #6.1/time (IEEE 1003-1.2017 Seconds since Epoch), or #6.1001/etime, and option bundled with a nonce.
 
