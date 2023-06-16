@@ -151,12 +151,12 @@ At the top level, an Epoch Marker is a CBOR array with a header carrying an opti
 
 This memo comes with a set of predefined payloads.
 
-### CBOR Time Tag (etime)
+### CBOR Time Tags
 
-CBOR extended time tag (1001) optionally bundled with a nonce.
+A CBOR time representation choosing from CBOR tag 0 (tdate, RFC3339 time as a string), tag 1 (time, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.
 
 See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
-time format.
+time format (tag 1001). See {{-CBOR}} for tdate (tag 0) and time (tag 1).
 
 ~~~~ CDDL
 {::include cddl/cbor-time-tag.cddl}

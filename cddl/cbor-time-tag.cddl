@@ -1,5 +1,5 @@
 cbor-epoch-id = [
-   etime
+   tdate / time / etime
    ? nonce
 ]
 
