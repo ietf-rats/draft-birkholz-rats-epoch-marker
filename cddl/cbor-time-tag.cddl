@@ -1,8 +1,10 @@
 cbor-epoch-id = [
-   tdate / time / etime
+   cbor-time
    ? nonce
 ]
 
 etime = #6.1001({* (int/tstr) => any})
+
+cbor-time = tdate / time / etime
 
 nonce = tstr / bstr / int
