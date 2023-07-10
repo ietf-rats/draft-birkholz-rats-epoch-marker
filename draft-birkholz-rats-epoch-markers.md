@@ -135,7 +135,10 @@ In general, there are three interaction models:
 * unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
 * solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
 
-In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'. Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell. An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier). Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
+In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'.
+Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell.
+An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
 # Epoch Marker Structure
 
