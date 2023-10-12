@@ -308,25 +308,25 @@ The Epoch Bell MUST use the following value as messageImprint in its request to 
 
 This is the sha-256 hash of the string "EPOCH_BELL".
 
-### Multi-Nonce {#sec-multi-nonce}
+### Epoch Tick {#sec-epoch-tick}
 
-Typically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.
+An Epoch Tick is a single opaque blob sent to multiple consumers.
 
 ~~~~ CDDL
 {::include cddl/multi-nonce.cddl}
 ~~~~
 
-The following describes the multi-nonce type.
+The following describes the epoch-tick type.
 
-multi-nonce:
+epoch-tick:
 
-: A byte string used by RATS roles in a trust domain as extra data included in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch.
+: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages {{-rats-arch}} to associate them with a certain epoch.
 
 #### Creation
 
 The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
-### Multi-Nonce-List {#sec-multi-nonce-list}
+### Multi-Nonce-List {#sec-epoch-tick-list}
 
 A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
 
@@ -393,8 +393,8 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | -- | -- | -- | -- |
 | 26980 | bytes | DER-encoded RFC3161 TSTInfo | {{sec-rfc3161-classic}} of {{&SELF}} |
 | 26981 | map | CBOR-encoding of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
-| 26982 | tstr / bstr / int | a nonce that is shared among many participants but that can only be used once by each participant | {{sec-multi-nonce}} of {{&SELF}} |
-| 26983 | array | a list of multi-nonce | {{sec-multi-nonce-list}} of {{&SELF}} |
+| 26982 | tstr / bstr / int | a nonce that is shared among many participants but that can only be used once by each participant | {{sec-epoch-tick}} of {{&SELF}} |
+| 26983 | array | a list of multi-nonce | {{sec-epoch-tick-list}} of {{&SELF}} |
 | 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
 {: #tbl-cbor-tags align="left" title="New CBOR Tags"}
 
