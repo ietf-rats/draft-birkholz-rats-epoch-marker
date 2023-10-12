@@ -1,4 +1,3 @@
-; Multi-Nonce-List
+; Epoch-Tick-List
 
-; a list of nonces potentially used by multiple entities
-multi-nonce-list = [ + multi-nonce ]
+epoch-tick-list = [ + epoch-tick ]

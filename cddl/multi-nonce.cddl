@@ -1,4 +1,3 @@
-; Multi-Nonce
+; Epoch-Tick
 
-; a single nonce used by multiple entities
-multi-nonce = tstr / bstr / int
+epoch-tick = tstr / bstr / int
