@@ -159,7 +159,7 @@ At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id (
 {: #fig-epoch-marker-cddl artwork-align="left"
    title="Epoch Marker definition"}
 
-The veracity proof can be encoded in an Evidence or Attestation Result conceptual message, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.
+The veracity proof can be encoded in an Evidence or Attestation Result conceptual message {{-rats-arch}}, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.
 
 ## Epoch Marker Payloads {#epoch-payloads}
 
