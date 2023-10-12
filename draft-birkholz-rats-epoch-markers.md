@@ -299,7 +299,7 @@ This is the sha-256 hash of the string "EPOCH_BELL".
 
 ### Epoch Tick {#sec-epoch-tick}
 
-An Epoch Tick is a single opaque blob send to multiple consumers.
+An Epoch Tick is a single opaque blob sent to multiple consumers.
 
 ~~~~ CDDL
 {::include cddl/multi-nonce.cddl}
