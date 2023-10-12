@@ -309,7 +309,7 @@ The following describes the epoch-tick type.
 
 epoch-tick:
 
-: Either a string, a byte string, or an integer used by RATS roles in a trust domain as extra data included in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch.
+: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages {{-rats-arch}} to associate them with a certain epoch.
 
 #### Creation
 
