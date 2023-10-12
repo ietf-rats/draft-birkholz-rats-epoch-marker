@@ -71,7 +71,16 @@ normative:
 informative:
   RFC9334: rats-arch
   I-D.ietf-rats-reference-interaction-models: rats-models
-  I-D.birkholz-scitt-receipts: scitt-receipts
+  I-D.ietf-scitt-architecture: scitt-receipts
+  I-D.ietf-rats-eat: rats-eat
+  TCG-CoEvidence:
+    author:
+      org: Trusted Computing Group
+    title: "TCG DICE Concise Evidence Binding for SPDM"
+    target: https://trustedcomputinggroup.org/wp-content/uploads/TCG-DICE-Concise-Evidence-Binding-for-SPDM-Version-1.0-Revision-53_1August2023.pdf
+    date: 2023-06
+    version: 1.00
+  I-D.ietf-rats-ar4si: rats-ar4si
 
 venue:
   mail: rats@ietf.org
@@ -142,7 +151,7 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
 
 # Epoch Marker Structure
 
-At the top level, an Epoch Marker is a CBOR array with a header carrying an optional veracity proof about the Epoch Bell and a payload.
+At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
 
 ~~~~ CDDL
 {::include cddl/epoch-marker.cddl}
@@ -150,7 +159,9 @@ At the top level, an Epoch Marker is a CBOR array with a header carrying an opti
 {: #fig-epoch-marker-cddl artwork-align="left"
    title="Epoch Marker definition"}
 
-## Epoch Marker Payloads
+The veracity proof can be encoded in an Evidence or Attestation Result conceptual message, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.
+
+## Epoch Marker Payloads {#epoch-payloads}
 
 This memo comes with a set of predefined payloads.
 
