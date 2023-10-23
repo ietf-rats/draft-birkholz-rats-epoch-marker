@@ -1,0 +1,206 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-05-05T00:54:49.625481+00:00",
+  "repo": "ietf-rats/draft-birkholz-rats-epoch-marker",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOHOmBp85IqjQr",
+      "title": "Random Generator EPOCH",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/2",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "EPOCH data model should have a mechanism to exchange a Random Number based on\r\nan agreed protocol between the Sender and the Receiver.\r\n\r\n",
+      "createdAt": "2022-04-28T18:30:07Z",
+      "updatedAt": "2022-04-28T18:35:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Like a symmetric private key that is known only by the Epoch Bell and a requster, established out-of-band, and functioning like... \"extradata\" when processing the nonce from a challenge-response quested by the Epoch Bell? We might need a tad bit more detail on the usage scenario.",
+          "createdAt": "2022-04-28T18:34:11Z",
+          "updatedAt": "2022-04-28T18:34:11Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "NONE",
+          "body": "Correct. I will try to draw a scenario and we can discuss further!",
+          "createdAt": "2022-04-28T18:35:48Z",
+          "updatedAt": "2022-04-28T18:35:48Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOHOmBp85Iqm8d",
+      "title": "Problems verifying the trust relationship between a digital signer and a supplier of a digitally signed object",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/3",
+      "state": "OPEN",
+      "author": "rjb4standards",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "this information is contained in two articles on Energy Central, but I'll summarize here.\r\nhttps://energycentral.com/c/ec/we-cannot-secure-software-supply-chain-without-sbom \r\nhttps://energycentral.com/c/ec/who-ya-gonna-trust \r\n\r\nToday's digital signing methods allow anyone with a valid signing certificate/key to sign any object, without requiring authorization from the party that originated the artifact. Software consumers have no way to \"validate\" that a digitally signed object, i.e., Program A produced by supplier S that is signed using a certificate owned by party D is legitimate. Software consumers that need to establish trust in Program A need a reliable method to confirm that Supplier S authorized signer D to sign Program A as part of digital signature verification during a software supply chain risk assessment.  \r\n\r\nCurrent digital signature verification practices only check that the signers certificate is valid and the MAC in the signature matches the computed hash of the signed artifact i.e. Program A (integrity verification), but does not provide any assurance as to the trustworthiness of the relationship between a signer in the digital signature and the supplier of an artifact. Anyone can sign anything today, without authorization from the originator of an artifact and the digital signature verification check will pass. \r\n",
+      "createdAt": "2022-04-28T18:44:21Z",
+      "updatedAt": "2022-04-28T18:45:27Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOHOmBp8420D__",
+      "title": "Cabo first look",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/1",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-04-26T16:08:07Z",
+      "updatedAt": "2022-04-27T10:39:32Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "1d3361860eae31443400e83752b7303bc1c56e3e",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "cabo-first-look",
+      "headRefOid": "1a77253ff40c36df4b3b281821de7459aeccc586",
+      "closedAt": "2022-04-27T10:39:32Z",
+      "mergedAt": "2022-04-27T10:39:32Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "8fc10e43ea9194a3caf5c322c62e26418bc643b6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp84451Y9",
+          "commit": {
+            "abbreviatedOid": "1a77253"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "yes",
+          "createdAt": "2022-04-27T10:39:24Z",
+          "updatedAt": "2022-04-27T10:39:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOHOmBp843D0qQ",
+      "title": "Thomas and Henk interactive session",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/4",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "massaging good old TSTInfo",
+      "createdAt": "2022-04-29T13:06:37Z",
+      "updatedAt": "2022-05-04T08:37:44Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "44001484f97f6ffd00b62699041a370ace3775a2",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "interactive",
+      "headRefOid": "a0801b06cd07fa219e9afec36674ba59671efcfc",
+      "closedAt": "2022-05-04T08:37:44Z",
+      "mergedAt": "2022-05-04T08:37:44Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f4be65f21e19dcd15f316bb86b0adb506b045fd7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp845Ty3m",
+          "commit": {
+            "abbreviatedOid": "a0801b0"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "small edits",
+          "createdAt": "2022-05-04T08:26:26Z",
+          "updatedAt": "2022-05-04T08:27:52Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\r\n~~~~ ASN.1\r\n```",
+              "createdAt": "2022-05-04T08:26:26Z",
+              "updatedAt": "2022-05-04T08:27:52Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "```suggestion\r\nAs a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depicts the original layout of the TSTInfo structure from {{-TSA}}.\r\n```",
+              "createdAt": "2022-05-04T08:26:39Z",
+              "updatedAt": "2022-05-04T08:27:52Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nThe Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in {{Section 10.3 of -rats-arch}}.\r\n```",
+              "createdAt": "2022-05-04T08:27:41Z",
+              "updatedAt": "2022-05-04T08:27:52Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
