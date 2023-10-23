@@ -399,7 +399,7 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
 {: #tbl-cbor-tags align="left" title="New CBOR Tags"}
 
-## New CWT Claim {#sec-iana-em-claim}
+## New EM CWT Claim {#sec-iana-em-claim}
 
 This specification adds the following value to the "CBOR Web Token Claims" registry {{IANA.cwt}}.
 
