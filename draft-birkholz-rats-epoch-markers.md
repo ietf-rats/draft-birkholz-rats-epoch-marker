@@ -81,6 +81,7 @@ informative:
     date: 2023-06
     version: 1.00
   I-D.ietf-rats-ar4si: rats-ar4si
+  IANA.cwt:
 
 venue:
   mail: rats@ietf.org
@@ -149,7 +150,7 @@ Handles are most useful to establish freshness in unsolicited and solicited dist
 An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
-# Epoch Marker Structure
+# Epoch Marker Structure {#sec-epoch-markers}
 
 At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
 
@@ -397,6 +398,17 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | 26983 | array | a list of multi-nonce | {{sec-epoch-tick-list}} of {{&SELF}} |
 | 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
 {: #tbl-cbor-tags align="left" title="New CBOR Tags"}
+
+## New EM CWT Claim {#sec-iana-em-claim}
+
+This specification adds the following value to the "CBOR Web Token Claims" registry {{IANA.cwt}}.
+
+* Claim Name: em
+* Claim Description: Epoch Marker
+* Claim Key: 2000
+* Claim Value Type(s): CBOR array
+* Change Controller: IESG
+* Specification Document(s): {{sec-epoch-markers}} of {{&SELF}}
 
 --- back
 
