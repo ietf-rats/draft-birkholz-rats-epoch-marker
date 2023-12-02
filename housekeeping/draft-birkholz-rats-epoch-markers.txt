@@ -360,7 +360,8 @@ Internet-Draft                Epoch Markers                December 2023
        OBJECT      2.16.840.1.101.3.4.2.1 (sha256)
        NULL
      }
-     OCTET STRING BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F
+     OCTET STRING
+       BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F
    }
 
    This is the sha-256 hash of the string "EPOCH_BELL".
@@ -378,7 +379,6 @@ Internet-Draft                Epoch Markers                December 2023
 
    The TST-info-based-on-CBOR-time-tag is semantically equivalent to
    classical [RFC3161] TSTInfo, rewritten using the CBOR type system.
-
 
 
 
@@ -508,7 +508,8 @@ Internet-Draft                Epoch Markers                December 2023
 
    [
        / hashAlg   / -16, / sha-256 /
-       / hashValue / h'BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F'
+       / hashValue / h'BF4EE9143EF2329B1B778974AAD44506
+                       4940B9CAE373C9E35A7B23361282698F'
    ]
 
    This is the sha-256 hash of the string "EPOCH_BELL".
@@ -547,7 +548,6 @@ Internet-Draft                Epoch Markers                December 2023
    The following describes the multi-nonce type.
 
    multi-nonce-list:  A sequence of byte strings used by RATS roles in
-
 
 
 
