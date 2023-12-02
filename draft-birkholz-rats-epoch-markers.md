@@ -155,7 +155,7 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
 
 At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/epoch-marker.cddl}
 ~~~~
 {: #fig-epoch-marker-cddl artwork-align="left"
@@ -174,7 +174,7 @@ A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a 
 See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
 time format (tag 1001). See {{-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
@@ -200,7 +200,7 @@ If a nonce is generated, the emitter MUST follow the requirements in {{sec-nonce
 
 DER-encoded {{X.690}} TSTInfo {{-TSA}}.  See {{classic-tstinfo}} for the layout.
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/classical-rfc3161-tst-info.cddl}
 ~~~~
 
@@ -214,7 +214,7 @@ classical-rfc3161-TST-info:
 
 The Epoch Bell MUST use the following value as MessageImprint in its request to the TSA:
 
-~~~ ASN.1
+~~~ asn.1
 SEQUENCE {
   SEQUENCE {
     OBJECT      2.16.840.1.101.3.4.2.1 (sha256)
@@ -240,7 +240,7 @@ The Epoch Bell COSE signature will replace the TSA signature.
 The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical
 {{-TSA}} TSTInfo, rewritten using the CBOR type system.
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/tst-info.cddl}
 ~~~~
 
@@ -316,7 +316,7 @@ This is the sha-256 hash of the string "EPOCH_BELL".
 
 An Epoch Tick is a single opaque blob sent to multiple consumers.
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/multi-nonce.cddl}
 ~~~~
 
@@ -334,7 +334,7 @@ The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/multi-nonce-list.cddl}
 ~~~~
 
@@ -354,7 +354,7 @@ A strictly monotonically increasing counter.
 
 The counter context is defined by the Epoch bell.
 
-~~~~ CDDL
+~~~~ cddl
 {::include cddl/strictly-monotonic-counter.cddl}
 ~~~~
 
@@ -420,7 +420,7 @@ This specification adds the following value to the "CBOR Web Token Claims" regis
 The example in {{fig-ex-1}} shows an epoch marker with a cbor-epoch-id and no
 bell veracity proof.
 
-~~~~ CBOR-DIAG
+~~~~ cbor-diag
 {::include cddl/examples/1.diag}
 ~~~~
 {: #fig-ex-1 artwork-align="center"
@@ -430,7 +430,7 @@ bell veracity proof.
 
 As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depicts the original layout of the TSTInfo structure from {{-TSA}}.
 
-~~~~ ASN.1
+~~~~ asn.1
 TSTInfo ::= SEQUENCE  {
    version                      INTEGER  { v1(1) },
    policy                       TSAPolicyId,
