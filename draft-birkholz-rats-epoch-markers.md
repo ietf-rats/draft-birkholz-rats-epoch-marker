@@ -300,12 +300,12 @@ corresponding request.  Cf. extensions, {{Section 2.4.2 of -TSA}}.
 
 The Epoch Bell MUST use the following value as messageImprint in its request to the TSA:
 
-```cbor-diag
+~~~ cbor-diag
 [
     / hashAlg   / -16, / sha-256 /
     / hashValue / h'BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F'
 ]
-```
+~~~
 
 This is the sha-256 hash of the string "EPOCH_BELL".
 
