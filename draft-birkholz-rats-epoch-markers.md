@@ -79,9 +79,10 @@ informative:
     title: "TCG DICE Concise Evidence Binding for SPDM"
     target: https://trustedcomputinggroup.org/wp-content/uploads/TCG-DICE-Concise-Evidence-Binding-for-SPDM-Version-1.0-Revision-53_1August2023.pdf
     date: 2023-06
-    version: 1.00
+    rc: Version 1.00
   I-D.ietf-rats-ar4si: rats-ar4si
   IANA.cwt:
+  IANA.cbor-tags:
 
 venue:
   mail: rats@ietf.org
@@ -388,7 +389,7 @@ TODO
 ## New CBOR Tags {#sec-iana-cbor-tags}
 
 IANA is requested to allocate the following tags in the "CBOR Tags" registry
-{{!IANA.cbor-tags}}, preferably with the specific CBOR tag value requested:
+{{IANA.cbor-tags}}, preferably with the specific CBOR tag value requested:
 
 | Tag | Data Item | Semantics | Reference |
 | -- | -- | -- | -- |
