@@ -425,7 +425,7 @@ bell veracity proof.
 
 ## RFC 3161 TSTInfo {#classic-tstinfo}
 
-As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depects the original layout of the TSTInfo structure from {{-TSA}}.
+As a reference for the definition of TST-info-based-on-CBOR-time-tag the code block below depicts the original layout of the TSTInfo structure from {{-TSA}}.
 
 ~~~~ ASN.1
 TSTInfo ::= SEQUENCE  {
