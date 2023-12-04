@@ -5,12 +5,12 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 4 June 2024                                         Arm Limited
+Expires: 6 June 2024                                         Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
                                                   Universität Bremen TZI
-                                                         2 December 2023
+                                                         4 December 2023
 
 
                              Epoch Markers
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 1]
+Birkholz, et al.           Expires 6 June 2024                  [Page 1]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -68,7 +68,7 @@ Internet-Draft                Epoch Markers                December 2023
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 June 2024.
+   This Internet-Draft will expire on 6 June 2024.
 
 Copyright Notice
 
@@ -101,7 +101,7 @@ Table of Contents
      4.2.  Time Requirements . . . . . . . . . . . . . . . . . . . .  11
      4.3.  Nonce Requirements  . . . . . . . . . . . . . . . . . . .  11
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
      6.1.  New CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  12
      6.2.   New EM CWT Claim . . . . . . . . . . . . . . . . . . . .  12
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 2]
+Birkholz, et al.           Expires 6 June 2024                  [Page 2]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -165,7 +165,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 3]
+Birkholz, et al.           Expires 6 June 2024                  [Page 3]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -221,7 +221,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 4]
+Birkholz, et al.           Expires 6 June 2024                  [Page 4]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -277,7 +277,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 5]
+Birkholz, et al.           Expires 6 June 2024                  [Page 5]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -333,7 +333,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 6]
+Birkholz, et al.           Expires 6 June 2024                  [Page 6]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -360,7 +360,8 @@ Internet-Draft                Epoch Markers                December 2023
        OBJECT      2.16.840.1.101.3.4.2.1 (sha256)
        NULL
      }
-     OCTET STRING BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F
+     OCTET STRING
+       BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F
    }
 
    This is the sha-256 hash of the string "EPOCH_BELL".
@@ -388,8 +389,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-
-Birkholz, et al.           Expires 4 June 2024                  [Page 7]
+Birkholz, et al.           Expires 6 June 2024                  [Page 7]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -445,7 +445,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 8]
+Birkholz, et al.           Expires 6 June 2024                  [Page 8]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -501,13 +501,16 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                  [Page 9]
+Birkholz, et al.           Expires 6 June 2024                  [Page 9]
 
 Internet-Draft                Epoch Markers                December 2023
 
 
-   cbor-diag [ / hashAlg / -16, / sha-256 / / hashValue /
-   h'BF4EE9143EF2329B1B778974AAD445064940B9CAE373C9E35A7B23361282698F' ]
+   [
+       / hashAlg   / -16, / sha-256 /
+       / hashValue / h'BF4EE9143EF2329B1B778974AAD44506
+                       4940B9CAE373C9E35A7B23361282698F'
+   ]
 
    This is the sha-256 hash of the string "EPOCH_BELL".
 
@@ -545,6 +548,20 @@ Internet-Draft                Epoch Markers                December 2023
    The following describes the multi-nonce type.
 
    multi-nonce-list:  A sequence of byte strings used by RATS roles in
+
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires 6 June 2024                 [Page 10]
+
+Internet-Draft                Epoch Markers                December 2023
+
+
       trust domain as extra data in the production of conceptual
       messages as specified by the RATS architecture [RFC9334] to
       associate them with a certain epoch.  Each nonce in the list is
@@ -553,14 +570,6 @@ Internet-Draft                Epoch Markers                December 2023
       the multi-nonce-list requires some state on the receiver side to
       assess if that nonce is the appropriate next unused nonce from the
       multi-nonce-list.
-
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 10]
-
-Internet-Draft                Epoch Markers                December 2023
-
 
 4.1.5.1.  Creation
 
@@ -600,23 +609,20 @@ Internet-Draft                Epoch Markers                December 2023
 
    TODO
 
+
+
+
+
+Birkholz, et al.           Expires 6 June 2024                 [Page 11]
+
+Internet-Draft                Epoch Markers                December 2023
+
+
 6.  IANA Considerations
 
 
    // RFC Editor: please replace RFCthis with the RFC number of this RFC
    // and remove this note.
-
-
-
-
-
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 11]
-
-Internet-Draft                Epoch Markers                December 2023
-
 
 6.1.  New CBOR Tags
 
@@ -660,19 +666,19 @@ Internet-Draft                Epoch Markers                December 2023
 
    *  Claim Description: Epoch Marker
 
+
+
+
+Birkholz, et al.           Expires 6 June 2024                 [Page 12]
+
+Internet-Draft                Epoch Markers                December 2023
+
+
    *  Claim Key: 2000
 
    *  Claim Value Type(s): CBOR array
 
    *  Change Controller: IESG
-
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 12]
-
-Internet-Draft                Epoch Markers                December 2023
-
 
    *  Specification Document(s): Section 4 of RFCthis
 
@@ -695,10 +701,6 @@ Internet-Draft                Epoch Markers                December 2023
               ietf-cose-cbor-encoded-cert-07, 20 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
               cbor-encoded-cert-07>.
-
-   [IANA.cbor-tags]
-              IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <http://www.iana.org/assignments/cbor-tags>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -723,9 +725,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 13]
+Birkholz, et al.           Expires 6 June 2024                 [Page 13]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -781,7 +781,7 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 4 June 2024                 [Page 14]
+Birkholz, et al.           Expires 6 June 2024                 [Page 14]
 
 Internet-Draft                Epoch Markers                December 2023
 
@@ -802,6 +802,10 @@ Internet-Draft                Epoch Markers                December 2023
               October 2023, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-04>.
 
+   [IANA.cbor-tags]
+              IANA, "Concise Binary Object Representation (CBOR) Tags",
+              <http://www.iana.org/assignments/cbor-tags>.
+
    [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
               <http://www.iana.org/assignments/cwt>.
 
@@ -812,7 +816,7 @@ Internet-Draft                Epoch Markers                December 2023
 
    [TCG-CoEvidence]
               Trusted Computing Group, "TCG DICE Concise Evidence
-              Binding for SPDM", June 2023,
+              Binding for SPDM", Version 1.00, June 2023,
               <https://trustedcomputinggroup.org/wp-content/uploads/TCG-
               DICE-Concise-Evidence-Binding-for-SPDM-Version-1.0-
               Revision-53_1August2023.pdf>.
@@ -821,6 +825,22 @@ Appendix A.  Examples
 
    The example in Figure 2 shows an epoch marker with a cbor-epoch-id
    and no bell veracity proof.
+
+
+
+
+
+
+
+
+
+
+
+
+Birkholz, et al.           Expires 6 June 2024                 [Page 15]
+
+Internet-Draft                Epoch Markers                December 2023
+
 
    [
      / cbor-epoch-id / [
@@ -834,20 +854,12 @@ Appendix A.  Examples
      / no bell veracity proof /
    ]
 
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 15]
-
-Internet-Draft                Epoch Markers                December 2023
-
-
             Figure 2: CBOR epoch id without bell veracity proof
 
 A.1.  RFC 3161 TSTInfo
 
    As a reference for the definition of TST-info-based-on-CBOR-time-tag
-   the code block below depects the original layout of the TSTInfo
+   the code block below depicts the original layout of the TSTInfo
    structure from [RFC3161].
 
    TSTInfo ::= SEQUENCE  {
@@ -874,6 +886,18 @@ Acknowledgements
 
 Authors' Addresses
 
+
+
+
+
+
+
+
+Birkholz, et al.           Expires 6 June 2024                 [Page 16]
+
+Internet-Draft                Epoch Markers                December 2023
+
+
    Henk Birkholz
    Fraunhofer SIT
    Rheinstrasse 75
@@ -890,14 +914,6 @@ Authors' Addresses
 
    Wei Pan
    Huawei Technologies
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 16]
-
-Internet-Draft                Epoch Markers                December 2023
-
-
    Email: william.panwei@huawei.com
 
 
@@ -933,20 +949,4 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Birkholz, et al.           Expires 4 June 2024                 [Page 17]
+Birkholz, et al.           Expires 6 June 2024                 [Page 17]
