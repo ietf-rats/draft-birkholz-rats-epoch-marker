@@ -5,12 +5,12 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 6 June 2024                                         Arm Limited
+Expires: 21 January 2025                                     Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
                                                   Universität Bremen TZI
-                                                         4 December 2023
+                                                            20 July 2024
 
 
                              Epoch Markers
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 1]
+Birkholz, et al.         Expires 21 January 2025                [Page 1]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    Internet-Drafts are working documents of the Internet Engineering
@@ -68,11 +68,11 @@ Internet-Draft                Epoch Markers                December 2023
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 June 2024.
+   This Internet-Draft will expire on 21 January 2025.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 2]
+Birkholz, et al.         Expires 21 January 2025                [Page 2]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  14
@@ -165,9 +165,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 3]
+Birkholz, et al.         Expires 21 January 2025                [Page 3]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    Epoch Markers is instrumental for enabling smooth migration paths and
@@ -221,9 +221,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 4]
+Birkholz, et al.         Expires 21 January 2025                [Page 4]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    *  unsolicited distribution (e.g., via uni-directional methods, such
@@ -277,9 +277,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 5]
+Birkholz, et al.         Expires 21 January 2025                [Page 5]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    The veracity proof can be encoded in an Evidence or Attestation
@@ -333,9 +333,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 6]
+Birkholz, et al.         Expires 21 January 2025                [Page 6]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
 4.1.2.  Classical RFC 3161 TST Info
@@ -389,9 +389,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 7]
+Birkholz, et al.         Expires 21 January 2025                [Page 7]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    TST-info-based-on-CBOR-time-tag = {
@@ -445,9 +445,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 8]
+Birkholz, et al.         Expires 21 January 2025                [Page 8]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    serialNumber:
@@ -501,9 +501,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                  [Page 9]
+Birkholz, et al.         Expires 21 January 2025                [Page 9]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    [
@@ -557,9 +557,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 10]
+Birkholz, et al.         Expires 21 January 2025               [Page 10]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
       trust domain as extra data in the production of conceptual
@@ -613,9 +613,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 11]
+Birkholz, et al.         Expires 21 January 2025               [Page 11]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
 6.  IANA Considerations
@@ -669,16 +669,16 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 12]
+Birkholz, et al.         Expires 21 January 2025               [Page 12]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
-   *  Claim Key: 2000
+   *  Claim Key: 2000 (IANA: suggested assignment)
 
    *  Claim Value Type(s): CBOR array
 
-   *  Change Controller: IESG
+   *  Change Controller: IETF
 
    *  Specification Document(s): Section 4 of RFCthis
 
@@ -698,9 +698,9 @@ Internet-Draft                Epoch Markers                December 2023
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-07, 20 October 2023,
+              ietf-cose-cbor-encoded-cert-11, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-07>.
+              cbor-encoded-cert-11>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -725,9 +725,9 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 13]
+Birkholz, et al.         Expires 21 January 2025               [Page 13]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
@@ -767,47 +767,48 @@ Internet-Draft                Epoch Markers                December 2023
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              05, 30 August 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-05>.
+              06, 4 March 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-ar4si-06>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-22, 14
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-eat-22>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-29, 8 July
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-eat-29>.
 
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 14]
+
+Birkholz, et al.         Expires 21 January 2025               [Page 14]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    [I-D.ietf-rats-reference-interaction-models]
               Birkholz, H., Eckel, M., Pan, W., and E. Voit, "Reference
               Interaction Models for Remote Attestation Procedures",
               Work in Progress, Internet-Draft, draft-ietf-rats-
-              reference-interaction-models-08, 10 September 2023,
+              reference-interaction-models-10, 7 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              reference-interaction-models-08>.
+              reference-interaction-models-10>.
 
    [I-D.ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-04, 23
-              October 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-scitt-architecture-04>.
+              Internet-Draft, draft-ietf-scitt-architecture-07, 8 July
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              scitt-architecture-07>.
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
-              <http://www.iana.org/assignments/cbor-tags>.
+              19 September 2013,
+              <https://www.iana.org/assignments/cbor-tags>.
 
-   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
-              <http://www.iana.org/assignments/cwt>.
+   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims", 22 March 2018,
+              <https://www.iana.org/assignments/cwt>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
@@ -836,10 +837,9 @@ Appendix A.  Examples
 
 
 
-
-Birkholz, et al.           Expires 6 June 2024                 [Page 15]
+Birkholz, et al.         Expires 21 January 2025               [Page 15]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    [
@@ -893,9 +893,9 @@ Authors' Addresses
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 16]
+Birkholz, et al.         Expires 21 January 2025               [Page 16]
 
-Internet-Draft                Epoch Markers                December 2023
+Internet-Draft                Epoch Markers                    July 2024
 
 
    Henk Birkholz
@@ -949,4 +949,4 @@ Internet-Draft                Epoch Markers                December 2023
 
 
 
-Birkholz, et al.           Expires 6 June 2024                 [Page 17]
+Birkholz, et al.         Expires 21 January 2025               [Page 17]
