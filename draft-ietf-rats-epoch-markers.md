@@ -3,7 +3,7 @@ v: 3
 
 title: Epoch Markers
 abbrev: Epoch Markers
-docname: draft-birkholz-rats-epoch-markers-latest
+docname: draft-ietf-rats-epoch-markers-latest
 stand_alone: true
 area: Security
 wg: RATS Working Group
