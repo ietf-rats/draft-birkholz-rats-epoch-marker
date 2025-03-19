@@ -10,8 +10,8 @@ wg: RATS Working Group
 kw: Internet-Draft
 
 venue:
-  email: rats@ietf.org
-  github: https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker
+  mail: rats@ietf.org
+  github: ietf-rats/draft-birkholz-rats-epoch-marker
 
 cat: std
 consensus: true
@@ -54,7 +54,7 @@ normative:
   STD96:
     -: COSE
     =: RFC9052
-  I-D.ietf-cbor-time-tag: CBOR-ETIME
+  RFC9581: CBOR-ETIME
   I-D.ietf-cose-cbor-encoded-cert: C509
   X.690:
     title: >
@@ -84,9 +84,6 @@ informative:
   IANA.cwt:
   IANA.cbor-tags:
 
-venue:
-  mail: rats@ietf.org
-  github: ietf-rats/draft-birkholz-rats-epoch-marker
 
 entity:
   SELF: "RFCthis"
