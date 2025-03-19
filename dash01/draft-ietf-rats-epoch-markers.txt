@@ -5,16 +5,16 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 21 January 2025                                     Arm Limited
+Expires: 20 September 2025                                   Arm Limited
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
                                                   Universität Bremen TZI
-                                                            20 July 2024
+                                                           19 March 2025
 
 
                              Epoch Markers
-                draft-birkholz-rats-epoch-markers-latest
+                  draft-ietf-rats-epoch-markers-latest
 
 Abstract
 
@@ -32,7 +32,7 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-birkholz-rats-epoch-markers/.
+   https://datatracker.ietf.org/doc/draft-ietf-rats-epoch-markers/.
 
    Discussion of this document takes place on the rats Working Group
    mailing list (mailto:rats@ietf.org), which is archived at
@@ -53,9 +53,9 @@ Status of This Memo
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 1]
+Birkholz, et al.        Expires 20 September 2025               [Page 1]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    Internet-Drafts are working documents of the Internet Engineering
@@ -68,11 +68,11 @@ Internet-Draft                Epoch Markers                    July 2024
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 January 2025.
+   This Internet-Draft will expire on 20 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 2]
+Birkholz, et al.        Expires 20 September 2025               [Page 2]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
      7.2.  Informative References  . . . . . . . . . . . . . . . . .  14
@@ -165,9 +165,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 3]
+Birkholz, et al.        Expires 20 September 2025               [Page 3]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    Epoch Markers is instrumental for enabling smooth migration paths and
@@ -221,9 +221,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 4]
+Birkholz, et al.        Expires 20 September 2025               [Page 4]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    *  unsolicited distribution (e.g., via uni-directional methods, such
@@ -277,9 +277,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 5]
+Birkholz, et al.        Expires 20 September 2025               [Page 5]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    The veracity proof can be encoded in an Evidence or Attestation
@@ -297,9 +297,9 @@ Internet-Draft                Epoch Markers                    July 2024
    time as a string), tag 1 (time, Posix time as int or float) or tag
    1001 (extended time data item), optionally bundled with a nonce.
 
-   See Section 3 of [I-D.ietf-cbor-time-tag] for the (many) details
-   about the CBOR extended time format (tag 1001).  See [STD94] for
-   tdate (tag 0) and time (tag 1).
+   See Section 3 of [RFC9581] for the (many) details about the CBOR
+   extended time format (tag 1001).  See [STD94] for tdate (tag 0) and
+   time (tag 1).
 
    cbor-epoch-id = [
       cbor-time
@@ -315,7 +315,7 @@ Internet-Draft                Epoch Markers                    July 2024
    The following describes each member of the cbor-epoch-id map.
 
    etime:  A freshly sourced timestamp represented as either time or
-      tdate ([STD94], [RFC8610]) or etime [I-D.ietf-cbor-time-tag].
+      tdate ([STD94], [RFC8610]) or etime [RFC9581].
 
    nonce:  An optional random byte string used as extra data in
       challenge-response interaction models (see
@@ -333,9 +333,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 6]
+Birkholz, et al.        Expires 20 September 2025               [Page 6]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
 4.1.2.  Classical RFC 3161 TST Info
@@ -389,9 +389,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 7]
+Birkholz, et al.        Expires 20 September 2025               [Page 7]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    TST-info-based-on-CBOR-time-tag = {
@@ -445,9 +445,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 8]
+Birkholz, et al.        Expires 20 September 2025               [Page 8]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    serialNumber:
@@ -457,8 +457,7 @@ Internet-Draft                Epoch Markers                    July 2024
    eTime:
       The time at which the tst-info has been created by the TSA.  Cf.
       genTime, Section 2.4.2 of [RFC3161].  Encoded as extended time
-      [I-D.ietf-cbor-time-tag], indicated by CBOR tag 1001, profiled as
-      follows:
+      [RFC9581], indicated by CBOR tag 1001, profiled as follows:
 
    *  The "base time" is encoded using key 1, indicating Posix time as
       int or float.
@@ -501,9 +500,10 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025                [Page 9]
+
+Birkholz, et al.        Expires 20 September 2025               [Page 9]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    [
@@ -557,9 +557,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 10]
+Birkholz, et al.        Expires 20 September 2025              [Page 10]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
       trust domain as extra data in the production of conceptual
@@ -613,9 +613,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 11]
+Birkholz, et al.        Expires 20 September 2025              [Page 11]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
 6.  IANA Considerations
@@ -669,9 +669,9 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 12]
+Birkholz, et al.        Expires 20 September 2025              [Page 12]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    *  Claim Key: 2000 (IANA: suggested assignment)
@@ -686,21 +686,13 @@ Internet-Draft                Epoch Markers                    July 2024
 
 7.1.  Normative References
 
-   [I-D.ietf-cbor-time-tag]
-              Bormann, C., Gamari, B., and H. Birkholz, "Concise Binary
-              Object Representation (CBOR) Tags for Time, Duration, and
-              Period", Work in Progress, Internet-Draft, draft-ietf-
-              cbor-time-tag-12, 30 October 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              time-tag-12>.
-
    [I-D.ietf-cose-cbor-encoded-cert]
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-11, 8 July 2024,
+              ietf-cose-cbor-encoded-cert-13, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-11>.
+              cbor-encoded-cert-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -720,16 +712,6 @@ Internet-Draft                Epoch Markers                    July 2024
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-
-
-
-
-
-Birkholz, et al.         Expires 21 January 2025               [Page 13]
-
-Internet-Draft                Epoch Markers                    July 2024
-
-
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
               Express Concise Binary Object Representation (CBOR) and
@@ -740,10 +722,23 @@ Internet-Draft                Epoch Markers                    July 2024
               Hash Algorithms", RFC 9054, DOI 10.17487/RFC9054, August
               2022, <https://www.rfc-editor.org/rfc/rfc9054>.
 
+
+
+
+Birkholz, et al.        Expires 20 September 2025              [Page 13]
+
+Internet-Draft                Epoch Markers                   March 2025
+
+
    [RFC9090]  Bormann, C., "Concise Binary Object Representation (CBOR)
               Tags for Object Identifiers", RFC 9090,
               DOI 10.17487/RFC9090, July 2021,
               <https://www.rfc-editor.org/rfc/rfc9090>.
+
+   [RFC9581]  Bormann, C., Gamari, B., and H. Birkholz, "Concise Binary
+              Object Representation (CBOR) Tags for Time, Duration, and
+              Period", RFC 9581, DOI 10.17487/RFC9581, August 2024,
+              <https://www.rfc-editor.org/rfc/rfc9581>.
 
    [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
@@ -767,47 +762,51 @@ Internet-Draft                Epoch Markers                    July 2024
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              06, 4 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-ar4si-06>.
+              08, 6 February 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              ar4si-08>.
 
    [I-D.ietf-rats-eat]
               Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-29, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-eat-29>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-31, 6
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-eat-31>.
 
 
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 14]
+
+
+
+
+Birkholz, et al.        Expires 20 September 2025              [Page 14]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    [I-D.ietf-rats-reference-interaction-models]
               Birkholz, H., Eckel, M., Pan, W., and E. Voit, "Reference
               Interaction Models for Remote Attestation Procedures",
               Work in Progress, Internet-Draft, draft-ietf-rats-
-              reference-interaction-models-10, 7 July 2024,
+              reference-interaction-models-13, 26 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              reference-interaction-models-10>.
+              reference-interaction-models-13>.
 
    [I-D.ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
               Transparent Digital Supply Chains", Work in Progress,
-              Internet-Draft, draft-ietf-scitt-architecture-07, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              scitt-architecture-07>.
+              Internet-Draft, draft-ietf-scitt-architecture-11, 3 March
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              scitt-architecture-11>.
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
-              19 September 2013,
               <https://www.iana.org/assignments/cbor-tags>.
 
-   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims", 22 March 2018,
+   [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
               <https://www.iana.org/assignments/cwt>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
@@ -837,9 +836,10 @@ Appendix A.  Examples
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 15]
+
+Birkholz, et al.        Expires 20 September 2025              [Page 15]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    [
@@ -893,9 +893,9 @@ Authors' Addresses
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 16]
+Birkholz, et al.        Expires 20 September 2025              [Page 16]
 
-Internet-Draft                Epoch Markers                    July 2024
+Internet-Draft                Epoch Markers                   March 2025
 
 
    Henk Birkholz
@@ -949,4 +949,4 @@ Internet-Draft                Epoch Markers                    July 2024
 
 
 
-Birkholz, et al.         Expires 21 January 2025               [Page 17]
+Birkholz, et al.        Expires 20 September 2025              [Page 17]
