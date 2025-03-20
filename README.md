@@ -1,11 +1,11 @@
 # Epoch Markers
 
-This is the working area for the individual Internet-Draft, "Epoch Handles".
+This is the working area for the IETF [RATS Working Group](https://datatracker.ietf.org/group/rats/documents/) Internet-Draft, "Epoch Markers".
 
-* [Editor's Copy](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/#go.draft-birkholz-rats-epoch-markers.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-birkholz-rats-epoch-markers)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-birkholz-rats-epoch-markers)
-* [Compare Editor's Copy to Individual Draft](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/#go.draft-birkholz-rats-epoch-markers.diff)
+* [Editor's Copy](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/#go.draft-ietf-rats-epoch-markers.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-rats-epoch-markers)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-rats-epoch-markers)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/#go.draft-ietf-rats-epoch-markers.diff)
 
 
 ## Contributing
