@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-05-05T00:54:49.625481+00:00",
+  "timestamp": "2025-03-23T01:09:58.547595+00:00",
   "repo": "ietf-rats/draft-birkholz-rats-epoch-marker",
   "labels": [
     {
@@ -24,14 +24,14 @@
       "color": "a2eeef"
     },
     {
-      "name": "help wanted",
-      "description": "Extra attention is needed",
-      "color": "008672"
-    },
-    {
       "name": "good first issue",
       "description": "Good for newcomers",
       "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
     },
     {
       "name": "invalid",
@@ -55,15 +55,15 @@
       "id": "I_kwDOHOmBp85IqjQr",
       "title": "Random Generator EPOCH",
       "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "EPOCH data model should have a mechanism to exchange a Random Number based on\r\nan agreed protocol between the Sender and the Receiver.\r\n\r\n",
       "createdAt": "2022-04-28T18:30:07Z",
-      "updatedAt": "2022-04-28T18:35:48Z",
-      "closedAt": null,
+      "updatedAt": "2023-06-14T15:18:47Z",
+      "closedAt": "2023-06-14T15:18:46Z",
       "comments": [
         {
           "author": "henkbirkholz",
@@ -78,6 +78,20 @@
           "body": "Correct. I will try to draw a scenario and we can discuss further!",
           "createdAt": "2022-04-28T18:35:48Z",
           "updatedAt": "2022-04-28T18:35:48Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This is still open, right? We'll submit without for now.",
+          "createdAt": "2022-10-24T20:04:31Z",
+          "updatedAt": "2022-10-24T20:04:31Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Abandoning this issue. Can be reissued as a working group item.",
+          "createdAt": "2023-06-14T15:18:46Z",
+          "updatedAt": "2023-06-14T15:18:46Z"
         }
       ]
     },
@@ -86,14 +100,502 @@
       "id": "I_kwDOHOmBp85Iqm8d",
       "title": "Problems verifying the trust relationship between a digital signer and a supplier of a digitally signed object",
       "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rjb4standards",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "this information is contained in two articles on Energy Central, but I'll summarize here.\r\nhttps://energycentral.com/c/ec/we-cannot-secure-software-supply-chain-without-sbom \r\nhttps://energycentral.com/c/ec/who-ya-gonna-trust \r\n\r\nToday's digital signing methods allow anyone with a valid signing certificate/key to sign any object, without requiring authorization from the party that originated the artifact. Software consumers have no way to \"validate\" that a digitally signed object, i.e., Program A produced by supplier S that is signed using a certificate owned by party D is legitimate. Software consumers that need to establish trust in Program A need a reliable method to confirm that Supplier S authorized signer D to sign Program A as part of digital signature verification during a software supply chain risk assessment.  \r\n\r\nCurrent digital signature verification practices only check that the signers certificate is valid and the MAC in the signature matches the computed hash of the signed artifact i.e. Program A (integrity verification), but does not provide any assurance as to the trustworthiness of the relationship between a signer in the digital signature and the supplier of an artifact. Anyone can sign anything today, without authorization from the originator of an artifact and the digital signature verification check will pass. \r\n",
       "createdAt": "2022-04-28T18:44:21Z",
-      "updatedAt": "2022-04-28T18:45:27Z",
+      "updatedAt": "2023-06-14T15:19:53Z",
+      "closedAt": "2023-06-14T15:19:53Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The Epoch Bell must be endorsed. There is the option to add veracity proofs to Epoch Markers so that policies can decide, if the signer of Epoch Markers (the Epoch Bell system & the Epoch Bell Owner) is trustworthy. Currently, the options are to include raw remote Evidence, refined Attestation Result, or slick new SCITT Receipts (that could be Endorsements, such as NIST 3rd Party Attestations -- never to be confused with actual Remote Attestation!).\r\n\r\nIa that set of options addressing this issues?",
+          "createdAt": "2022-10-24T19:16:05Z",
+          "updatedAt": "2022-10-24T19:17:18Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Assuming this addresses the issue. Closing for can. Feel free to reopen as a working group item.",
+          "createdAt": "2023-06-14T15:19:53Z",
+          "updatedAt": "2023-06-14T15:19:53Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOHOmBp85T6a0y",
+      "title": "Intro in #6 still needs some minor fixing",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/7",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "some nits and grammar still need to be fixed",
+      "createdAt": "2022-10-13T13:37:12Z",
+      "updatedAt": "2022-10-13T13:37:57Z",
+      "closedAt": "2022-10-13T13:37:56Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "fixed in #6 ",
+          "createdAt": "2022-10-13T13:37:56Z",
+          "updatedAt": "2022-10-13T13:37:56Z"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOHOmBp85UJ3R8",
+      "title": "(editorial:) Add reference to \"Epoch Bell\"",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/9",
+      "state": "CLOSED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-17T16:27:53Z",
+      "updatedAt": "2022-10-24T19:12:10Z",
+      "closedAt": "2022-10-24T19:12:09Z",
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Or maybe make sure one understands that is our term?",
+          "createdAt": "2022-10-17T16:28:55Z",
+          "updatedAt": "2022-10-17T16:28:55Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed by #10",
+          "createdAt": "2022-10-24T19:12:09Z",
+          "updatedAt": "2022-10-24T19:12:09Z"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOHOmBp85gZAbn",
+      "title": "Section 4.1 Subsections must be transmogrifed the IANA regsitry Section",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/11",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Potentially adding https://github.com/veraison/services/issues/35#issuecomment-1260053674 as 4.1.7, this would compose a valuable \"starter set\" for the IANA Section.",
+      "createdAt": "2023-03-09T12:47:08Z",
+      "updatedAt": "2023-03-10T10:43:32Z",
+      "closedAt": "2023-03-10T10:43:32Z",
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOHOmBp85gZBD2",
+      "title": "Include a specification for a \"cose profile\" used by Epoch Bells",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/12",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "Maybe already aligned with the upcoming COSE profile -00?",
+      "createdAt": "2023-03-09T12:48:38Z",
+      "updatedAt": "2024-04-24T15:40:33Z",
+      "closedAt": "2024-04-24T15:40:33Z",
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "see https://datatracker.ietf.org/doc/draft-fossati-cose-profiles/",
+          "createdAt": "2023-06-14T15:23:36Z",
+          "updatedAt": "2023-06-14T15:23:36Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "as agreed, use the URL form for now (using the datatracker URL of the draft)",
+          "createdAt": "2023-06-14T15:25:44Z",
+          "updatedAt": "2023-06-14T15:26:16Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "using draft name as profile uri for now",
+          "createdAt": "2023-06-14T15:25:51Z",
+          "updatedAt": "2023-06-14T15:25:51Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "ha, jinx... +1",
+          "createdAt": "2023-06-14T15:26:01Z",
+          "updatedAt": "2023-06-14T15:26:01Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "coming back to this as a WG item",
+          "createdAt": "2024-04-24T15:40:33Z",
+          "updatedAt": "2024-04-24T15:40:33Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOHOmBp85goxHR",
+      "title": "complete CBOR replacement for RFC3161?",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/18",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[...]\r\n\r\nThere's a bigger question though: is this CBOR tst-info something that we can define in isolation?  Or should it be more proper to do a full COSE translation of RFC3161?\r\n\r\n_Originally posted by @thomas-fossati in https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/16#discussion_r1133686965_",
+      "createdAt": "2023-03-13T11:29:20Z",
+      "updatedAt": "2023-06-14T15:28:53Z",
+      "closedAt": "2023-06-14T15:28:53Z",
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think we should do all of 3161, possibly in a separate document (or for convenience, here).\r\nThe sign request looks similar enough to the signed timestamp that this is little additional material.\r\n",
+          "createdAt": "2023-03-13T11:32:59Z",
+          "updatedAt": "2023-03-13T11:32:59Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Since I am going to be a Helvetian in just a few months, I decide to declare neutrality :-)",
+          "createdAt": "2023-03-13T12:27:21Z",
+          "updatedAt": "2023-03-13T12:27:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "please materialize in #16, according to https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/16#pullrequestreview-1337599629",
+          "createdAt": "2023-03-13T17:26:35Z",
+          "updatedAt": "2023-03-13T17:26:35Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "most of it is done in #16 \r\nOpen action items are currently inline notes in the I-D. Those can become working group items later.",
+          "createdAt": "2023-06-14T15:28:53Z",
+          "updatedAt": "2023-06-14T15:28:53Z"
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "I_kwDOHOmBp85noms8",
+      "title": "tdate as epoch",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/21",
+      "state": "CLOSED",
+      "author": "nedmsmith",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "tdate is a reasonable `tagged-epoch-id` given Evidence contains a timestamp in `tdate` format and a reference value is expressed in terms of a grace period within which the timestamp falls, relative to the epoch id.",
+      "createdAt": "2023-06-02T19:25:02Z",
+      "updatedAt": "2023-06-16T14:18:05Z",
+      "closedAt": "2023-06-16T14:18:05Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "why #6.0 and not #6.1? We are using CBOR.\r\nAs we are using #6.1001 already, an alternative approach would be to just allow for all CBOR time representations? (#6.0,#6.1,#6.1001) But it feels to me, that #6.0 is the most cumbersome?",
+          "createdAt": "2023-06-14T15:32:09Z",
+          "updatedAt": "2023-06-14T15:35:31Z"
+        },
+        {
+          "author": "nedmsmith",
+          "authorAssociation": "NONE",
+          "body": "#6.0 implies a translation to #6.1 before any math can be applied. #6.1 and #6.1001 implies a translation to #6.0 if human readable representation is needed.",
+          "createdAt": "2023-06-14T15:53:31Z",
+          "updatedAt": "2023-06-14T15:53:31Z"
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOHOmBp85o8q5C",
+      "title": "Carl's early review",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/23",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I realize it may be a bit early to review the draft, but I gave it a read and had some comments and questions. \r\n\r\n- How/where is this intended to be used? Some elements seem useful to conveying a (pool of) nonces that would be used in a claim like eat_nonce, others seem like they would serve as a new claim type (i.e., the 3161-focused options).\r\n- What is Concise Evidence? It is listed as alternative to EAT in section 4.\r\n- The draft is currently a description of a format. It might benefit from sections describing creation and verification (or at least some considerations for each). \r\n- Is the epoch-marker structure intended to be authenticated? Some of the options can be authenticated already, i.e., 4.1.2 and 4.1.7. It's not clear what the plan is for the top level (or if encryption is required).\r\n- It's not clear to me what the \u201cnever-repeating byte string\u201d phrase in sections 4.1.4 and 4.1.5 means? Is this phrase intended to avoid confusion because the nonces may be used one time by multiple parties? As written, it could be read as referring to the contents of the value.\r\n- Are each of the possible types applicable to each model? \r\n- For the RFC3161-based types, what does the message imprint in response cover, i.e., what data was hashed? This seems likely to vary with the model.\r\n- In section 4.1.2, it's probably worth explicitly excluding failed RFC3161 responses or maybe just conveying the timeStampToken field instead of the response.\r\n- Section 4.1.7 describes a \"stateless nonce\" but there is state, i.e., the symmetric key and synchronized clocks. To assure one time use, there would also need to be state up until some window size elapses. This feels a bit like TOTP (RFC6238), in which case, why is the time field needed at all? If you want to use a key and a time value, just use one of the timestamp token options.\r\n- It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example). \r\n- Section 7.3 of draft-ietf-rats-reference-interaction-models-07 states \"While a Handle Distributor is not required in this model, it is also limited to bi-lateral subscription relationships in which each Verifier has to create and provide its individual Handle.\" This suggests reuse is possible.\r\n- Given the ordering requirements on multi-nonce, this feels less like a nonce and more like a one-time pad. Some words on what happens if a message gets lost would be helpful. Ought this type require the verifier to be able to distinguish between attesters (in order to maintain state)? Given the ordering requirement, probably worth noting storage burden is diminished for the verifier.\r\n",
+      "createdAt": "2023-06-16T14:18:40Z",
+      "updatedAt": "2023-10-19T10:13:03Z",
+      "closedAt": "2023-10-19T10:13:03Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> What is Concise Evidence? It is listed as alternative to EAT in section 4.\r\n\r\nI'll take this one. It should be a matter of days for the reference to be public for informative reference.",
+          "createdAt": "2023-06-16T14:26:35Z",
+          "updatedAt": "2023-06-16T14:26:35Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> The draft is currently a description of a format. It might benefit from sections describing creation and verification (or at least some considerations for each).\r\n\r\nIf subsections \"Creation Procedure\" & \"Verification Procedure\" for Epoch Marker Payload is implied here, that's an excellent idea. Each subsection of . [Epoch Marker Payloads](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/draft-birkholz-rats-epoch-markers.html#name-epoch-marker-payloads) should then follow that structure.",
+          "createdAt": "2023-06-16T14:31:03Z",
+          "updatedAt": "2023-06-16T14:31:03Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is the epoch-marker structure intended to be authenticated? Some of the options can be authenticated already, i.e., 4.1.2 and 4.1.7. It's not clear what the plan is for the top level (or if encryption is required).\r\n\r\nOnly Stateless Nonce is symmetrically signed (like a cookie with a proof of origin attached to it - am minimal pop). but not 4.1.2 (RFC3161 TST_Info) that is coming without the CMS frosting. Maybe Stateless Nonce should be outsourced into a separate I-D? To keep this one requiring COSE envelopes for every payload?",
+          "createdAt": "2023-06-16T14:37:14Z",
+          "updatedAt": "2023-06-16T14:37:14Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> It's not clear to me what the \u201cnever-repeating byte string\u201d phrase in sections 4.1.4 and 4.1.5 means? Is this phrase intended to avoid confusion because the nonces may be used one time by multiple parties? As written, it could be read as referring to the contents of the value.\r\n\r\nOkay... let's say \"never-repeating\" was a placeholder for n-bits entropy requirements... will fix.\r\n\r\n",
+          "createdAt": "2023-06-16T14:44:01Z",
+          "updatedAt": "2023-06-16T14:44:01Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Are each of the possible types applicable to each model?\r\n\r\nYes. That's the point. But we can spell that out more explicitly. ",
+          "createdAt": "2023-06-16T14:45:32Z",
+          "updatedAt": "2023-06-16T14:45:32Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> For the RFC3161-based types, what does the message imprint in response cover, i.e., what data was hashed? This seems likely to vary with the model.\r\n\r\nGood catch. The vital part here is the timestamp and the signature and not the input to message imprint. Hence, the bell can send whatever it wants to a trusted TSA. Do we want to provide recommendations here what you send? It could bea  fixed byte array, like a magic number. Whould that be addressing this comment?",
+          "createdAt": "2023-06-16T14:50:14Z",
+          "updatedAt": "2023-06-16T14:50:14Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In section 4.1.2, it's probably worth explicitly excluding failed RFC3161 responses or maybe just conveying the timeStampToken field instead of the response.\r\n\r\nOh, we are inconsistent in our wording here! We meant to TSTInfo in the description of the field. Will fix.",
+          "createdAt": "2023-06-16T14:56:42Z",
+          "updatedAt": "2023-06-16T14:56:42Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Section 4.1.7 describes a \"stateless nonce\" but there is state, i.e., the symmetric key and synchronized clocks. To assure one time use, there would also need to be state up until some window size elapses. This feels a bit like TOTP (RFC6238), in which case, why is the time field needed at all? If you want to use a key and a time value, just use one of the timestamp token options.\r\n\r\n@thomas-fossati will comment more on this later.",
+          "createdAt": "2023-06-16T14:58:59Z",
+          "updatedAt": "2023-06-16T14:58:59Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).\r\n\r\nMaybe we need to include \"nonce handling considerations\" not here in epoch markers, but in Section [Uni-Directional Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-uni-directional-remote-atte) (unsolicited) and Section [Streaming Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-streaming-remote-attestatio) (solicited) in I-D.ietf-rats-reference-interaction-models? And then reference those here?\r\n\r\n@carl-wallace, what do you think?",
+          "createdAt": "2023-06-19T09:23:32Z",
+          "updatedAt": "2023-06-19T09:23:32Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Section 7.3 of draft-ietf-rats-reference-interaction-models-07 states \"While a Handle Distributor is not required in this model, it is also limited to bi-lateral subscription relationships in which each Verifier has to create and provide its individual Handle.\" This suggests reuse is possible.\r\n\r\nReusing the term nonce here, although it is obviously defined as being re-usable in a given scope of subscribers and in the scope of an epoch, it nevertheless felt prudent to us to create that mental association. If that association with nonce and \"epoch extra-data that spawns from a huge amount of entropy\" is more confusing than helping, should we rephrase the whole use of multi-nonce-(lists)?",
+          "createdAt": "2023-06-19T09:29:47Z",
+          "updatedAt": "2023-06-19T09:30:28Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> should we rephrase the whole use pf multi-nonce-(lists)?\r\n\r\nyes, please :-)",
+          "createdAt": "2023-06-19T09:30:37Z",
+          "updatedAt": "2023-06-19T09:30:37Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Given the ordering requirements on multi-nonce, this feels less like a nonce and more like a one-time pad\r\n\r\nI guess you mean \"one-time password\" here?\r\n\r\n> Some words on what happens if a message gets lost would be helpful.\r\n\r\nexcellent point.\r\n\r\n> Ought this type require the verifier to be able to distinguish between attesters (in order to maintain state)? \r\n\r\nThis is not needed since attesters are distinguished based on their cryptographic identity (which is used to sign the specific \"multi-nonce\").\r\n\r\n> Given the ordering requirement, probably worth noting storage burden is diminished for the verifier.\r\n\r\nFor each epoch, the verifier needs to keep the whole list in memory, as well as per-attester consumption state.  So, the storage requirements are actually increased compared to the simple \"multi-nonce\" case.\r\n",
+          "createdAt": "2023-06-19T09:43:23Z",
+          "updatedAt": "2023-06-19T09:43:23Z"
+        },
+        {
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "body": "> Maybe we need to include \"nonce handling considerations\" not here in epoch markers, but in Section [Uni-Directional Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-uni-directional-remote-atte) (unsolicited) and Section [Streaming Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-streaming-remote-attestatio) (solicited) in I-D.ietf-rats-reference-interaction-models? And then reference those here?\r\n> \r\n> @carl-wallace, what do you think?\r\n\r\nWriting there and referencing here seems fine.",
+          "createdAt": "2023-06-22T18:46:38Z",
+          "updatedAt": "2023-06-22T18:47:04Z"
+        },
+        {
+          "author": "carl-wallace",
+          "authorAssociation": "NONE",
+          "body": "> > Given the ordering requirements on multi-nonce, this feels less like a nonce and more like a one-time pad\r\n> \r\n> I guess you mean \"one-time password\" here?\r\n\r\nOne-time password works. I meant this is more like a list of values that you scratch off after use than a traditional nonce. It's already not a traditional nonce given the reuse by different parties and the ordering requirement is another step away from \"nonce.\" Re-reading it now, I don't think it is unclear what the goal is so it's probably fine.\r\n\r\n",
+          "createdAt": "2023-06-22T18:57:56Z",
+          "updatedAt": "2023-06-22T18:57:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Section 4.1.7 describes a \"stateless nonce\" but there is state, i.e., the symmetric key and synchronized clocks. To assure one time use, there would also need to be state up until some window size elapses. This feels a bit like TOTP (RFC6238), in which case, why is the time field needed at all? If you want to use a key and a time value, just use one of the timestamp token options.\r\n> \r\n> @thomas-fossati will comment more on this later.\r\n\r\nI have removed the stateless nonce from the draft.  It is a useful construct but I'm more and more convinced it's not a good fit with the overall epoch markers design.",
+          "createdAt": "2023-06-23T18:19:20Z",
+          "updatedAt": "2023-06-23T18:19:20Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > The draft is currently a description of a format. It might benefit from sections describing creation and verification (or at least some considerations for each).\r\n> \r\n> If subsections \"Creation Procedure\" & \"Verification Procedure\" for Epoch Marker Payload is implied here, that's an excellent idea. Each subsection of . [Epoch Marker Payloads](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/draft-birkholz-rats-epoch-markers.html#name-epoch-marker-payloads) should then follow that structure.\r\n\r\naddressed in #24 ",
+          "createdAt": "2023-07-06T13:48:25Z",
+          "updatedAt": "2023-07-06T13:48:25Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Is the epoch-marker structure intended to be authenticated? Some of the options can be authenticated already, i.e., 4.1.2 and 4.1.7. It's not clear what the plan is for the top level (or if encryption is required).\r\n> \r\n> Only Stateless Nonce is symmetrically signed (like a cookie with a proof of origin attached to it - am minimal pop). but not 4.1.2 (RFC3161 TST_Info) that is coming without the CMS frosting. Maybe Stateless Nonce should be outsourced into a separate I-D? To keep this one requiring COSE envelopes for every payload?\r\n\r\naddressed in https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/24\r\n",
+          "createdAt": "2023-07-06T13:48:47Z",
+          "updatedAt": "2023-07-06T13:48:47Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > It's not clear to me what the \u201cnever-repeating byte string\u201d phrase in sections 4.1.4 and 4.1.5 means? Is this phrase intended to avoid confusion because the nonces may be used one time by multiple parties? As written, it could be read as referring to the contents of the value.\r\n> \r\n> Okay... let's say \"never-repeating\" was a placeholder for n-bits entropy requirements... will fix.\r\n\r\naddressed in https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/24",
+          "createdAt": "2023-07-06T13:49:04Z",
+          "updatedAt": "2023-07-06T13:49:04Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).\r\n> \r\n> Maybe we need to include \"nonce handling considerations\" not here in epoch markers, but in Section [Uni-Directional Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-uni-directional-remote-atte) (unsolicited) and Section [Streaming Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-streaming-remote-attestatio) (solicited) in I-D.ietf-rats-reference-interaction-models? And then reference those here?\r\n> \r\n> @carl-wallace, what do you think?\r\n\r\nwill be addressed in https://github.com/ietf-rats-wg/draft-ietf-rats-reference-interaction-models/",
+          "createdAt": "2023-07-06T14:08:04Z",
+          "updatedAt": "2023-07-06T14:08:04Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Section 7.3 of draft-ietf-rats-reference-interaction-models-07 states \"While a Handle Distributor is not required in this model, it is also limited to bi-lateral subscription relationships in which each Verifier has to create and provide its individual Handle.\" This suggests reuse is possible.\r\n> \r\n> Reusing the term nonce here, although it is obviously defined as being re-usable in a given scope of subscribers and in the scope of an epoch, it nevertheless felt prudent to us to create that mental association. If that association with nonce and \"epoch extra-data that spawns from a huge amount of entropy\" is more confusing than helping, should we rephrase the whole use of multi-nonce-(lists)?\r\n\r\nwill be a topic at IETF 117",
+          "createdAt": "2023-07-06T14:09:21Z",
+          "updatedAt": "2023-07-06T14:09:21Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > It'd be helpful to include words on nonce handling for unsolicited and subscription models and how this varies for each role (since storage burden will vary for attester and verifier, for example).\r\n> \r\n> Maybe we need to include \"nonce handling considerations\" not here in epoch markers, but in Section [Uni-Directional Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-uni-directional-remote-atte) (unsolicited) and Section [Streaming Remote Attestation](https://www.ietf.org/archive/id/draft-ietf-rats-reference-interaction-models-07.html#name-streaming-remote-attestatio) (solicited) in I-D.ietf-rats-reference-interaction-models? And then reference those here?\r\n> \r\n> @carl-wallace, what do you think?\r\n\r\nwill be a topic at IETF 117",
+          "createdAt": "2023-07-06T14:12:04Z",
+          "updatedAt": "2023-07-06T14:12:04Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > What is Concise Evidence? It is listed as alternative to EAT in section 4.\r\n> \r\n> I'll take this one. It should be a matter of days for the reference to be public for informative reference.\r\n\r\nwith a little bit of luck, the public reference will be available before the submission cut-off",
+          "createdAt": "2023-07-06T15:03:59Z",
+          "updatedAt": "2023-07-06T15:03:59Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > The draft is currently a description of a format. It might benefit from sections describing creation and verification (or at least some considerations for each).\r\n> \r\n> If subsections \"Creation Procedure\" & \"Verification Procedure\" for Epoch Marker Payload is implied here, that's an excellent idea. Each subsection of . [Epoch Marker Payloads](https://ietf-rats.github.io/draft-birkholz-rats-epoch-marker/draft-birkholz-rats-epoch-markers.html#name-epoch-marker-payloads) should then follow that structure.\r\n\r\nMoving to after CfA",
+          "createdAt": "2023-07-06T15:06:28Z",
+          "updatedAt": "2023-07-06T15:06:28Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > Section 7.3 of draft-ietf-rats-reference-interaction-models-07 states \"While a Handle Distributor is not required in this model, it is also limited to bi-lateral subscription relationships in which each Verifier has to create and provide its individual Handle.\" This suggests reuse is possible.\r\n\r\n> Reusing the term nonce here, although it is obviously defined as being re-usable in a given scope of subscribers and in the scope of an epoch, it nevertheless felt prudent to us to create that mental association. If that association with nonce and \"epoch extra-data that spawns from a huge amount of entropy\" is more confusing than helping, should we rephrase the whole use of multi-nonce-(lists)?\r\n\r\nFinally, we made a decision on how to substitute multi-nonce: the proposed name is now Epoch Tick.",
+          "createdAt": "2023-10-12T13:48:13Z",
+          "updatedAt": "2023-10-12T13:48:13Z"
+        },
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Resolved in #24, #25, #27, #28.\r\n\r\nThanks @carl-wallace!",
+          "createdAt": "2023-10-19T10:12:57Z",
+          "updatedAt": "2023-10-19T10:12:57Z"
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOHOmBp85rEGXy",
+      "title": "'multi-nonce' might be a confusing term",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/26",
+      "state": "CLOSED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Using the example of \"one-time passwords\" helped, but that does not help with naming this type of Epoch Marker payload.\r\nPushing the discussion to the IETF 117 meeting.",
+      "createdAt": "2023-07-10T08:16:29Z",
+      "updatedAt": "2023-10-19T10:13:35Z",
+      "closedAt": "2023-10-19T10:13:35Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "resolved in #28 ",
+          "createdAt": "2023-10-19T10:13:35Z",
+          "updatedAt": "2023-10-19T10:13:35Z"
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOHOmBp850ViAR",
+      "title": "Use EM in EAT",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/29",
+      "state": "CLOSED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We want epoch markers to appear in EAT tokens.\r\n\r\nOne claim should be sufficient for all EM types.\r\n\r\nThere is the question of whether we also want to put it in JWTs.  (I am for it, Henk less so.)\r\n",
+      "createdAt": "2023-10-19T10:11:47Z",
+      "updatedAt": "2024-04-24T15:38:54Z",
+      "closedAt": "2024-04-24T15:38:54Z",
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Done",
+          "createdAt": "2024-04-24T15:38:54Z",
+          "updatedAt": "2024-04-24T15:38:54Z"
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOHOmBp86PHauH",
+      "title": "evidence and results should use CMWs",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/32",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "   The CDDL in epoch markers includes:\r\n```\r\nremote-attestation-evidence = (1: \"PLEASE DEFINE\")\r\nremote-attestation-result = (2: \"PLEASE DEFINE\")\r\n```\r\nShouldn't these be defined in terms [CMW](https://datatracker.ietf.org/doc/draft-ietf-rats-msg-wrap/) since CMW already distinguishes conceptual message type?\r\n\r\nFor example, the cddl might only need:\r\n```\r\n   bell-veracity-proof = non-empty<{\r\n     ? cmw-collection; contains evidence / results as appropriate\r\n     ? scitt-receipt ; SCITT receipt\r\n   }>\r\n```",
+      "createdAt": "2024-07-10T15:35:13Z",
+      "updatedAt": "2024-07-10T15:35:13Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOHOmBp86PHb4P",
+      "title": "header in COSE that contains epoch marker should be described",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/33",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Epoch markers are presumed to go into COSE signature headers. This should be described better and should include extensibility conventions for other forms of validity beyond epoch markers. ",
+      "createdAt": "2024-07-10T15:37:37Z",
+      "updatedAt": "2024-07-10T15:45:07Z",
       "closedAt": null,
       "comments": []
     }
@@ -199,6 +701,1533 @@
               "updatedAt": "2022-05-04T08:27:52Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOHOmBp85AOfpv",
+      "title": "work in progress",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/5",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-10-05T15:50:28Z",
+      "updatedAt": "2022-10-12T13:43:52Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "f4be65f21e19dcd15f316bb86b0adb506b045fd7",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "restruct",
+      "headRefOid": "1f90533174f16a1bda9767eee4d3c35e50f26f49",
+      "closedAt": "2022-10-12T13:43:48Z",
+      "mergedAt": "2022-10-12T13:43:48Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "61fd39efa624fa626ae261f6706c5681cba7239e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85DdFFj",
+          "commit": {
+            "abbreviatedOid": "43eda43"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Intro might need more love.\r\n\r\nCHARRA nonce can go into extradata of the \"soon\" to be added COSE content, I think.",
+          "createdAt": "2022-10-05T16:09:22Z",
+          "updatedAt": "2022-10-05T16:13:31Z",
+          "comments": [
+            {
+              "originalPosition": 143,
+              "body": "We should remove my assignment marks... \r\n```suggestion\r\nA list of nonces send to multiple consumers. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce\r\n```",
+              "createdAt": "2022-10-05T16:09:22Z",
+              "updatedAt": "2022-10-05T16:13:31Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "remove assignment\r\n```suggestion\r\nTypically, a nonce is a number only used once. In the context of Epoch Markers, one Nonce can be distributed to multiple consumers, each of them using that Nonce only once. Technically, that is not a Nonce anymore. This type of Nonce is called Multi-Nonce in Epoch Markers.\r\n```",
+              "createdAt": "2022-10-05T16:12:18Z",
+              "updatedAt": "2022-10-05T16:13:31Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOHOmBp85Ar9Sw",
+      "title": "a pass over intro and abstract",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/6",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-10-12T22:02:32Z",
+      "updatedAt": "2022-10-13T13:43:43Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "61fd39efa624fa626ae261f6706c5681cba7239e",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "intro-again",
+      "headRefOid": "c4f34d10f1abc52615cf09ec048c68528f31fcb0",
+      "closedAt": "2022-10-13T13:43:38Z",
+      "mergedAt": "2022-10-13T13:43:38Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "e574d9efa12efee43db241e195cf3a56aea9da34"
+      },
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "lgtm with one BIG exception:\r\n\r\nWhy are you changing sentence-based lines to arbitrary length lines? This makes the diff very hard to read (for me).",
+          "createdAt": "2022-10-13T08:06:08Z",
+          "updatedAt": "2022-10-13T08:06:08Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> lgtm with one BIG exception:\r\n> \r\n> Why are you changing sentence-based lines to arbitrary length lines? This makes the diff very hard to read (for me).\r\n\r\napologies, it's the editor settings (specifically `set tw=72`)",
+          "createdAt": "2022-10-13T08:19:48Z",
+          "updatedAt": "2022-10-13T08:19:48Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85D_vIm",
+          "commit": {
+            "abbreviatedOid": "ecb5cf3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-10-13T13:21:25Z",
+          "updatedAt": "2022-10-13T13:21:26Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "```suggestion\r\n\r\nThe entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.\r\n```",
+              "createdAt": "2022-10-13T13:21:25Z",
+              "updatedAt": "2022-10-13T13:21:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOHOmBp85A31UT",
+      "title": "minimalist definitions",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/8",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Signed-off-by: Thomas Fossati <thomas.fossati@arm.com>",
+      "createdAt": "2022-10-16T11:36:15Z",
+      "updatedAt": "2022-10-17T15:10:28Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "e574d9efa12efee43db241e195cf3a56aea9da34",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "thomas-chores",
+      "headRefOid": "71f0abb3f51b4939d88337a809e2d5e8dcf61df3",
+      "closedAt": "2022-10-17T15:06:56Z",
+      "mergedAt": "2022-10-17T15:06:56Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "475432c18739b11c7ecbdcf169e89aed2a8fa1f7"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> enough meat for an adoption call?\r\n\r\nnot sure yet, definitely worth a chat.",
+          "createdAt": "2022-10-17T15:06:49Z",
+          "updatedAt": "2022-10-17T15:06:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85EKRnm",
+          "commit": {
+            "abbreviatedOid": "71f0abb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "enough meat for an adoption call?",
+          "createdAt": "2022-10-17T06:08:24Z",
+          "updatedAt": "2022-10-17T06:08:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOHOmBp85Bb0Dd",
+      "title": "Nits 2022 10 24",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/10",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-10-24T18:02:01Z",
+      "updatedAt": "2022-10-24T19:10:24Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "475432c18739b11c7ecbdcf169e89aed2a8fa1f7",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "nits-2022-10-24",
+      "headRefOid": "ba13bb188f32077986bc7d5ef4e5fa54970a83cd",
+      "closedAt": "2022-10-24T19:10:24Z",
+      "mergedAt": "2022-10-24T19:10:24Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "a25d1b95aa098b046cc36e484e6a957181a3f96e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85EwfD1",
+          "commit": {
+            "abbreviatedOid": "ba13bb1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-10-24T18:03:03Z",
+          "updatedAt": "2022-10-24T18:03:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp85Ewx6J",
+          "commit": {
+            "abbreviatedOid": "ba13bb1"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "yes",
+          "createdAt": "2022-10-24T19:10:14Z",
+          "updatedAt": "2022-10-24T19:10:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOHOmBp85LrsPF",
+      "title": "add stateless nonces",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/13",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-09T14:27:24Z",
+      "updatedAt": "2023-03-09T16:21:52Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "a25d1b95aa098b046cc36e484e6a957181a3f96e",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "stateless-nonce",
+      "headRefOid": "b1fa0380605896562d410974f630a7a9048a8662",
+      "closedAt": "2023-03-09T16:21:47Z",
+      "mergedAt": "2023-03-09T16:21:47Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "a435412953c14c76a0838765b7af49a264905a13"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85Pdxcd",
+          "commit": {
+            "abbreviatedOid": "b1fa038"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "pending future discussion about \"posix-time\" or time-tag, this lgtm",
+          "createdAt": "2023-03-09T16:15:11Z",
+          "updatedAt": "2023-03-09T16:15:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOHOmBp85LuWgD",
+      "title": "CBOR tags request to IANA",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/14",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #11",
+      "createdAt": "2023-03-09T23:43:41Z",
+      "updatedAt": "2023-03-10T10:43:31Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "a435412953c14c76a0838765b7af49a264905a13",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "iana",
+      "headRefOid": "d226a67bed3a35d0d45a0d599619e558d3a4e780",
+      "closedAt": "2023-03-10T10:43:31Z",
+      "mergedAt": "2023-03-10T10:43:31Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "1cc409f92d2a1ce365663cff1a7421865e6700cd"
+      },
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I can see we woke the Roland!\r\n\r\nThe poor guy has just realised that Angelica has \"betrayed\" him with Medoro\r\nStay tuned, many more superb adventures will follow!",
+          "createdAt": "2023-03-10T10:29:46Z",
+          "updatedAt": "2023-03-10T10:29:46Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85Ph3ay",
+          "commit": {
+            "abbreviatedOid": "d226a67"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I can see we woke the Roland!\r\n\r\nlgtm",
+          "createdAt": "2023-03-10T07:18:38Z",
+          "updatedAt": "2023-03-10T07:18:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOHOmBp85LyB7W",
+      "title": "stateless nonce description",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/15",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-10T16:35:25Z",
+      "updatedAt": "2023-03-10T22:25:53Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "1cc409f92d2a1ce365663cff1a7421865e6700cd",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "sn-desc",
+      "headRefOid": "1d3b48ffa41a7cde434c4e96e4c8b4e1831cbfde",
+      "closedAt": "2023-03-10T22:25:52Z",
+      "mergedAt": "2023-03-10T22:25:52Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "febe71e508c244c11e59cba2357fdc6de447dc6f"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85PnTP9",
+          "commit": {
+            "abbreviatedOid": "1d3b48f"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "will unify description sections next",
+          "createdAt": "2023-03-10T22:23:52Z",
+          "updatedAt": "2023-03-10T22:23:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOHOmBp85L03FX",
+      "title": "CBOR-encoded RFC3161 TST Info description",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/16",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-11T20:25:46Z",
+      "updatedAt": "2023-03-13T17:35:54Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "476b550eb1159d64df132f72027a24063cd78136",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "tstinfo-desc",
+      "headRefOid": "28bbd2cd1efecae9b9dba3086e6611c9ae220fb3",
+      "closedAt": "2023-03-13T17:35:54Z",
+      "mergedAt": "2023-03-13T17:35:54Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "d96fd165e8d63575eabd159a429b1fbe1fbe1d17"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85Pobyh",
+          "commit": {
+            "abbreviatedOid": "87333b9"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-12T10:29:33Z",
+          "updatedAt": "2023-03-12T10:51:31Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "You would need to make this optional to make use of the default.",
+              "createdAt": "2023-03-12T10:29:33Z",
+              "updatedAt": "2023-03-12T10:51:31Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "Do you want extensions to be ignored when unknown (you would need to add a catch-all) or fail on unknown (in which case what we have is fine)?",
+              "createdAt": "2023-03-12T10:36:26Z",
+              "updatedAt": "2023-03-12T10:51:31Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "Not sure you want a roid here (relative to what?)",
+              "createdAt": "2023-03-12T10:37:45Z",
+              "updatedAt": "2023-03-12T10:51:31Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "This (and nonce below) will need to be `integer`, not `int`:\r\n\r\n```\r\n    -- Time-Stamping users MUST be ready to accommodate integers\r\n    -- up to 160 bits.\r\n```\r\n",
+              "createdAt": "2023-03-12T10:39:40Z",
+              "updatedAt": "2023-03-12T10:51:31Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "Tag 1001 does not have a #6.1 here.",
+              "createdAt": "2023-03-12T10:42:04Z",
+              "updatedAt": "2023-03-12T10:51:31Z"
+            },
+            {
+              "originalPosition": 32,
+              "body": "Again, no tag here in time-tag",
+              "createdAt": "2023-03-12T10:43:22Z",
+              "updatedAt": "2023-03-12T10:51:32Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "This would be just one name component.\r\n\r\nencoded-cert says:\r\n\r\n      GeneralName = ( GeneralNameType : int, GeneralNameValue : any )\r\n      GeneralNames = [ + GeneralName ]\r\n",
+              "createdAt": "2023-03-12T10:44:47Z",
+              "updatedAt": "2023-03-12T10:51:32Z"
+            },
+            {
+              "originalPosition": 38,
+              "body": "See above on roid",
+              "createdAt": "2023-03-12T10:45:25Z",
+              "updatedAt": "2023-03-12T10:51:32Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "-8",
+              "createdAt": "2023-03-12T10:47:10Z",
+              "updatedAt": "2023-03-12T10:51:32Z"
+            },
+            {
+              "originalPosition": 78,
+              "body": "This doesn't allow to seamlessly import extensions per 3161/5280 (and probably shouldn't).  This may require some more exposition.",
+              "createdAt": "2023-03-12T10:51:26Z",
+              "updatedAt": "2023-03-12T10:51:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85Pqxay",
+          "commit": {
+            "abbreviatedOid": "87333b9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T09:58:49Z",
+          "updatedAt": "2023-03-13T09:58:49Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "the extensions here MUST match an extension in the corresponding request, so I guess we are fine with the current state.\r\n\r\nThere's a bigger question though: is this CBOR tst-info something that we can define in isolation?  Or should it be more proper to do a full COSE translation of RFC3161?",
+              "createdAt": "2023-03-13T09:58:49Z",
+              "updatedAt": "2023-03-13T09:59:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85Pq-I9",
+          "commit": {
+            "abbreviatedOid": "87333b9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T10:24:43Z",
+          "updatedAt": "2023-03-13T10:24:44Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "oops sorry I didn't notice this.  Will fix, thanks!",
+              "createdAt": "2023-03-13T10:24:43Z",
+              "updatedAt": "2023-03-13T10:24:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PrHQp",
+          "commit": {
+            "abbreviatedOid": "bd38e72"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T10:39:51Z",
+          "updatedAt": "2023-03-13T10:39:51Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "however, double checking https://datatracker.ietf.org/doc/draft-ietf-cbor-time-tag/ to see what I missed when pulling this in, I can't find a clear statement in either \u00a73.5.5 or \u00a74 that the tag must be removed.  Can you point me to the relevant text please?",
+              "createdAt": "2023-03-13T10:39:51Z",
+              "updatedAt": "2023-03-13T10:39:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PuiaN",
+          "commit": {
+            "abbreviatedOid": "a376bd9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "approved conditionally\r\nwith the assumption that resolution of #18 will end in #16",
+          "createdAt": "2023-03-13T17:25:09Z",
+          "updatedAt": "2023-03-13T17:29:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOHOmBp85L1S2l",
+      "title": "let stateless-nonce use SHA-2",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/17",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-12T08:56:44Z",
+      "updatedAt": "2023-03-13T10:23:29Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "febe71e508c244c11e59cba2357fdc6de447dc6f",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "sn-again",
+      "headRefOid": "b582e0bd22efac300d94577f263e09fa589e1cda",
+      "closedAt": "2023-03-13T10:23:24Z",
+      "mergedAt": "2023-03-13T10:23:24Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "476b550eb1159d64df132f72027a24063cd78136"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85PobwG",
+          "commit": {
+            "abbreviatedOid": "3d80bb3"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-12T10:28:15Z",
+          "updatedAt": "2023-03-12T10:28:39Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Now if we could spend four more bytes to get a hash that is actually widely supported in hardware and software (SHA-256)?",
+              "createdAt": "2023-03-12T10:28:15Z",
+              "updatedAt": "2023-03-12T10:28:39Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "The \"starting at\" is not Bourne out by the CDDL.",
+              "createdAt": "2023-03-12T10:28:31Z",
+              "updatedAt": "2023-03-12T10:28:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PqjWb",
+          "commit": {
+            "abbreviatedOid": "3d80bb3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T09:28:34Z",
+          "updatedAt": "2023-03-13T09:28:34Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "I guess we could.  The whole idea behind SHA-1 was being able to do everything in 32 bytes, which fits well in \"a certain RoT\"'s API. ",
+              "createdAt": "2023-03-13T09:28:34Z",
+              "updatedAt": "2023-03-13T09:28:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85Pqkvn",
+          "commit": {
+            "abbreviatedOid": "3d80bb3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T09:31:37Z",
+          "updatedAt": "2023-03-13T09:31:37Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Not sure I get your point: with a 0-length Pad (the inf), it serialises to 40 bytes.  That's what I wanted to say here.",
+              "createdAt": "2023-03-13T09:31:37Z",
+              "updatedAt": "2023-03-13T09:31:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85Pqmvv",
+          "commit": {
+            "abbreviatedOid": "3d80bb3"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T09:36:06Z",
+          "updatedAt": "2023-03-13T09:36:07Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "I didn't see how to go beyond the 40-byte token, but I probably focused on the non-agile hash too much.",
+              "createdAt": "2023-03-13T09:36:07Z",
+              "updatedAt": "2023-03-13T09:36:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PqnZW",
+          "commit": {
+            "abbreviatedOid": "3d80bb3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T09:37:38Z",
+          "updatedAt": "2023-03-13T09:37:38Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "ok, got it, sorry, not enough coffee :-)",
+              "createdAt": "2023-03-13T09:37:38Z",
+              "updatedAt": "2023-03-13T09:37:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PqvVk",
+          "commit": {
+            "abbreviatedOid": "b582e0b"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thank you. This now looks good.\r\nAdding optional agility might be a next step, but this one can go in.",
+          "createdAt": "2023-03-13T09:54:47Z",
+          "updatedAt": "2023-03-13T09:54:47Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOHOmBp85L8NLa",
+      "title": "Fix GeneralName",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/19",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-13T22:34:32Z",
+      "updatedAt": "2023-03-13T23:23:04Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "d794ef3d05b61cca5d3feb17b7b6852e432a203e",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "fix-general-name",
+      "headRefOid": "399e54abc25b13d7d7c94bfc3d9bd4e22b6b23eb",
+      "closedAt": "2023-03-13T22:40:08Z",
+      "mergedAt": "2023-03-13T22:40:08Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "edb33eb75a9c613e8a7476238ec9b7cca8293e4a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85PwTiN",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thx! lgtm",
+          "createdAt": "2023-03-13T22:39:58Z",
+          "updatedAt": "2023-03-13T22:39:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PwV_e",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T22:52:41Z",
+          "updatedAt": "2023-03-13T22:52:41Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "hmm, this is not what 3161 says though: `tsa` is `GeneralName` singular, not `GeneralNames` plural...",
+              "createdAt": "2023-03-13T22:52:41Z",
+              "updatedAt": "2023-03-13T22:52:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PwWW0",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T22:54:44Z",
+          "updatedAt": "2023-03-13T22:54:45Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Yes.  that is what the PR says?\r\n",
+              "createdAt": "2023-03-13T22:54:45Z",
+              "updatedAt": "2023-03-13T22:54:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PwWow",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T22:56:19Z",
+          "updatedAt": "2023-03-13T22:56:20Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Now I see what you were trying to do... RFC 5280...\r\n",
+              "createdAt": "2023-03-13T22:56:19Z",
+              "updatedAt": "2023-03-13T22:56:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PwXEt",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T22:58:38Z",
+          "updatedAt": "2023-03-13T22:58:39Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "Fixed.",
+              "createdAt": "2023-03-13T22:58:38Z",
+              "updatedAt": "2023-03-13T22:58:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PwXTU",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T22:59:53Z",
+          "updatedAt": "2023-03-13T22:59:53Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/20\r\n",
+              "createdAt": "2023-03-13T22:59:53Z",
+              "updatedAt": "2023-03-13T22:59:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85PweGV",
+          "commit": {
+            "abbreviatedOid": "399e54a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-03-13T23:23:04Z",
+          "updatedAt": "2023-03-13T23:23:04Z",
+          "comments": [
+            {
+              "originalPosition": 23,
+              "body": "thanks!",
+              "createdAt": "2023-03-13T23:23:04Z",
+              "updatedAt": "2023-03-13T23:23:04Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOHOmBp85L8Uhj",
+      "title": "Reference RFC 5280 for the missing parts",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/20",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-13T22:59:26Z",
+      "updatedAt": "2023-03-13T23:07:24Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "edb33eb75a9c613e8a7476238ec9b7cca8293e4a",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "fix-general-name",
+      "headRefOid": "35a308c27e047541b0b4d35d4803c0d19f4e69f7",
+      "closedAt": "2023-03-13T23:07:24Z",
+      "mergedAt": "2023-03-13T23:07:24Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "e664d40cb8e74c58013baade96e0a9d07bc9dc91"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOHOmBp85TAsu5",
+      "title": "More times",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/22",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #21",
+      "createdAt": "2023-06-14T15:55:09Z",
+      "updatedAt": "2023-06-16T14:18:04Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "e664d40cb8e74c58013baade96e0a9d07bc9dc91",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "more-times",
+      "headRefOid": "0ea205e0ce3acb60dee66c242b1417f247ae12ce",
+      "closedAt": "2023-06-16T14:18:04Z",
+      "mergedAt": "2023-06-16T14:18:04Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "b620c89b0c0b341190e08a2c08f2edcc7a84e27b"
+      },
+      "comments": [
+        {
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "fixes #21 ",
+          "createdAt": "2023-06-14T16:04:36Z",
+          "updatedAt": "2023-06-14T16:04:36Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85YNDhD",
+          "commit": {
+            "abbreviatedOid": "2959e7c"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-14T15:56:20Z",
+          "updatedAt": "2023-06-14T15:56:21Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nA CBOR time representation choosing from CBOR tag 0 (tdate, RFC3339 time as a string), tag 1 (time, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.\r\n```",
+              "createdAt": "2023-06-14T15:56:20Z",
+              "updatedAt": "2023-06-14T16:00:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YNGe3",
+          "commit": {
+            "abbreviatedOid": "2959e7c"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-14T16:01:45Z",
+          "updatedAt": "2023-06-14T16:01:46Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "```suggestion\r\ntime format (tag 1001). See {{-CBOR}} for tdate (tag 0) and time (tag 1).\r\n```",
+              "createdAt": "2023-06-14T16:01:45Z",
+              "updatedAt": "2023-06-14T16:01:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YR-aJ",
+          "commit": {
+            "abbreviatedOid": "0ea205e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM (I cannot approve this explicitly because I was the one creating it...)",
+          "createdAt": "2023-06-15T09:19:47Z",
+          "updatedAt": "2023-06-15T09:19:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YSNgw",
+          "commit": {
+            "abbreviatedOid": "0ea205e"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "... but see comment.",
+          "createdAt": "2023-06-15T09:50:45Z",
+          "updatedAt": "2023-06-15T09:51:03Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Do we say that \"etime\" is defined in -CBOR-ETIME?  Shouldn't we?  Is it defined elsewhere?",
+              "createdAt": "2023-06-15T09:50:45Z",
+              "updatedAt": "2023-06-15T09:51:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YSS_B",
+          "commit": {
+            "abbreviatedOid": "0ea205e"
+          },
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-15T10:02:16Z",
+          "updatedAt": "2023-06-15T10:02:16Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "Actually, -CBOR-ETIME defines `Etime`, and `etime`  is defined here.  WFM.",
+              "createdAt": "2023-06-15T10:02:16Z",
+              "updatedAt": "2023-06-15T10:02:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YS5f6",
+          "commit": {
+            "abbreviatedOid": "0ea205e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-06-15T11:27:58Z",
+          "updatedAt": "2023-06-15T11:27:59Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "ack",
+              "createdAt": "2023-06-15T11:27:59Z",
+              "updatedAt": "2023-06-15T11:27:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85YS5xD",
+          "commit": {
+            "abbreviatedOid": "0ea205e"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-06-15T11:28:24Z",
+          "updatedAt": "2023-06-15T11:28:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOHOmBp85Twbrg",
+      "title": "Carl's review thumbsups",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/24",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Thomas's quota of Carl's comments\r\n\r\nPartially addressing #23",
+      "createdAt": "2023-06-23T15:02:52Z",
+      "updatedAt": "2023-07-05T13:42:58Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "b620c89b0c0b341190e08a2c08f2edcc7a84e27b",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "carl-s-review-thumbsups",
+      "headRefOid": "6248116c0fe7d811c0d2380ac7d8ab74e985a30f",
+      "closedAt": "2023-07-05T13:42:57Z",
+      "mergedAt": "2023-07-05T13:42:57Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "f691e910d6975d63ceb8fb7c17f289353149a556"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85aRl7t",
+          "commit": {
+            "abbreviatedOid": "6248116"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "first batch",
+          "createdAt": "2023-07-05T13:42:49Z",
+          "updatedAt": "2023-07-05T13:42:49Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOHOmBp85U0kTc",
+      "title": "Epoch Markers as Handles",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/25",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "addresses https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/23#issuecomment-1594813852",
+      "createdAt": "2023-07-06T15:09:32Z",
+      "updatedAt": "2023-07-10T08:10:33Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "f691e910d6975d63ceb8fb7c17f289353149a556",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "carl-s-review-thumbsups-2",
+      "headRefOid": "04c1ab310a404b32877c5c6ebc7be950c753ce07",
+      "closedAt": "2023-07-10T08:10:32Z",
+      "mergedAt": "2023-07-10T08:10:32Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "0f879c208a2f046808c0a6a19e27b7a3e58d9441"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85aaGTJ",
+          "commit": {
+            "abbreviatedOid": "04c1ab3"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-07-06T15:18:42Z",
+          "updatedAt": "2023-07-10T08:10:26Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nIn all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'. Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell. In ad-hoc requests, the handle is typically a nonce generated by the challenger. As a consequence, a fresh Epoch Marker used as a handle in ad-hoc requests must be available to the challenger. While this strategy can provide additional capabilities to challenge-response attestation (e.g., limiting the number of ad-hoc requests by a Verifier), it can also be an overhead that can be avoided by using a nonce as the handle.\r\n```",
+              "createdAt": "2023-07-06T15:18:42Z",
+              "updatedAt": "2023-07-10T08:10:26Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOHOmBp85coyEk",
+      "title": "coevidence ref + small edits",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/27",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-12T13:50:04Z",
+      "updatedAt": "2023-10-12T14:02:49Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "0f879c208a2f046808c0a6a19e27b7a3e58d9441",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "concise-evidence-ref",
+      "headRefOid": "6056b51e925f1ab751560a7ef535f6a07a61ca6e",
+      "closedAt": "2023-10-12T14:02:44Z",
+      "mergedAt": "2023-10-12T14:02:44Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "27754443e20aa2cbaba24b33e0f4752b2c9b7a1b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85jyzyi",
+          "commit": {
+            "abbreviatedOid": "8254242"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-12T14:00:25Z",
+          "updatedAt": "2023-10-12T14:00:26Z",
+          "comments": [
+            {
+              "originalPosition": 32,
+              "body": "```suggestion\r\nThe veracity proof can be encoded in an Evidence or Attestation Result conceptual message {{-rats-arch}}, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.\r\n```",
+              "createdAt": "2023-10-12T14:00:25Z",
+              "updatedAt": "2023-10-12T14:00:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85jy0IN",
+          "commit": {
+            "abbreviatedOid": "6056b51"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "added a small ref due to first mentioning of conceptual message in text",
+          "createdAt": "2023-10-12T14:01:06Z",
+          "updatedAt": "2023-10-12T14:01:06Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOHOmBp85co0qe",
+      "title": "Multi Nonce begone!",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/28",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-12T13:55:59Z",
+      "updatedAt": "2023-10-12T14:03:09Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "0f879c208a2f046808c0a6a19e27b7a3e58d9441",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "multi-nonce",
+      "headRefOid": "1885e75d05a768d904c5cb37971090fc9c8cd0b0",
+      "closedAt": "2023-10-12T14:03:06Z",
+      "mergedAt": "2023-10-12T14:03:06Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "5215547e11f69e11df3b47a3a35c11b3a20d03a4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85jyzLD",
+          "commit": {
+            "abbreviatedOid": "0684973"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-12T13:59:15Z",
+          "updatedAt": "2023-10-12T13:59:16Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\nAn Epoch Tick is a single opaque blob sent to multiple consumers.\r\n```",
+              "createdAt": "2023-10-12T13:59:16Z",
+              "updatedAt": "2023-10-12T13:59:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85jyz8y",
+          "commit": {
+            "abbreviatedOid": "35cdfd8"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-12T14:00:44Z",
+          "updatedAt": "2023-10-12T14:00:44Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages {{-rats-arch}} to associate them with a certain epoch.\r\n```",
+              "createdAt": "2023-10-12T14:00:44Z",
+              "updatedAt": "2023-10-12T14:00:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHOmBp85jy0O6",
+          "commit": {
+            "abbreviatedOid": "1885e75"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "imperial awesomeness",
+          "createdAt": "2023-10-12T14:01:18Z",
+          "updatedAt": "2023-10-12T14:01:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOHOmBp85dioSL",
+      "title": "register a CWT claim",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/30",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Partially addresses #29 (CWT-only, for now)",
+      "createdAt": "2023-10-23T14:52:21Z",
+      "updatedAt": "2023-10-23T15:24:36Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "5215547e11f69e11df3b47a3a35c11b3a20d03a4",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "eat-claim",
+      "headRefOid": "e7707ba0734f7ebe28525180758a3b4bcdfe13ff",
+      "closedAt": "2023-10-23T15:24:32Z",
+      "mergedAt": "2023-10-23T15:24:32Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "84a7564b6bc062fa441fb89c44b9b19b549877b9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85k5fvd",
+          "commit": {
+            "abbreviatedOid": "96a6dbc"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "20x:100:",
+          "createdAt": "2023-10-23T14:54:16Z",
+          "updatedAt": "2023-10-23T14:54:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp85k5o7D",
+          "commit": {
+            "abbreviatedOid": "96a6dbc"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-23T15:10:14Z",
+          "updatedAt": "2023-10-23T15:10:15Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\n##\u00a0New EM CWT Claim {#sec-iana-em-claim}\r\n```",
+              "createdAt": "2023-10-23T15:10:15Z",
+              "updatedAt": "2023-10-23T15:10:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOHOmBp85g92q4",
+      "title": "Housekeeping",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/31",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-12-02T19:38:27Z",
+      "updatedAt": "2023-12-04T19:58:02Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "e7611aab28f6e2ec34dcd3a777fd713911b01a09",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "housekeeping",
+      "headRefOid": "5bb24c76d5ccfcd7c998812b084d52d19eccf323",
+      "closedAt": "2023-12-04T19:58:02Z",
+      "mergedAt": "2023-12-04T19:58:02Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "5d6062866c7f61f7b04545ee6a5934d2396cd10d"
+      },
+      "comments": [
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is there an easy way to check the ASN.1 snippets?\r\n",
+          "createdAt": "2023-12-02T19:58:05Z",
+          "updatedAt": "2023-12-02T19:58:05Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm also planning to turn all sourcecode types to lower case, as required in https://www.rfc-editor.org/materials/sourcecode-types.txt\r\nNot sure of implications to Makefile etc.",
+          "createdAt": "2023-12-02T19:59:35Z",
+          "updatedAt": "2023-12-02T19:59:35Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is there an easy way to check the ASN.1 snippets?\r\n\r\nnot that I know of.  BTW, the way MessageImprint is described is non-ambiguous but completely custom.   ASN.1 \"value notation\" may be a better option.\r\n",
+          "createdAt": "2023-12-02T22:02:23Z",
+          "updatedAt": "2023-12-02T22:02:23Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "But do we have a tool that can check ASN.1 value notation?  Maybe the fantasy notation is better, because it cannot be wrong :-)\r\n",
+          "createdAt": "2023-12-02T22:04:06Z",
+          "updatedAt": "2023-12-02T22:04:06Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> But do we have a tool that can check ASN.1 value notation?\r\n\r\nGood question.  It appears that there is no open-source tool available for this :-(\r\nNIH had an `asntool`, it looks it's no longer accessible.\r\n\r\n> Maybe the fantasy notation is better, because it cannot be wrong :-)\r\n\r\n:rofl:\r\n\r\nWould using JER qualify as trolling ISO/ITU?\r\n\r\n\r\n",
+          "createdAt": "2023-12-03T11:41:46Z",
+          "updatedAt": "2023-12-03T11:41:46Z"
+        },
+        {
+          "author": "cabo",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Would using JER qualify as trolling ISO/ITU?\r\n\r\nI like the idea, but let's do that in the next PR...",
+          "createdAt": "2023-12-04T19:57:53Z",
+          "updatedAt": "2023-12-04T19:57:53Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp85o9exZ",
+          "commit": {
+            "abbreviatedOid": "94e0339"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks!",
+          "createdAt": "2023-12-02T19:55:00Z",
+          "updatedAt": "2023-12-02T19:55:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp85pFYRO",
+          "commit": {
+            "abbreviatedOid": "5bb24c7"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2023-12-04T17:33:26Z",
+          "updatedAt": "2023-12-04T17:33:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDOHOmBp851_KVS",
+      "title": "Clean up IANA considerations for em claim (2000 suggested)",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/34",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-20T12:21:58Z",
+      "updatedAt": "2024-07-22T09:45:55Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "5d6062866c7f61f7b04545ee6a5934d2396cd10d",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "claim-cleanup",
+      "headRefOid": "a5ef9e97f19c3c265787749ce01e2db52d2860eb",
+      "closedAt": "2024-07-20T15:13:51Z",
+      "mergedAt": "2024-07-20T15:13:51Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "49c360e4a1adf30886158fdd66b57ab959afdfa2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp86CiMxn",
+          "commit": {
+            "abbreviatedOid": "a5ef9e9"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks, Amanda",
+          "createdAt": "2024-07-20T14:46:50Z",
+          "updatedAt": "2024-07-20T14:46:50Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHOmBp86CmfnE",
+          "commit": {
+            "abbreviatedOid": "a5ef9e9"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "thanks!",
+          "createdAt": "2024-07-22T09:45:55Z",
+          "updatedAt": "2024-07-22T09:45:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDOHOmBp86PWxag",
+      "title": "Start preparing -01",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/35",
+      "state": "MERGED",
+      "author": "cabo",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-03-19T21:45:36Z",
+      "updatedAt": "2025-03-20T04:13:58Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "49c360e4a1adf30886158fdd66b57ab959afdfa2",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "dash01",
+      "headRefOid": "fae6d2617a473b1e24d09134b713835af96b6e97",
+      "closedAt": "2025-03-20T04:13:58Z",
+      "mergedAt": "2025-03-20T04:13:58Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "b88ada305c1038a1388148c642a9a53d240bb678"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp86g_wOJ",
+          "commit": {
+            "abbreviatedOid": "fae6d26"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "\ud83d\udea2 it!",
+          "createdAt": "2025-03-20T03:10:23Z",
+          "updatedAt": "2025-03-20T03:10:23Z",
+          "comments": []
         }
       ]
     }
