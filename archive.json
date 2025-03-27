@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T01:05:59.506163+00:00",
+  "timestamp": "2025-03-27T01:05:37.002547+00:00",
   "repo": "ietf-rats/draft-birkholz-rats-epoch-marker",
   "labels": [
     {
@@ -596,6 +596,22 @@
       "body": "Epoch markers are presumed to go into COSE signature headers. This should be described better and should include extensibility conventions for other forms of validity beyond epoch markers. ",
       "createdAt": "2024-07-10T15:37:37Z",
       "updatedAt": "2024-07-10T15:45:07Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 36,
+      "id": "I_kwDOHOmBp86vruOh",
+      "title": "cbor-epoch-id isn't tagged",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/36",
+      "state": "OPEN",
+      "author": "nedmsmith",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Technically cbor-epoch-id isn't tagged because it begins with a '['. \n\nCan it be given a CBOR tag as in:\n\ntagged-cbor-epoch-id = #6.TBA( [ cbor-epoch-id] )\n\nAlso, are:\n```\n$tagged-epoch-id /= tdate \n$tagged-epoch-id /= time \n```\nvalid epoch identifiers? If not, why not?\n\nAlso, shouldn't these be using \"TBA\" instead of actual values:\n```\n   $tagged-epoch-id /= #6.26980(classical-rfc3161-TST-info)\n   $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)\n   $tagged-epoch-id /= #6.26982(epoch-tick)\n   $tagged-epoch-id /= #6.26983(epoch-tick-list)\n   $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)\n```",
+      "createdAt": "2025-03-25T18:47:41Z",
+      "updatedAt": "2025-03-25T18:53:16Z",
       "closedAt": null,
       "comments": []
     }
