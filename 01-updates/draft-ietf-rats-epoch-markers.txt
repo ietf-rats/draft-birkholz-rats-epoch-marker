@@ -95,17 +95,17 @@ Table of Contents
        4.1.1.  CBOR Time Tags  . . . . . . . . . . . . . . . . . . .   6
        4.1.2.  Classical RFC 3161 TST Info . . . . . . . . . . . . .   7
        4.1.3.  CBOR-encoded RFC3161 TST Info . . . . . . . . . . . .   8
-       4.1.4.  Epoch Tick  . . . . . . . . . . . . . . . . . . . . .  11
-       4.1.5.  Multi-Nonce-List  . . . . . . . . . . . . . . . . . .  11
-       4.1.6.  Strictly Monotonically Increasing Counter . . . . . .  12
-     4.2.  Time Requirements . . . . . . . . . . . . . . . . . . . .  12
-     4.3.  Nonce Requirements  . . . . . . . . . . . . . . . . . . .  12
+       4.1.4.  Epoch Tick  . . . . . . . . . . . . . . . . . . . . .  10
+       4.1.5.  Multi-Nonce-List  . . . . . . . . . . . . . . . . . .  10
+       4.1.6.  Strictly Monotonically Increasing Counter . . . . . .  11
+     4.2.  Time Requirements . . . . . . . . . . . . . . . . . . . .  11
+     4.3.  Nonce Requirements  . . . . . . . . . . . . . . . . . . .  11
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
-   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
-     6.1.  New CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  13
-     6.2.   New EM CWT Claim . . . . . . . . . . . . . . . . . . . .  13
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  14
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
+     6.1.  New CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  12
+     6.2.   New EM CWT Claim . . . . . . . . . . . . . . . . . . . .  12
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .  13
 
 
 
@@ -114,11 +114,11 @@ Birkholz, et al.         Expires 13 October 2025                [Page 2]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .  15
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  17
-     A.1.  RFC 3161 TSTInfo  . . . . . . . . . . . . . . . . . . . .  17
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .  14
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  16
+     A.1.  RFC 3161 TSTInfo  . . . . . . . . . . . . . . . . . . . .  16
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  17
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -282,29 +282,19 @@ Birkholz, et al.         Expires 13 October 2025                [Page 5]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-   epoch-marker = [
-     $tagged-epoch-id
-     ? bell-veracity-proof
-   ]
-
-   ; veracity of the bell
-   bell-veracity-proof = non-empty<{
-     ? remote-attestation-evidence ; could be EAT or Concise Evidence
-     ? remote-attestation-result ; hopefully EAT with AR4SI Claims
-     ? scitt-receipt ; SCITT receipt
-   }>
-
-   remote-attestation-evidence = (1: "PLEASE DEFINE")
-   remote-attestation-result = (2: "PLEASE DEFINE")
-   scitt-receipt = (3: "PLEASE DEFINE")
+   epoch-marker = $tagged-epoch-id
 
    ; epoch-id types independent of interaction model
-   $tagged-epoch-id /= cbor-epoch-id
+   $tagged-epoch-id /= cbor-time
    $tagged-epoch-id /= #6.26980(classical-rfc3161-TST-info)
    $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)
    $tagged-epoch-id /= #6.26982(epoch-tick)
    $tagged-epoch-id /= #6.26983(epoch-tick-list)
    $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)
+
+   cbor-time = tdate / time / etime
+
+   etime = #6.1001({* (int/tstr) => any})
 
                      Figure 1: Epoch Marker definition
 
@@ -327,17 +317,6 @@ Internet-Draft                Epoch Markers                   April 2025
    extended time format (tag 1001).  See [STD94] for tdate (tag 0) and
    time (tag 1).
 
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025                [Page 6]
-
-Internet-Draft                Epoch Markers                   April 2025
-
-
    cbor-epoch-id = [
       cbor-time
       ? nonce
@@ -350,6 +329,14 @@ Internet-Draft                Epoch Markers                   April 2025
    nonce = tstr / bstr / int
 
    The following describes each member of the cbor-epoch-id map.
+
+
+
+
+Birkholz, et al.         Expires 13 October 2025                [Page 6]
+
+Internet-Draft                Epoch Markers                   April 2025
+
 
    etime:  A freshly sourced timestamp represented as either time or
       tdate ([STD94], [RFC8610]) or etime [RFC9581].
@@ -383,17 +370,6 @@ Internet-Draft                Epoch Markers                   April 2025
    The Epoch Bell MUST use the following value as MessageImprint in its
    request to the TSA:
 
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025                [Page 7]
-
-Internet-Draft                Epoch Markers                   April 2025
-
-
    SEQUENCE {
      SEQUENCE {
        OBJECT      2.16.840.1.101.3.4.2.1 (sha256)
@@ -410,6 +386,14 @@ Internet-Draft                Epoch Markers                   April 2025
    discarded.  The Epoch Bell COSE signature will replace the TSA
    signature.
 
+
+
+
+Birkholz, et al.         Expires 13 October 2025                [Page 7]
+
+Internet-Draft                Epoch Markers                   April 2025
+
+
 4.1.3.  CBOR-encoded RFC3161 TST Info
 
 
@@ -418,37 +402,6 @@ Internet-Draft                Epoch Markers                   April 2025
 
    The TST-info-based-on-CBOR-time-tag is semantically equivalent to
    classical [RFC3161] TSTInfo, rewritten using the CBOR type system.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025                [Page 8]
-
-Internet-Draft                Epoch Markers                   April 2025
-
 
    TST-info-based-on-CBOR-time-tag = {
      &(version : 0) => v1
@@ -489,6 +442,14 @@ Internet-Draft                Epoch Markers                   April 2025
       The integer value 1.  Cf. version, Section 2.4.2 of [RFC3161].
 
    policy:
+
+
+
+Birkholz, et al.         Expires 13 October 2025                [Page 8]
+
+Internet-Draft                Epoch Markers                   April 2025
+
+
       A [RFC9090] object identifier tag (111 or 112) representing the
       TSA's policy under which the tst-info was produced.  Cf. policy,
       Section 2.4.2 of [RFC3161].
@@ -497,14 +458,6 @@ Internet-Draft                Epoch Markers                   April 2025
       A [RFC9054] COSE_Hash_Find array carrying the hash algorithm
       identifier and the hash value of the time-stamped datum.  Cf.
       messageImprint, Section 2.4.2 of [RFC3161].
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025                [Page 9]
-
-Internet-Draft                Epoch Markers                   April 2025
-
 
    serialNumber:
       A unique integer value assigned by the TSA to each issued tst-
@@ -544,6 +497,15 @@ Internet-Draft                Epoch Markers                   April 2025
       the name of the TSA.  Cf. tsa, Section 2.4.2 of [RFC3161].
 
    $$TSTInfoExtensions:
+
+
+
+
+Birkholz, et al.         Expires 13 October 2025                [Page 9]
+
+Internet-Draft                Epoch Markers                   April 2025
+
+
       A CDDL socket (Section 3.9 of [RFC8610]) to allow extensibility of
       the data format.  Note that any extensions appearing here MUST
       match an extension in the corresponding request.  Cf. extensions,
@@ -553,14 +515,6 @@ Internet-Draft                Epoch Markers                   April 2025
 
    The Epoch Bell MUST use the following value as messageImprint in its
    request to the TSA:
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025               [Page 10]
-
-Internet-Draft                Epoch Markers                   April 2025
-
 
    [
        / hashAlg   / -16, / sha-256 /
@@ -601,23 +555,16 @@ Internet-Draft                Epoch Markers                   April 2025
 
    epoch-tick-list = [ + epoch-tick ]
 
-   The following describes the multi-nonce type.
-
-   multi-nonce-list:  A sequence of byte strings used by RATS roles in
 
 
-
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025               [Page 11]
+Birkholz, et al.         Expires 13 October 2025               [Page 10]
 
 Internet-Draft                Epoch Markers                   April 2025
 
 
+   The following describes the multi-nonce type.
+
+   multi-nonce-list:  A sequence of byte strings used by RATS roles in
       trust domain as extra data in the production of conceptual
       messages as specified by the RATS architecture [RFC9334] to
       associate them with a certain epoch.  Each nonce in the list is
@@ -661,18 +608,19 @@ Internet-Draft                Epoch Markers                   April 2025
    requirements.  All receivers MUST be able to accommodate the maximum
    size.
 
-5.  Security Considerations
-
-   TODO
 
 
 
 
 
-Birkholz, et al.         Expires 13 October 2025               [Page 12]
+Birkholz, et al.         Expires 13 October 2025               [Page 11]
 
 Internet-Draft                Epoch Markers                   April 2025
 
+
+5.  Security Considerations
+
+   TODO
 
 6.  IANA Considerations
 
@@ -718,17 +666,17 @@ Internet-Draft                Epoch Markers                   April 2025
    This specification adds the following value to the "CBOR Web Token
    Claims" registry [IANA.cwt].
 
-   *  Claim Name: em
-
-   *  Claim Description: Epoch Marker
 
 
 
-
-Birkholz, et al.         Expires 13 October 2025               [Page 13]
+Birkholz, et al.         Expires 13 October 2025               [Page 12]
 
 Internet-Draft                Epoch Markers                   April 2025
 
+
+   *  Claim Name: em
+
+   *  Claim Description: Epoch Marker
 
    *  Claim Key: 2000 (IANA: suggested assignment)
 
@@ -775,16 +723,16 @@ Internet-Draft                Epoch Markers                   April 2025
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
-              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
-              May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
 
 
-
-Birkholz, et al.         Expires 13 October 2025               [Page 14]
+Birkholz, et al.         Expires 13 October 2025               [Page 13]
 
 Internet-Draft                Epoch Markers                   April 2025
 
+
+   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
+              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
+              May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
 
    [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
               Definition Language (CDDL): A Notational Convention to
@@ -824,6 +772,20 @@ Internet-Draft                Epoch Markers                   April 2025
 
 7.2.  Informative References
 
+
+
+
+
+
+
+
+
+
+Birkholz, et al.         Expires 13 October 2025               [Page 14]
+
+Internet-Draft                Epoch Markers                   April 2025
+
+
    [I-D.ietf-lamps-csr-attestation]
               Ounsworth, M., Tschofenig, H., Birkholz, H., Wiseman, M.,
               and N. Smith, "Use of Remote Attestation with
@@ -831,16 +793,6 @@ Internet-Draft                Epoch Markers                   April 2025
               Internet-Draft, draft-ietf-lamps-csr-attestation-18, 19
               March 2025, <https://datatracker.ietf.org/doc/html/draft-
               ietf-lamps-csr-attestation-18>.
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025               [Page 15]
-
-Internet-Draft                Epoch Markers                   April 2025
-
 
    [I-D.ietf-rats-ar4si]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
@@ -880,23 +832,20 @@ Internet-Draft                Epoch Markers                   April 2025
    [IANA.cwt] IANA, "CBOR Web Token (CWT) Claims",
               <https://www.iana.org/assignments/cwt>.
 
+
+
+
+
+
+Birkholz, et al.         Expires 13 October 2025               [Page 15]
+
+Internet-Draft                Epoch Markers                   April 2025
+
+
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
               Architecture", RFC 9334, DOI 10.17487/RFC9334, January
               2023, <https://www.rfc-editor.org/rfc/rfc9334>.
-
-
-
-
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025               [Page 16]
-
-Internet-Draft                Epoch Markers                   April 2025
-
 
    [TCG-CoEvidence]
               Trusted Computing Group, "TCG DICE Concise Evidence
@@ -944,12 +893,7 @@ A.1.  RFC 3161 TSTInfo
 
 
 
-
-
-
-
-
-Birkholz, et al.         Expires 13 October 2025               [Page 17]
+Birkholz, et al.         Expires 13 October 2025               [Page 16]
 
 Internet-Draft                Epoch Markers                   April 2025
 
@@ -1005,7 +949,7 @@ Authors' Addresses
 
 
 
-Birkholz, et al.         Expires 13 October 2025               [Page 18]
+Birkholz, et al.         Expires 13 October 2025               [Page 17]
 
 Internet-Draft                Epoch Markers                   April 2025
 
@@ -1061,4 +1005,4 @@ Internet-Draft                Epoch Markers                   April 2025
 
 
 
-Birkholz, et al.         Expires 13 October 2025               [Page 19]
+Birkholz, et al.         Expires 13 October 2025               [Page 18]
