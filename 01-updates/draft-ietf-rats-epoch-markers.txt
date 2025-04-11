@@ -151,12 +151,12 @@ Internet-Draft                Epoch Markers                   April 2025
    needs to be taken into consideration when Epoch Markers are used.
 
    While all Epoch Markers share the same core property of behaving like
-   clock ticks in a shared domain, various "epoch id" payloads are
-   defined in this document to accommodate different use cases and
-   diverse kinds of Epoch Bells.
+   clock ticks in a shared domain, various "Epoch ID" payloads are
+   defined as Epoch Marker types in this document to accommodate
+   different use cases and diverse kinds of Epoch Bells.
 
    While most Epoch Markers types are encoded in CBOR [STD94], and many
-   of the epoch id types are themselves encoded in CBOR, a prominent
+   of the Epoch ID types are themselves encoded in CBOR, a prominent
    format in this space is the TimeStampToken (TST) defined by
    [RFC3161], a DER-encoded TSTInfo value wrapped in a CMS envelope
    [RFC5652].  TSTs are produced by Time-Stamp Authorities (TSA) and
@@ -170,7 +170,7 @@ Birkholz, et al.         Expires 13 October 2025                [Page 3]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-   Therefore, reusing the core TSTInfo structure as an epoch id type for
+   Therefore, reusing the core TSTInfo structure as an Epoch ID type for
    Epoch Markers is instrumental for enabling smooth migration paths and
    promote interoperability.  There are, however, several other ways to
    represent a signed timestamp or the start of a new freshness epoch,
@@ -250,7 +250,7 @@ Internet-Draft                Epoch Markers                   April 2025
 4.  Epoch Marker Structure
 
    At the top level, an Epoch Marker is a CBOR array carrying the actual
-   epoch id (Section 4.1) and an optional veracity proof about the Epoch
+   Epoch ID (Section 4.1) and an optional veracity proof about the Epoch
    Bell.
 
 
@@ -922,7 +922,7 @@ Appendix A.  Examples
      / no bell veracity proof /
    ]
 
-            Figure 2: CBOR epoch id without bell veracity proof
+                          Figure 2: CBOR Epoch ID
 
 A.1.  RFC 3161 TSTInfo
 
