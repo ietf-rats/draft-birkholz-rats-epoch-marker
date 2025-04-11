@@ -112,7 +112,7 @@ This document defines Epoch Markers as a way to establish a notion of freshness 
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
 Actors in a system that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed over the Internet.
+In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock, with these ticks being conveyed over the Internet.
 
 In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
 This introduces skew that needs to be taken into consideration when Epoch Markers are used.
