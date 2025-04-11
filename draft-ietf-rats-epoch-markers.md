@@ -124,8 +124,8 @@ Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Mark
 There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens {{-CWT}}.
-An extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs, is specified using CDDL {{-CDDL}}.
+The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens (CWT) {{-CWT}}.
+The present document specifies an extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs.
 CWTs are signed using COSE {{-COSE}} and benefit from wide tool support.
 However, CWTs are not the only containers in which Epoch Markers can be embedded.
 Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
@@ -140,7 +140,7 @@ In this document, CDDL {{-CDDL}} is used to describe the data formats.  The exam
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture {{-rats-arch}}.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in {{Section 10.3 of -rats-arch}} (the RATS architecture).
 
 # Interaction Models {#interaction-models}
 
@@ -178,11 +178,11 @@ This in fact means that it is possible to request an Epoch Marker via a challeng
 
 ## Epoch Marker Types {#epoch-payloads}
 
-This memo comes with a set of predefined Epoch Marker types.
+This specification comes with a set of predefined Epoch Marker types.
 
 ### CBOR Time Tags
 
-A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float) or tag 1001 (extended time data item).
+CBOR Time Tags are CBOR time representations choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float), or tag 1001 (extended time data item).
 
 See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended time format (tag 1001).
 See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
@@ -413,7 +413,7 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | Tag | Data Item | Semantics | Reference |
 | -- | -- | -- | -- |
 | 26980 | bytes | DER-encoded RFC3161 TSTInfo | {{sec-rfc3161-classic}} of {{&SELF}} |
-| 26981 | map | CBOR-encoding of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
+| 26981 | map | CBOR representation of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
 | 26982 | tstr / bstr / int | a nonce that is shared among many participants but that can only be used once by each participant | {{sec-epoch-tick}} of {{&SELF}} |
 | 26983 | array | a list of multi-nonce | {{sec-epoch-tick-list}} of {{&SELF}} |
 | 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
