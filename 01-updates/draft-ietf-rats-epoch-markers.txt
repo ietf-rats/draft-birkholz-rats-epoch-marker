@@ -316,7 +316,7 @@ Internet-Draft                Epoch Markers                   April 2025
 
    etime = #6.1001({* (int/tstr) => any})
 
-   The following describes each member of the cbor-epoch-id map.
+   The following describes cbor-time type choice.
 
    etime:  A freshly sourced timestamp represented as either time or
       tdate (Sections 3.4.2 and 3.4.1 of RFC 8949 [STD94], Appendix D of
@@ -856,8 +856,8 @@ Internet-Draft                Epoch Markers                   April 2025
 
 Appendix A.  Examples
 
-   The example in Figure 3 shows an epoch marker with a cbor-epoch-id
-   and no bell veracity proof.
+   The example in Figure 3 shows an Epoch Marker with an etime as the
+   Epoch Marker type.
 
    [
      / cbor-epoch-id / [
@@ -868,7 +868,6 @@ Appendix A.  Examples
          -11: { "u-ca": "hebrew" }
        })
      ]
-     / no bell veracity proof /
    ]
 
                           Figure 3: CBOR Epoch ID
@@ -878,6 +877,7 @@ A.1.  RFC 3161 TSTInfo
    As a reference for the definition of TST-info-based-on-CBOR-time-tag
    the code block below depicts the original layout of the TSTInfo
    structure from [RFC3161].
+
 
 
 
