@@ -96,7 +96,7 @@ This document defines Epoch Markers as a way to establish a notion of freshness 
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
 Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-This documents defines Epoch Marker payloads, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.
+This documents defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.
 
 --- middle
 
@@ -117,7 +117,7 @@ In essence, the emissions and corresponding receptions of Epoch Markers are like
 In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
 This introduces skew that needs to be taken into consideration when Epoch Markers are used.
 
-While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "Epoch ID" payloads are defined as Epoch Marker types in this document to accommodate different use cases and diverse kinds of Epoch Bells.
+While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "Epoch ID" values are defined as Epoch Marker types in this document to accommodate different use cases and diverse kinds of Epoch Bells.
 
 While most Epoch Markers types are encoded in CBOR {{-CBOR}}, and many of the Epoch ID types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
 TSTs are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
