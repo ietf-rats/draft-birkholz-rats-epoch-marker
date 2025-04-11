@@ -117,12 +117,12 @@ In essence, the emissions and corresponding receptions of Epoch Markers are like
 In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
 This introduces skew that needs to be taken into consideration when Epoch Markers are used.
 
-While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" payloads are defined in this document to accommodate different use cases and diverse kinds of Epoch Bells.
+While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "Epoch ID" payloads are defined as Epoch Marker types in this document to accommodate different use cases and diverse kinds of Epoch Bells.
 
-While most Epoch Markers types are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
+While most Epoch Markers types are encoded in CBOR {{-CBOR}}, and many of the Epoch ID types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
 TSTs are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
 At the time of writing, TSAs are the most common providers of secure time-stamping services.
-Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
+Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
 There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
@@ -159,7 +159,7 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
 
 # Epoch Marker Structure {#sec-epoch-markers}
 
-At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
+At the top level, an Epoch Marker is a CBOR array carrying the actual Epoch ID ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
 
 ~~~~ cddl
 {::include cddl/epoch-marker.cddl}
@@ -431,7 +431,7 @@ bell veracity proof.
 {::include cddl/examples/1.diag}
 ~~~~
 {: #fig-ex-1 artwork-align="center"
-   title="CBOR epoch id without bell veracity proof"}
+   title="CBOR Epoch ID"}
 
 ## RFC 3161 TSTInfo {#classic-tstinfo}
 
