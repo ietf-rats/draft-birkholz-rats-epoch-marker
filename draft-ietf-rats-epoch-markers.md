@@ -149,8 +149,8 @@ The interaction models illustrated in this section are derived from the RATS Ref
 In general, there are three interaction models:
 
 * ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to {{Section 7.1 of -rats-models}}
-* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
-* solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
+* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to {{Section 7.2 of -rats-models}}
+* solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to {{Section 7.3 of -rats-models}}
 
 In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'.
 Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell.
