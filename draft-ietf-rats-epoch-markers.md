@@ -130,7 +130,8 @@ The default top-level structure of Epoch Markers described in this document are 
 An extensible set of Epoch Marker types as well as the `em` CWT Claim to include them in CWTs are specified using CDDL {{-CDDL}}.
 CWTs are signed using {{-COSE}} and come with the advantage of wide tool support.
 Nevertheless, CWTs are not the only vehicle Epoch Markers can be embedded in.
-Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items (e.g., the Collection CMW in {{-csr-attestation}} or the CWT Claims Header Parameter of {{-scitt-receipts}}).
+Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items.
+Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats, such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}).
 
 ## Requirements Notation
 
