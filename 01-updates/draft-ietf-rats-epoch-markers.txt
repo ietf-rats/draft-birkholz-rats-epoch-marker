@@ -232,10 +232,10 @@ Internet-Draft                Epoch Markers                   April 2025
 
    *  unsolicited distribution (e.g., via uni-directional methods, such
       as broad- or multicasting from Epoch Bells), corresponding to
-      Section 7.2 in [I-D.ietf-rats-reference-interaction-models]
+      Section 7.2 of [I-D.ietf-rats-reference-interaction-models]
 
    *  solicited distribution (e.g., via a subscription to Epoch Bells),
-      corresponding to Section 7.3 in
+      corresponding to Section 7.3 of
       [I-D.ietf-rats-reference-interaction-models]
 
    In all three interaction models, Epoch Markers can be used as content
