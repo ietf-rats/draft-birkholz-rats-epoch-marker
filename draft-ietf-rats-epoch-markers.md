@@ -45,6 +45,7 @@ author:
 normative:
   RFC3161: TSA
   RFC5652: CMS
+  RFC8392: CWT
   RFC8610: CDDL
   RFC9090: CBOR-OID
   RFC9054: COSE-HASH-ALGS
@@ -56,6 +57,7 @@ normative:
     =: RFC9052
   RFC9581: CBOR-ETIME
   I-D.ietf-cose-cbor-encoded-cert: C509
+  I-D.ietf-cbor-edn-literals: EDN
   X.690:
     title: >
       Information technology — ASN.1 encoding rules:
@@ -73,6 +75,7 @@ informative:
   I-D.ietf-rats-reference-interaction-models: rats-models
   I-D.ietf-scitt-architecture: scitt-receipts
   I-D.ietf-rats-eat: rats-eat
+  I-D.ietf-lamps-csr-attestation: csr-attestation
   TCG-CoEvidence:
     author:
       org: Trusted Computing Group
@@ -84,13 +87,12 @@ informative:
   IANA.cwt:
   IANA.cbor-tags:
 
-
 entity:
   SELF: "RFCthis"
 
 --- abstract
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients. This documents defines Epoch Marker payloads, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.
 
 --- middle
 
@@ -102,32 +104,35 @@ In general, securely establishing a shared notion of freshness of the exchanged 
 
 The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
 
-
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in distributed systems.
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
-Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Actors in a system that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.
+In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed over the Internet.
 
-In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.  This introduces skew that needs to be taken into consideration when Epoch Markers are used.
+In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
+This introduces skew that needs to be taken into consideration when Epoch Markers are used.
 
-While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" types are defined to accommodate different use cases and diverse kinds of Epoch Bells.
+While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" payloads are defined in this document to accommodate different use cases and diverse kinds of Epoch Bells.
 
-While Epoch Markers are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
-Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
+While most Epoch Markers types are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
+TSTs are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
 At the time of writing, TSAs are the most common providers of secure time-stamping services.
 Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
-There are, however, several other ways to represent a signed timestamp, and therefore other kinds of payloads that can be used to implement Epoch Markers.
+There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The top-level structure of Epoch Markers and an initial set of epoch id types are specified using CDDL {{-CDDL}}.
-To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipts {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
+The default top-level structure of Epoch Markers described in this document are CBOR Web Tokens {{-CWT}}.
+An extensible set of Epoch Marker types as well as the `em` CWT Claim to include them in CWTs are specified using CDDL {{-CDDL}}.
+CWTs are signed using {{-COSE}} and come with the advantage of wide tool support.
+Nevertheless, CWTs are not the only vehicle Epoch Markers can be embedded in.
+Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items (e.g., the Collection CMW in {{-csr-attestation}} or the CWT Claims Header Parameter of {{-scitt-receipts}}).
 
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use CBOR diagnostic notation as defined in {{Section 8 of -CBOR}} and {{Appendix G of -CDDL}}.
+In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use the CBOR Extended Diagnostic Notation (EDN) {{-EDN}}.
 
 # Epoch IDs
 
@@ -139,7 +144,7 @@ The Epoch Markers defined in this document are a solution that includes the less
 The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
 In general, there are three interaction models:
 
-* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to Section 7.1 in {{-rats-models}}
+* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to {{Section 7.1 of -rats-models}}
 * unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
 * solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
 
@@ -234,8 +239,7 @@ The Epoch Bell COSE signature will replace the TSA signature.
 
 [^issue]: Issue tracked at:
 
-The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical
-{{-TSA}} TSTInfo, rewritten using the CBOR type system.
+The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical {{-TSA}} TSTInfo, rewritten using the CBOR type system.
 
 ~~~~ cddl
 {::include cddl/tst-info.cddl}
@@ -248,29 +252,27 @@ version:
 : The integer value 1.  Cf. version, {{Section 2.4.2 of -TSA}}.
 
 policy:
-: A {{-CBOR-OID}} object identifier tag (111 or 112) representing the TSA's
-policy under which the tst-info was produced.  Cf. policy, {{Section 2.4.2 of
--TSA}}.
+: A {{-CBOR-OID}} object identifier tag (111 or 112) representing the TSA's policy under which the tst-info was produced.
+Cf. policy, {{Section 2.4.2 of -TSA}}.
 
 messageImprint:
 : A {{-COSE-HASH-ALGS}} COSE_Hash_Find array carrying the hash algorithm
-identifier and the hash value of the time-stamped datum.  Cf. messageImprint,
-{{Section 2.4.2 of -TSA}}.
+identifier and the hash value of the time-stamped datum.
+Cf. messageImprint, {{Section 2.4.2 of -TSA}}.
 
 serialNumber:
-: A unique integer value assigned by the TSA to each issued tst-info.  Cf.
+: A unique integer value assigned by the TSA to each issued tst-info. Cf.
 serialNumber, {{Section 2.4.2 of -TSA}}.
 
 eTime:
-: The time at which the tst-info has been created by the TSA.  Cf. genTime,
-{{Section 2.4.2 of -TSA}}.
-Encoded as extended time {{-CBOR-ETIME}}, indicated by CBOR tag 1001, profiled
-as follows:
+: The time at which the tst-info has been created by the TSA.
+Cf. genTime, {{Section 2.4.2 of -TSA}}.
+Encoded as extended time {{-CBOR-ETIME}}, indicated by CBOR tag 1001, profiled as follows:
 
 - The "base time" is encoded using key 1, indicating Posix time as int or float.
 - The stated "accuracy" is encoded using key -8, which indicates the maximum
-  allowed deviation from the value indicated by "base time".  The duration map
-  is profiled to disallow string keys.  This is an optional field.
+  allowed deviation from the value indicated by "base time". The duration map
+  is profiled to disallow string keys. This is an optional field.
 - The map MAY also contain one or more integer keys, which may encode
   supplementary information [^tf1].
 
@@ -278,22 +280,23 @@ as follows:
 
 {:vspace}
 ordering:
-: boolean indicating whether tst-info issued by the TSA can be ordered solely
-based on the "base time". This is an optional field, whose default value is
-"false".  Cf. ordering, {{Section 2.4.2 of -TSA}}.
+: boolean indicating whether tst-info issued by the TSA can be ordered solely based on the "base time".
+This is an optional field, whose default value is "false".
+Cf. ordering, {{Section 2.4.2 of -TSA}}.
 
 nonce:
-: int value echoing the nonce supplied by the requestor.  Cf. nonce, {{Section
-2.4.2 of -TSA}}.
+: int value echoing the nonce supplied by the requestor.
+Cf. nonce, {{Section 2.4.2 of -TSA}}.
 
 tsa:
-: a single-entry GeneralNames array {{Section 11.8 of -C509}} providing a hint
-in identifying the name of the TSA.  Cf. tsa, {{Section 2.4.2 of -TSA}}.
+: a single-entry GeneralNames array {{Section 11.8 of -C509}} providing a hint in identifying the name of the TSA.
+Cf. tsa, {{Section 2.4.2 of -TSA}}.
 
 $$TSTInfoExtensions:
-: A CDDL socket ({{Section 3.9 of -CDDL}}) to allow extensibility of the data
-format.  Note that any extensions appearing here MUST match an extension in the
-corresponding request.  Cf. extensions, {{Section 2.4.2 of -TSA}}.
+: A CDDL socket ({{Section 3.9 of -CDDL}}) to allow extensibility of the data format.
+Note that any extensions appearing here MUST match an extension in the
+corresponding request.
+Cf. extensions, {{Section 2.4.2 of -TSA}}.
 
 #### Creation
 
@@ -329,7 +332,10 @@ The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 ### Multi-Nonce-List {#sec-epoch-tick-list}
 
-A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
+A list of nonces send to multiple consumer.
+The consumers use each Nonce in the list of Nonces sequentially.
+Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved.
+This renders each Nonce in the list a Multi-Nonce
 
 ~~~~ cddl
 {::include cddl/multi-nonce-list.cddl}
