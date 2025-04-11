@@ -1281,12 +1281,12 @@ At the time of writing, TSAs are the most common providers of secure time-stampi
 Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
 There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The default top-level structure of Epoch Markers described in this document are CBOR Web Tokens <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.
-An extensible set of Epoch Marker types as well as the <code>em</code> CWT Claim to include them in CWTs are specified using CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
-CWTs are signed using <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> and come with the advantage of wide tool support.
-Nevertheless, CWTs are not the only vehicle Epoch Markers can be embedded in.
-Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items.
-Examples include the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, Evidence formats, such as <span>[<a href="#TCG-CoEvidence" class="cite xref">TCG-CoEvidence</a>]</span> or <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>, <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>, or the CWT Claims Header Parameter of <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>).<a href="#section-1-7" class="pilcrow">¶</a></p>
+The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.
+An extensible set of Epoch Marker types, along with the <code>em</code> CWT claim to include them in CWTs, is specified using CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
+CWTs are signed using COSE <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> and benefit from wide tool support.
+However, CWTs are not the only containers in which Epoch Markers can be embedded.
+Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
+Examples include the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, Evidence formats such as <span>[<a href="#TCG-CoEvidence" class="cite xref">TCG-CoEvidence</a>]</span> or <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>, <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>, or the CWT Claims Header Parameter of <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="requirements-notation">
 <section id="section-1.1">
         <h3 id="name-requirements-notation">
