@@ -49,12 +49,10 @@ normative:
   RFC8610: CDDL
   RFC9090: CBOR-OID
   RFC9054: COSE-HASH-ALGS
-  STD94:
-    -: CBOR
-    =: RFC8949
-  STD96:
-    -: COSE
-    =: RFC9052
+  STD94: CBOR
+#    =: RFC8949
+  STD96: COSE
+#    =: RFC9052
   RFC9581: CBOR-ETIME
   I-D.ietf-cose-cbor-encoded-cert: C509
   I-D.ietf-cbor-edn-literals: EDN
@@ -197,7 +195,8 @@ The following describes each member of the cbor-epoch-id map.
 
 etime:
 
-: A freshly sourced timestamp represented as either time or tdate ({{-CBOR}}, {{-CDDL}}) or etime {{-CBOR-ETIME}}.
+: A freshly sourced timestamp represented as either `time` or `tdate`
+  ({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}) or `etime` {{-CBOR-ETIME}}.
 
 nonce:
 
