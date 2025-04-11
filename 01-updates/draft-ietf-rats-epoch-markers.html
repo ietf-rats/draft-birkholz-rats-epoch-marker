@@ -10,11 +10,11 @@
 <meta content="Wei Pan" name="author">
 <meta content="Carsten Bormann" name="author">
 <meta content='
-       This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
-Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
-Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
-Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-This documents defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages. 
+       This document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
+Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages. 
     ' name="description">
 <meta content="xml2rfc 3.28.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -1098,11 +1098,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Epoch Markers</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
-Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
-Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
-Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-This documents defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
+Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
