@@ -296,12 +296,11 @@ Internet-Draft                Epoch Markers                   April 2025
 
    etime = #6.1001({* (int/tstr) => any})
 
-                     Figure 1: Epoch Marker definition
+                        Figure 1: Epoch Marker types
 
-   The veracity proof can be encoded in an Evidence or Attestation
-   Result conceptual message [RFC9334], e.g., using [I-D.ietf-rats-eat],
-   [TCG-CoEvidence], [I-D.ietf-rats-ar4si], or SCITT receipts
-   [I-D.ietf-scitt-architecture].
+   $$Claims-Set-Claims //= &(em => epoch-marker)
+
+                   Figure 2: Epoch Marker as a CWT Claim
 
 4.1.  Epoch Marker Payloads
 
@@ -330,6 +329,7 @@ Internet-Draft                Epoch Markers                   April 2025
 
    The following describes each member of the cbor-epoch-id map.
 
+   etime:  A freshly sourced timestamp represented as either time or
 
 
 
@@ -338,7 +338,6 @@ Birkholz, et al.         Expires 13 October 2025                [Page 6]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-   etime:  A freshly sourced timestamp represented as either time or
       tdate ([STD94], [RFC8610]) or etime [RFC9581].
 
    nonce:  An optional random byte string used as extra data in
@@ -385,6 +384,7 @@ Internet-Draft                Epoch Markers                   April 2025
    signature.  Only the TSTInfo is to be kept the rest MUST be
    discarded.  The Epoch Bell COSE signature will replace the TSA
    signature.
+
 
 
 
@@ -856,7 +856,7 @@ Internet-Draft                Epoch Markers                   April 2025
 
 Appendix A.  Examples
 
-   The example in Figure 2 shows an epoch marker with a cbor-epoch-id
+   The example in Figure 3 shows an epoch marker with a cbor-epoch-id
    and no bell veracity proof.
 
    [
@@ -871,7 +871,7 @@ Appendix A.  Examples
      / no bell veracity proof /
    ]
 
-                          Figure 2: CBOR Epoch ID
+                          Figure 3: CBOR Epoch ID
 
 A.1.  RFC 3161 TSTInfo
 
