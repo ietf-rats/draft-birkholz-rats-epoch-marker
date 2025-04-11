@@ -191,7 +191,7 @@ See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time`
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
-The following describes each member of the cbor-epoch-id map.
+The following describes cbor-time type choice.
 
 etime:
 
@@ -434,8 +434,7 @@ This specification adds the following value to the "CBOR Web Token Claims" regis
 
 # Examples {#examples}
 
-The example in {{fig-ex-1}} shows an epoch marker with a cbor-epoch-id and no
-bell veracity proof.
+The example in {{fig-ex-1}} shows an Epoch Marker with an etime as the Epoch Marker type.
 
 ~~~~ cbor-diag
 {::include cddl/examples/1.diag}
