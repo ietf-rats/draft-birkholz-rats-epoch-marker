@@ -1185,7 +1185,7 @@ This documents defines Epoch Marker payloads, including CBOR time tags, RFC 3161
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-epoch-marker-structure" class="internal xref">Epoch Marker Structure</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-epoch-marker-payloads" class="internal xref">Epoch Marker Payloads</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-epoch-marker-types-2" class="internal xref">Epoch Marker Types</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
                     <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-cbor-time-tags" class="internal xref">CBOR Time Tags</a></p>
@@ -1296,7 +1296,7 @@ Examples include the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attes
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> is used to describe the data formats.  The examples in <a href="#examples" class="auto internal xref">Appendix A</a> use the CBOR Extended Diagnostic Notation (EDN) <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> is used to describe the data formats.  The examples in <a href="#examples" class="auto internal xref">Appendix A</a> use the CBOR Extended Diagnostic Notation (EDN, <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>).<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1357,10 +1357,6 @@ $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)
 $tagged-epoch-id /= #6.26982(epoch-tick)
 $tagged-epoch-id /= #6.26983(epoch-tick-list)
 $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)
-
-cbor-time = tdate / time / etime
-
-etime = #6.1001({* (int/tstr) =&gt; any})
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
@@ -1380,30 +1376,23 @@ $$Claims-Set-Claims //= &amp;(em: 4711) =&gt; epoch-marker
 </div>
 <div id="epoch-payloads">
 <section id="section-4.1">
-        <h3 id="name-epoch-marker-payloads">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-epoch-marker-payloads" class="section-name selfRef">Epoch Marker Payloads</a>
+        <h3 id="name-epoch-marker-types-2">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-epoch-marker-types-2" class="section-name selfRef">Epoch Marker Types</a>
         </h3>
-<p id="section-4.1-1">This memo comes with a set of predefined payloads.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This memo comes with a set of predefined Epoch Marker types.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div id="cbor-time-tags">
 <section id="section-4.1.1">
           <h4 id="name-cbor-time-tags">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-cbor-time-tags" class="section-name selfRef">CBOR Time Tags</a>
           </h4>
-<p id="section-4.1.1-1">A CBOR time representation choosing from CBOR tag 0 (<code>tdate</code>, RFC3339 time as a string), tag 1 (<code>time</code>, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">See <span><a href="https://rfc-editor.org/rfc/rfc9581#section-3" class="relref">Section 3</a> of [<a href="#RFC9581" class="cite xref">RFC9581</a>]</span> for the (many) details about the CBOR extended
-time format (tag 1001). See <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> for <code>tdate</code> (tag 0) and <code>time</code> (tag 1).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">A CBOR time representation choosing from CBOR tag 0 (<code>tdate</code>, RFC3339 time as a string), tag 1 (<code>time</code>, Posix time as int or float) or tag 1001 (extended time data item).<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">See <span><a href="https://rfc-editor.org/rfc/rfc9581#section-3" class="relref">Section 3</a> of [<a href="#RFC9581" class="cite xref">RFC9581</a>]</span> for the (many) details about the CBOR extended time format (tag 1001).
+See <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> for <code>tdate</code> (tag 0) and <code>time</code> (tag 1).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.1.1-3">
 <pre>
-cbor-epoch-id = [
-   cbor-time
-   ? nonce
-]
-
-etime = #6.1001({* (int/tstr) =&gt; any})
-
 cbor-time = tdate / time / etime
 
-nonce = tstr / bstr / int
+etime = #6.1001({* (int/tstr) =&gt; any})
 </pre><a href="#section-4.1.1-3" class="pilcrow">¶</a>
 </div>
 <p id="section-4.1.1-4">The following describes each member of the cbor-epoch-id map.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
