@@ -89,7 +89,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
      1.1.  Requirements Notation . . . . . . . . . . . . . . . . . .   4
    2.  Epoch IDs . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   3.  Interaction Models  . . . . . . . . . . . . . . . . . . . . .   4
+   3.  Interaction Models  . . . . . . . . . . . . . . . . . . . . .   5
    4.  Epoch Marker Structure  . . . . . . . . . . . . . . . . . . .   5
      4.1.  Epoch Marker Payloads . . . . . . . . . . . . . . . . . .   6
        4.1.1.  CBOR Time Tags  . . . . . . . . . . . . . . . . . . .   6
@@ -213,11 +213,11 @@ Internet-Draft                Epoch Markers                   April 2025
    introduced and discussed in Section 10.3 of the RATS architecture
    [RFC9334].
 
-3.  Interaction Models
 
-   The interaction models illustrated in this section are derived from
-   the RATS Reference Interaction Models.  In general, there are three
-   interaction models:
+
+
+
+
 
 
 
@@ -225,6 +225,13 @@ Birkholz, et al.         Expires 13 October 2025                [Page 4]
 
 Internet-Draft                Epoch Markers                   April 2025
 
+
+3.  Interaction Models
+
+   The interaction models illustrated in this section are derived from
+   the RATS Reference Interaction Models
+   [I-D.ietf-rats-reference-interaction-models].  In general, there are
+   three major interaction models used in remote attestation:
 
    *  ad-hoc requests (e.g., via challenge-response requests addressed
       at Epoch Bells), corresponding to Section 7.1 of
@@ -239,33 +246,26 @@ Internet-Draft                Epoch Markers                   April 2025
       [I-D.ietf-rats-reference-interaction-models]
 
    In all three interaction models, Epoch Markers can be used as content
-   for the generic information element 'handle'.  Handles are most
-   useful to establish freshness in unsolicited and solicited
-   distribution by the Epoch Bell.  An Epoch Marker can be used as a
-   nonce in challenge-response remote attestation (e.g., for limiting
-   the number of ad-hoc requests by a Verifier).  Using an Epoch Marker
-   requires the challenger to acquire an Epoch Marker beforehand, which
-   may introduce a sensible overhead compared to using a simple nonce.
+   for the generic information element handle as introduced by
+   [I-D.ietf-rats-reference-interaction-models].  Handles are used to
+   establish freshness in ad-hoc, unsolicited, and solicited
+   distribution mechanisms of an Epoch Bell.  For example, an Epoch
+   Marker can be used as a nonce in challenge-response remote
+   attestation (e.g., for limiting the number of ad-hoc requests by a
+   Verifier).  If embedded in a CWT, an Epoch Marker can be used as a
+   handle by extracting the value of the em Claim or by using the
+   complete CWT including an em Claim (e.g., functioning as a signed
+   time-stamp token).  Using an Epoch Marker requires the challenger to
+   acquire an Epoch Marker beforehand, which may introduce a sensible
+   overhead compared to using a simple nonce.
 
 4.  Epoch Marker Structure
 
-   At the top level, an Epoch Marker is a CBOR array carrying the actual
-   Epoch ID (Section 4.1) and an optional veracity proof about the Epoch
-   Bell.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   Epoch Markers are tagged CBOR data items.  As a default, Epoch
+   Markers are transported via the em Claim in CWTs.  In cases of a
+   challenge-response interaction that employs a nonce to show
+   recentness, the em Claim can be paired with a Nonce Claim to bind the
+   nonce with the Epoch Marker in a protocol message.
 
 
 
