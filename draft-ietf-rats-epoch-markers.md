@@ -145,21 +145,24 @@ The Epoch Markers defined in this document are a solution that includes the less
 
 # Interaction Models {#interaction-models}
 
-The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
-In general, there are three interaction models:
+The interaction models illustrated in this section are derived from the RATS Reference Interaction Models {{-rats-models}}.
+In general, there are three major interaction models used in remote attestation:
 
 * ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to {{Section 7.1 of -rats-models}}
 * unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to {{Section 7.2 of -rats-models}}
 * solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to {{Section 7.3 of -rats-models}}
 
-In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'.
-Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell.
-An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+In all three interaction models, Epoch Markers can be used as content for the generic information element `handle` as introduced by {{-rats-models}}.
+Handles are used to establish freshness in ad-hoc, unsolicited, and solicited distribution mechanisms of an Epoch Bell.
+For example, an Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+If embedded in a CWT, an Epoch Marker can be used as a handle by extracting the value of the `em` Claim or by using the complete CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
 # Epoch Marker Structure {#sec-epoch-markers}
 
-At the top level, an Epoch Marker is a CBOR array carrying the actual Epoch ID ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
+Epoch Markers are tagged CBOR data items.
+As a default, Epoch Markers are transported via the `em` Claim in CWTs.
+In cases of a challenge-response interaction that employs a nonce to show recentness, the `em` Claim can be paired with a `Nonce` Claim to bind the nonce with the Epoch Marker in a protocol message.
 
 ~~~~ cddl
 {::include cddl/epoch-marker.cddl}
