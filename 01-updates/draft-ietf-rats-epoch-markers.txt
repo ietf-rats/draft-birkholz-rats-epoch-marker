@@ -25,10 +25,10 @@ Abstract
    do not have to track freshness using their own understanding of time
    (e.g., via a local real-time clock).  Instead, the reception of a
    certain Epoch Marker establishes a new epoch that is shared between
-   all recipients.  This documents defines Epoch Marker payloads,
-   including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like
-   structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392
-   CBOR Web Tokens as a vehicle for signed protocol messages.
+   all recipients.  This documents defines Epoch Marker types, including
+   CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as
+   well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web
+   Tokens as a vehicle for signed protocol messages.
 
 About This Document
 
@@ -151,9 +151,9 @@ Internet-Draft                Epoch Markers                   April 2025
    needs to be taken into consideration when Epoch Markers are used.
 
    While all Epoch Markers share the same core property of behaving like
-   clock ticks in a shared domain, various "Epoch ID" payloads are
-   defined as Epoch Marker types in this document to accommodate
-   different use cases and diverse kinds of Epoch Bells.
+   clock ticks in a shared domain, various "Epoch ID" values are defined
+   as Epoch Marker types in this document to accommodate different use
+   cases and diverse kinds of Epoch Bells.
 
    While most Epoch Markers types are encoded in CBOR [STD94], and many
    of the Epoch ID types are themselves encoded in CBOR, a prominent
