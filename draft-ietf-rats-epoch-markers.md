@@ -137,7 +137,7 @@ Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats, s
 
 {::boilerplate bcp14-tagged}
 
-In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use the CBOR Extended Diagnostic Notation (EDN) {{-EDN}}.
+In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use the CBOR Extended Diagnostic Notation (EDN, {{-EDN}}).
 
 # Epoch IDs
 
@@ -178,16 +178,16 @@ This in fact means that it is possible to request an Epoch Marker via a challeng
 {: #fig-epoch-marker-cwt artwork-align="left"
    title="Epoch Marker as a CWT Claim"}
 
-## Epoch Marker Payloads {#epoch-payloads}
+## Epoch Marker Types {#epoch-payloads}
 
-This memo comes with a set of predefined payloads.
+This memo comes with a set of predefined Epoch Marker types.
 
 ### CBOR Time Tags
 
-A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.
+A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float) or tag 1001 (extended time data item).
 
-See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
-time format (tag 1001). See {{-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
+See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended time format (tag 1001).
+See {{-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
 
 ~~~~ cddl
 {::include cddl/cbor-time-tag.cddl}

@@ -7,7 +7,3 @@ $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)
 $tagged-epoch-id /= #6.26982(epoch-tick)
 $tagged-epoch-id /= #6.26983(epoch-tick-list)
 $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)
-
-cbor-time = tdate / time / etime
-
-etime = #6.1001({* (int/tstr) => any})
