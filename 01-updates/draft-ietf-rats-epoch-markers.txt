@@ -143,7 +143,7 @@ Internet-Draft                Epoch Markers                   April 2025
    the reception of a certain Epoch Marker establishes a new epoch that
    is shared between all recipients.  In essence, the emissions and
    corresponding receptions of Epoch Markers are like the ticks of a
-   clock where the ticks are conveyed over the Internet.
+   clock, with these ticks being conveyed over the Internet.
 
    In general (barring highly symmetrical topologies), epoch ticking
    incurs differential latency due to the non-uniform distribution of
