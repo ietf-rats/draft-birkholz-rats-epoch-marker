@@ -434,13 +434,22 @@ This specification adds the following value to the "CBOR Web Token Claims" regis
 
 # Examples {#examples}
 
-The example in {{fig-ex-1}} shows an Epoch Marker with an etime as the Epoch Marker type.
+The example in {{fig-ex-1}} shows an Epoch Marker with an `etime` as the Epoch Marker type.
 
 ~~~~ cbor-diag
 {::include cddl/examples/1.diag}
 ~~~~
 {: #fig-ex-1 artwork-align="center"
-   title="CBOR Epoch ID"}
+   title="CBOR Epoch Marker based on `etime` (EDN)"}
+
+The encoded data item in CBOR pretty-printed form (hex with comments) is shown in {{fig-ex-1-pretty}}.
+
+~~~~ cbor-pretty
+{::include cddl/examples/1.pretty}
+~~~~
+{: #fig-ex-1-pretty artwork-align="center"
+   title="CBOR Epoch Marker based on `etime` (pretty hex)"}
+
 
 ## RFC 3161 TSTInfo {#classic-tstinfo}
 
