@@ -185,9 +185,10 @@ Internet-Draft                Epoch Markers                   April 2025
    come with the advantage of wide tool support.  Nevertheless, CWTs are
    not the only vehicle Epoch Markers can be embedded in.  Epoch Markers
    can be included in any type of message that allows for embedding
-   opaque bytes or CBOR data items (e.g., the Collection CMW in
-   [I-D.ietf-lamps-csr-attestation] or the CWT Claims Header Parameter
-   of [I-D.ietf-scitt-architecture]).
+   opaque bytes or CBOR data items.  Examples include the Collection CMW
+   in [I-D.ietf-lamps-csr-attestation], Evidence formats, such as
+   [TCG-CoEvidence] or [I-D.ietf-rats-eat], [I-D.ietf-rats-ar4si], or
+   the CWT Claims Header Parameter of [I-D.ietf-scitt-architecture]).
 
 1.1.  Requirements Notation
 
@@ -212,7 +213,6 @@ Internet-Draft                Epoch Markers                   April 2025
    means to identify a new freshness epoch.  Some of these methods are
    introduced and discussed in Section 10.3 of the RATS architecture
    [RFC9334].
-
 
 
 
@@ -298,7 +298,7 @@ Internet-Draft                Epoch Markers                   April 2025
 
                         Figure 1: Epoch Marker types
 
-   $$Claims-Set-Claims //= &(em => epoch-marker)
+   $$Claims-Set-Claims //= &(em: 4711) => epoch-marker
 
                    Figure 2: Epoch Marker as a CWT Claim
 

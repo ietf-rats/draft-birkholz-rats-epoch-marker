@@ -1285,7 +1285,8 @@ The default top-level structure of Epoch Markers described in this document are 
 An extensible set of Epoch Marker types as well as the <code>em</code> CWT Claim to include them in CWTs are specified using CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
 CWTs are signed using <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> and come with the advantage of wide tool support.
 Nevertheless, CWTs are not the only vehicle Epoch Markers can be embedded in.
-Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items (e.g., the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span> or the CWT Claims Header Parameter of <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>).<a href="#section-1-7" class="pilcrow">¶</a></p>
+Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items.
+Examples include the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, Evidence formats, such as <span>[<a href="#TCG-CoEvidence" class="cite xref">TCG-CoEvidence</a>]</span> or <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>, <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>, or the CWT Claims Header Parameter of <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>).<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="requirements-notation">
 <section id="section-1.1">
         <h3 id="name-requirements-notation">
@@ -1370,7 +1371,7 @@ etime = #6.1001({* (int/tstr) =&gt; any})
 <figure id="figure-2">
         <div class="alignLeft art-cddl art-text artwork" id="section-4-3.1">
 <pre>
-$$Claims-Set-Claims //= &amp;(em =&gt; epoch-marker)
+$$Claims-Set-Claims //= &amp;(em: 4711) =&gt; epoch-marker
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
