@@ -185,7 +185,7 @@ This memo comes with a set of predefined Epoch Marker types.
 A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float) or tag 1001 (extended time data item).
 
 See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended time format (tag 1001).
-See {{-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
+See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
 
 ~~~~ cddl
 {::include cddl/cbor-time-tag.cddl}
