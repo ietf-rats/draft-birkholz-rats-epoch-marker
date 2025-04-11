@@ -169,9 +169,13 @@ This in fact means that it is possible to request an Epoch Marker via a challeng
 {::include cddl/epoch-marker.cddl}
 ~~~~
 {: #fig-epoch-marker-cddl artwork-align="left"
-   title="Epoch Marker definition"}
+   title="Epoch Marker types"}
 
-The veracity proof can be encoded in an Evidence or Attestation Result conceptual message {{-rats-arch}}, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.
+~~~~ cddl
+{::include cddl/epoch-marker-claim.cddl}
+~~~~
+{: #fig-epoch-marker-cwt artwork-align="left"
+   title="Epoch Marker as a CWT Claim"}
 
 ## Epoch Marker Payloads {#epoch-payloads}
 
