@@ -92,7 +92,11 @@ entity:
 
 --- abstract
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients. This documents defines Epoch Marker payloads, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
+Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+This documents defines Epoch Marker payloads, including CBOR time tags, RFC 3161 TimeStampToken, or nonce-like structures, as well as a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens as a vehicle for signed protocol messages.
 
 --- middle
 
