@@ -168,13 +168,13 @@ This in fact means that it is possible to request an Epoch Marker via a challeng
 {::include cddl/epoch-marker.cddl}
 ~~~~
 {: #fig-epoch-marker-cddl artwork-align="left"
-   title="Epoch Marker types"}
+   title="Epoch Marker types (tag numbers 2698x are suggested, not yet allocated)"}
 
 ~~~~ cddl
 {::include cddl/epoch-marker-claim.cddl}
 ~~~~
 {: #fig-epoch-marker-cwt artwork-align="left"
-   title="Epoch Marker as a CWT Claim"}
+   title="Epoch Marker as a CWT Claim (CWT claim number 2000 is suggested, not yet allocated)"}
 
 ## Epoch Marker Types {#epoch-payloads}
 
