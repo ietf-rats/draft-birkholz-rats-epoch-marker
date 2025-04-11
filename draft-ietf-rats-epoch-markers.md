@@ -162,7 +162,8 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
 
 Epoch Markers are tagged CBOR data items.
 As a default, Epoch Markers are transported via the `em` Claim in CWTs.
-In cases of a challenge-response interaction that employs a nonce to show recentness, the `em` Claim can be paired with a `Nonce` Claim to bind the nonce with the Epoch Marker in a protocol message.
+In cases of challenge-response interactions that employ a nonce to show recentness, the `em` Claim can be paired with a `Nonce` Claim to bind the nonce with the Epoch Marker as a response message in an ad-hoc request.
+This in fact means that it is possible to request an Epoch Marker via a challenge-response interaction using a nonce to than use the received CWT or the Epoch Marker included as a different nonce in a separate RATS reference interaction model.
 
 ~~~~ cddl
 {::include cddl/epoch-marker.cddl}
