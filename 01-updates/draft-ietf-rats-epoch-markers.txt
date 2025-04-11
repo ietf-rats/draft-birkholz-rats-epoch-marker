@@ -309,8 +309,8 @@ Internet-Draft                Epoch Markers                   April 2025
    1001 (extended time data item).
 
    See Section 3 of [RFC9581] for the (many) details about the CBOR
-   extended time format (tag 1001).  See [STD94] for tdate (tag 0) and
-   time (tag 1).
+   extended time format (tag 1001).  See Sections 3.4.1 and 3.4.2 of RFC
+   8949 [STD94] for tdate (tag 0) and time (tag 1).
 
    cbor-time = tdate / time / etime
 
@@ -562,8 +562,8 @@ Birkholz, et al.         Expires 13 October 2025               [Page 10]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-      messages.  Asserting freshness of a conceptual message including
-      an Epoch Tick from the epoch-tick-list requires some state on the
+      message.  Asserting freshness of a conceptual message including an
+      Epoch Tick from the epoch-tick-list requires some state on the
       receiver side to assess if that Epoch Tick is the appropriate next
       unused Epoch Tick from the epoch-tick-list.
 
@@ -582,7 +582,7 @@ Internet-Draft                Epoch Markers                   April 2025
    The following describes the strictly-monotonic-counter type.
 
    strictly-monotonic-counter:  An unsigned integer used by RATS roles
-      in a trust domain as extra data in the production of of conceptual
+      in a trust domain as extra data in the production of conceptual
       messages as specified by the RATS architecture [RFC9334] to
       associate them with a certain epoch.  Each new strictly-monotonic-
       counter value must be higher than the last one.
