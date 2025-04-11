@@ -191,23 +191,13 @@ See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time`
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
-The following describes cbor-time type choice.
-
-etime:
-
-: A freshly sourced timestamp represented as either `time` or `tdate`
-  ({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}) or `etime` {{-CBOR-ETIME}}.
-
-nonce:
-
-: An optional random byte string used as extra data in challenge-response interaction models (see {{-rats-models}}).
+The CBOR Time Tag represents a freshly sourced timestamp represented as either `time` or `tdate`
+({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}), or `etime` {{-CBOR-ETIME}}.
 
 
 #### Creation
 
 To generate the cbor-time value, the emitter MUST follow the requirements in {{sec-time-reqs}}.
-
-If a nonce is generated, the emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 
 ### Classical RFC 3161 TST Info {#sec-rfc3161-classic}
