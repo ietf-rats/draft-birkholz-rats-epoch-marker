@@ -156,7 +156,7 @@ In general, there are three major interaction models used in remote attestation:
 In all three interaction models, Epoch Markers can be used as content for the generic information element `handle` as introduced by {{-rats-models}}.
 Handles are used to establish freshness in ad-hoc, unsolicited, and solicited distribution mechanisms of an Epoch Bell.
 For example, an Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
-If embedded in a CWT, an Epoch Marker can be used as a handle by extracting the value of the `em` Claim or by using the complete CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
+If embedded in a CWT, an Epoch Marker can be used as a `handle` by extracting the value of the `em` Claim or by using the complete CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
 # Epoch Marker Structure {#sec-epoch-markers}
@@ -274,8 +274,8 @@ identifier and the hash value of the time-stamped datum.
 Cf. messageImprint, {{Section 2.4.2 of -TSA}}.
 
 serialNumber:
-: A unique integer value assigned by the TSA to each issued tst-info. Cf.
-serialNumber, {{Section 2.4.2 of -TSA}}.
+: A unique integer value assigned by the TSA to each issued tst-info.
+Cf. serialNumber, {{Section 2.4.2 of -TSA}}.
 
 eTime:
 : The time at which the tst-info has been created by the TSA.
@@ -337,28 +337,30 @@ The following describes the epoch-tick type.
 
 epoch-tick:
 
-: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages {{-rats-arch}} to associate them with a certain epoch.
+: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data (`handle`) included in conceptual messages {{-rats-arch}} to associate them with a certain epoch, similar to a nonce.
+Technically, an Epoch Tick is not used just once (like a nonce), but by every Epoch Marker consumer involved.
 
 #### Creation
 
 The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
-### Multi-Nonce-List {#sec-epoch-tick-list}
+### Epoch Tick List {#sec-epoch-tick-list}
 
-A list of nonces send to multiple consumer.
-The consumers use each Nonce in the list of Nonces sequentially.
-Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved.
-This renders each Nonce in the list a Multi-Nonce
+A list of Epoch Ticks send to multiple consumers.
+The consumers use each Epoch Tick in the list of sequentially, similar to a list of nonces.
+Technically, each sequential Epoch Tick in the distributed list is not used just once (like a nonce), but by every Epoch Marker consumer involved.
 
 ~~~~ cddl
 {::include cddl/multi-nonce-list.cddl}
 ~~~~
 
-The following describes the multi-nonce type.
+The following describes the Epoch Tick List type.
 
-multi-nonce-list:
+epoch-tick-list:
 
-: A sequence of byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess if that nonce is the appropriate next unused nonce from the multi-nonce-list.
+: A sequence of byte strings used by RATS roles in trust domain as extra data (`handle`) in the generation of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch.
+Each Epoch Tick in the list is used in a consecutive generation of a conceptual messages.
+Asserting freshness of a conceptual message including an Epoch Tick from the epoch-tick-list requires some state on the receiver side to assess if that Epoch Tick is the appropriate next unused Epoch Tick from the epoch-tick-list.
 
 #### Creation
 
@@ -386,7 +388,7 @@ Time MUST be sourced from a trusted clock.
 
 ## Nonce Requirements {#sec-nonce-reqs}
 
-A nonce MUST be freshly generated.
+A nonce value used in a protocol or message to retrieve an Epoch Marker MUST be freshly generated.
 The generated value MUST have at least 64 bits of entropy (before encoding).
 The generated value MUST be generated via a cryptographically secure random number generator.
 
