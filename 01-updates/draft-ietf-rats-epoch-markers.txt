@@ -96,7 +96,7 @@ Table of Contents
        4.1.2.  Classical RFC 3161 TST Info . . . . . . . . . . . . .   7
        4.1.3.  CBOR-encoded RFC3161 TST Info . . . . . . . . . . . .   7
        4.1.4.  Epoch Tick  . . . . . . . . . . . . . . . . . . . . .  10
-       4.1.5.  Multi-Nonce-List  . . . . . . . . . . . . . . . . . .  10
+       4.1.5.  Epoch Tick List . . . . . . . . . . . . . . . . . . .  10
        4.1.6.  Strictly Monotonically Increasing Counter . . . . . .  11
      4.2.  Time Requirements . . . . . . . . . . . . . . . . . . . .  11
      4.3.  Nonce Requirements  . . . . . . . . . . . . . . . . . . .  11
@@ -525,35 +525,35 @@ Internet-Draft                Epoch Markers                   April 2025
    The following describes the epoch-tick type.
 
    epoch-tick:  Either a string, a byte string, or an integer used by
-      RATS roles within a trust domain as extra data included in
-      conceptual messages [RFC9334] to associate them with a certain
-      epoch.
+      RATS roles within a trust domain as extra data (handle) included
+      in conceptual messages [RFC9334] to associate them with a certain
+      epoch, similar to a nonce.  Technically, an Epoch Tick is not used
+      just once (like a nonce), but by every Epoch Marker consumer
+      involved.
 
 4.1.4.1.  Creation
 
    The emitter MUST follow the requirements in Section 4.3.
 
-4.1.5.  Multi-Nonce-List
+4.1.5.  Epoch Tick List
 
-   A list of nonces send to multiple consumer.  The consumers use each
-   Nonce in the list of Nonces sequentially.  Technically, each
-   sequential Nonce in the distributed list is not used just once, but
-   by every Epoch Marker consumer involved.  This renders each Nonce in
-   the list a Multi-Nonce
+   A list of Epoch Ticks send to multiple consumers.  The consumers use
+   each Epoch Tick in the list of sequentially, similar to a list of
+   nonces.  Technically, each sequential Epoch Tick in the distributed
+   list is not used just once (like a nonce), but by every Epoch Marker
+   consumer involved.
 
    ; Epoch-Tick-List
 
    epoch-tick-list = [ + epoch-tick ]
 
-   The following describes the multi-nonce type.
+   The following describes the Epoch Tick List type.
 
-   multi-nonce-list:  A sequence of byte strings used by RATS roles in
-
-
-
-
-
-
+   epoch-tick-list:  A sequence of byte strings used by RATS roles in
+      trust domain as extra data (handle) in the generation of
+      conceptual messages as specified by the RATS architecture
+      [RFC9334] to associate them with a certain epoch.  Each Epoch Tick
+      in the list is used in a consecutive generation of a conceptual
 
 
 
@@ -562,14 +562,10 @@ Birkholz, et al.         Expires 13 October 2025               [Page 10]
 Internet-Draft                Epoch Markers                   April 2025
 
 
-      trust domain as extra data in the production of conceptual
-      messages as specified by the RATS architecture [RFC9334] to
-      associate them with a certain epoch.  Each nonce in the list is
-      used in a consecutive production of a conceptual messages.
-      Asserting freshness of a conceptual message including a nonce from
-      the multi-nonce-list requires some state on the receiver side to
-      assess if that nonce is the appropriate next unused nonce from the
-      multi-nonce-list.
+      messages.  Asserting freshness of a conceptual message including
+      an Epoch Tick from the epoch-tick-list requires some state on the
+      receiver side to assess if that Epoch Tick is the appropriate next
+      unused Epoch Tick from the epoch-tick-list.
 
 4.1.5.1.  Creation
 
@@ -597,7 +593,8 @@ Internet-Draft                Epoch Markers                   April 2025
 
 4.3.  Nonce Requirements
 
-   A nonce MUST be freshly generated.  The generated value MUST have at
+   A nonce value used in a protocol or message to retrieve an Epoch
+   Marker MUST be freshly generated.  The generated value MUST have at
    least 64 bits of entropy (before encoding).  The generated value MUST
    be generated via a cryptographically secure random number generator.
 
@@ -608,6 +605,9 @@ Internet-Draft                Epoch Markers                   April 2025
 5.  Security Considerations
 
    TODO
+
+
+
 
 
 
