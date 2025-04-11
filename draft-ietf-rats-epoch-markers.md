@@ -126,12 +126,12 @@ Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Mark
 There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The default top-level structure of Epoch Markers described in this document are CBOR Web Tokens {{-CWT}}.
-An extensible set of Epoch Marker types as well as the `em` CWT Claim to include them in CWTs are specified using CDDL {{-CDDL}}.
-CWTs are signed using {{-COSE}} and come with the advantage of wide tool support.
-Nevertheless, CWTs are not the only vehicle Epoch Markers can be embedded in.
-Epoch Markers can be included in any type of message that allows for embedding opaque bytes or CBOR data items.
-Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats, such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}).
+The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens {{-CWT}}.
+An extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs, is specified using CDDL {{-CDDL}}.
+CWTs are signed using COSE {{-COSE}} and benefit from wide tool support.
+However, CWTs are not the only containers in which Epoch Markers can be embedded.
+Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
+Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.
 
 ## Requirements Notation
 
