@@ -2,6 +2,8 @@ include tools.mk
 
 %.cbor: %.diag
 	$(diag2cbor) $< > $@
+%.pretty: %.cbor
+	$(cbor2pretty) $< > $@
 
 # $1: label
 # $2: cddl fragments
