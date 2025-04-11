@@ -358,7 +358,7 @@ The following describes the Epoch Tick List type.
 epoch-tick-list:
 
 : A sequence of byte strings used by RATS roles in trust domain as extra data (`handle`) in the generation of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch.
-Each Epoch Tick in the list is used in a consecutive generation of a conceptual messages.
+Each Epoch Tick in the list is used in a consecutive generation of a conceptual message.
 Asserting freshness of a conceptual message including an Epoch Tick from the epoch-tick-list requires some state on the receiver side to assess if that Epoch Tick is the appropriate next unused Epoch Tick from the epoch-tick-list.
 
 #### Creation
@@ -379,7 +379,7 @@ The following describes the strictly-monotonic-counter type.
 
 strictly-monotonic-counter:
 
-: An unsigned integer used by RATS roles in a trust domain as extra data in the production of of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.
+: An unsigned integer used by RATS roles in a trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.
 
 ## Time Requirements {#sec-time-reqs}
 
