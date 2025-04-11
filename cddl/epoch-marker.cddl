@@ -1,21 +1,7 @@
-epoch-marker = [
-  $tagged-epoch-id
-  ? bell-veracity-proof
-]
-
-; veracity of the bell
-bell-veracity-proof = non-empty<{
-  ? remote-attestation-evidence ; could be EAT or Concise Evidence
-  ? remote-attestation-result ; hopefully EAT with AR4SI Claims
-  ? scitt-receipt ; SCITT receipt
-}>
-
-remote-attestation-evidence = (1: "PLEASE DEFINE")
-remote-attestation-result = (2: "PLEASE DEFINE")
-scitt-receipt = (3: "PLEASE DEFINE")
+epoch-marker = $tagged-epoch-id
 
 ; epoch-id types independent of interaction model
-$tagged-epoch-id /= cbor-epoch-id
+$tagged-epoch-id /= cbor-time
 $tagged-epoch-id /= #6.26980(classical-rfc3161-TST-info)
 $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)
 $tagged-epoch-id /= #6.26982(epoch-tick)

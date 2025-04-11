@@ -45,17 +45,17 @@ author:
 normative:
   RFC3161: TSA
   RFC5652: CMS
+  RFC8392: CWT
   RFC8610: CDDL
   RFC9090: CBOR-OID
   RFC9054: COSE-HASH-ALGS
-  STD94:
-    -: CBOR
-    =: RFC8949
-  STD96:
-    -: COSE
-    =: RFC9052
+  STD94: CBOR
+#    =: RFC8949
+  STD96: COSE
+#    =: RFC9052
   RFC9581: CBOR-ETIME
   I-D.ietf-cose-cbor-encoded-cert: C509
+  I-D.ietf-cbor-edn-literals: EDN
   X.690:
     title: >
       Information technology — ASN.1 encoding rules:
@@ -73,6 +73,7 @@ informative:
   I-D.ietf-rats-reference-interaction-models: rats-models
   I-D.ietf-scitt-architecture: scitt-receipts
   I-D.ietf-rats-eat: rats-eat
+  I-D.ietf-lamps-csr-attestation: csr-attestation
   TCG-CoEvidence:
     author:
       org: Trusted Computing Group
@@ -84,13 +85,16 @@ informative:
   IANA.cwt:
   IANA.cbor-tags:
 
-
 entity:
   SELF: "RFCthis"
 
 --- abstract
 
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
+This document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
+Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.
 
 --- middle
 
@@ -102,95 +106,98 @@ In general, securely establishing a shared notion of freshness of the exchanged 
 
 The entire {{Appendix A of -rats-arch}} deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.
 
-
-This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
+This document defines Epoch Markers as a way to establish a notion of freshness among actors in distributed systems.
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
-Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Actors in a system that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.
+In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock, with these ticks being conveyed over the Internet.
 
-In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.  This introduces skew that needs to be taken into consideration when Epoch Markers are used.
+In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
+This introduces skew that needs to be taken into consideration when Epoch Markers are used.
 
-While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" types are defined to accommodate different use cases and diverse kinds of Epoch Bells.
+While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "Epoch ID" values are defined as Epoch Marker types in this document to accommodate different use cases and diverse kinds of Epoch Bells.
 
-While Epoch Markers are encoded in CBOR {{-CBOR}}, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
-Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
+While most Epoch Markers types are encoded in CBOR {{-CBOR}}, and many of the Epoch ID types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by {{-TSA}}, a DER-encoded TSTInfo value wrapped in a CMS envelope {{-CMS}}.
+TSTs are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
 At the time of writing, TSAs are the most common providers of secure time-stamping services.
-Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
-There are, however, several other ways to represent a signed timestamp, and therefore other kinds of payloads that can be used to implement Epoch Markers.
+Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
+There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The top-level structure of Epoch Markers and an initial set of epoch id types are specified using CDDL {{-CDDL}}.
-To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipts {{-scitt-receipts}} associated with the trust status of the Epoch Bell.
+The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens (CWT) {{-CWT}}.
+The present document specifies an extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs.
+CWTs are signed using COSE {{-COSE}} and benefit from wide tool support.
+However, CWTs are not the only containers in which Epoch Markers can be embedded.
+Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
+Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.
 
 ## Requirements Notation
 
 {::boilerplate bcp14-tagged}
 
-In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use CBOR diagnostic notation as defined in {{Section 8 of -CBOR}} and {{Appendix G of -CDDL}}.
+In this document, CDDL {{-CDDL}} is used to describe the data formats.  The examples in {{examples}} use the CBOR Extended Diagnostic Notation (EDN, {{-EDN}}).
 
 # Epoch IDs
 
 The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture {{-rats-arch}}.
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in {{Section 10.3 of -rats-arch}} (the RATS architecture).
 
 # Interaction Models {#interaction-models}
 
-The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
-In general, there are three interaction models:
+The interaction models illustrated in this section are derived from the RATS Reference Interaction Models {{-rats-models}}.
+In general, there are three major interaction models used in remote attestation:
 
-* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to Section 7.1 in {{-rats-models}}
-* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in {{-rats-models}}
-* solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in {{-rats-models}}
+* ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to {{Section 7.1 of -rats-models}}
+* unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to {{Section 7.2 of -rats-models}}
+* solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to {{Section 7.3 of -rats-models}}
 
-In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'.
-Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell.
-An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+In all three interaction models, Epoch Markers can be used as content for the generic information element `handle` as introduced by {{-rats-models}}.
+Handles are used to establish freshness in ad-hoc, unsolicited, and solicited distribution mechanisms of an Epoch Bell.
+For example, an Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+If embedded in a CWT, an Epoch Marker can be used as a `handle` by extracting the value of the `em` Claim or by using the complete CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
 # Epoch Marker Structure {#sec-epoch-markers}
 
-At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id ({{epoch-payloads}}) and an optional veracity proof about the Epoch Bell.
+Epoch Markers are tagged CBOR data items.
+As a default, Epoch Markers are transported via the `em` Claim in CWTs.
+In cases of challenge-response interactions that employ a nonce to show recentness, the `em` Claim can be paired with a `Nonce` Claim to bind the nonce with the Epoch Marker as a response message in an ad-hoc request.
+This in fact means that it is possible to request an Epoch Marker via a challenge-response interaction using a nonce to than use the received CWT or the Epoch Marker included as a different nonce in a separate RATS reference interaction model.
 
 ~~~~ cddl
 {::include cddl/epoch-marker.cddl}
 ~~~~
 {: #fig-epoch-marker-cddl artwork-align="left"
-   title="Epoch Marker definition"}
+   title="Epoch Marker types (tag numbers 2698x are suggested, not yet allocated)"}
 
-The veracity proof can be encoded in an Evidence or Attestation Result conceptual message {{-rats-arch}}, e.g., using {{-rats-eat}}, {{TCG-CoEvidence}}, {{-rats-ar4si}}, or SCITT receipts {{-scitt-receipts}}.
+~~~~ cddl
+{::include cddl/epoch-marker-claim.cddl}
+~~~~
+{: #fig-epoch-marker-cwt artwork-align="left"
+   title="Epoch Marker as a CWT Claim (CWT claim number 2000 is suggested, not yet allocated)"}
 
-## Epoch Marker Payloads {#epoch-payloads}
+## Epoch Marker Types {#epoch-payloads}
 
-This memo comes with a set of predefined payloads.
+This specification comes with a set of predefined Epoch Marker types.
 
 ### CBOR Time Tags
 
-A CBOR time representation choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.
+CBOR Time Tags are CBOR time representations choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float), or tag 1001 (extended time data item).
 
-See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended
-time format (tag 1001). See {{-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
+See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended time format (tag 1001).
+See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
 
 ~~~~ cddl
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
-The following describes each member of the cbor-epoch-id map.
-
-etime:
-
-: A freshly sourced timestamp represented as either time or tdate ({{-CBOR}}, {{-CDDL}}) or etime {{-CBOR-ETIME}}.
-
-nonce:
-
-: An optional random byte string used as extra data in challenge-response interaction models (see {{-rats-models}}).
+The CBOR Time Tag represents a freshly sourced timestamp represented as either `time` or `tdate`
+({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}), or `etime` {{-CBOR-ETIME}}.
 
 
 #### Creation
 
 To generate the cbor-time value, the emitter MUST follow the requirements in {{sec-time-reqs}}.
-
-If a nonce is generated, the emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 
 ### Classical RFC 3161 TST Info {#sec-rfc3161-classic}
@@ -234,8 +241,7 @@ The Epoch Bell COSE signature will replace the TSA signature.
 
 [^issue]: Issue tracked at:
 
-The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical
-{{-TSA}} TSTInfo, rewritten using the CBOR type system.
+The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical {{-TSA}} TSTInfo, rewritten using the CBOR type system.
 
 ~~~~ cddl
 {::include cddl/tst-info.cddl}
@@ -248,29 +254,27 @@ version:
 : The integer value 1.  Cf. version, {{Section 2.4.2 of -TSA}}.
 
 policy:
-: A {{-CBOR-OID}} object identifier tag (111 or 112) representing the TSA's
-policy under which the tst-info was produced.  Cf. policy, {{Section 2.4.2 of
--TSA}}.
+: A {{-CBOR-OID}} object identifier tag (111 or 112) representing the TSA's policy under which the tst-info was produced.
+Cf. policy, {{Section 2.4.2 of -TSA}}.
 
 messageImprint:
 : A {{-COSE-HASH-ALGS}} COSE_Hash_Find array carrying the hash algorithm
-identifier and the hash value of the time-stamped datum.  Cf. messageImprint,
-{{Section 2.4.2 of -TSA}}.
+identifier and the hash value of the time-stamped datum.
+Cf. messageImprint, {{Section 2.4.2 of -TSA}}.
 
 serialNumber:
-: A unique integer value assigned by the TSA to each issued tst-info.  Cf.
-serialNumber, {{Section 2.4.2 of -TSA}}.
+: A unique integer value assigned by the TSA to each issued tst-info.
+Cf. serialNumber, {{Section 2.4.2 of -TSA}}.
 
 eTime:
-: The time at which the tst-info has been created by the TSA.  Cf. genTime,
-{{Section 2.4.2 of -TSA}}.
-Encoded as extended time {{-CBOR-ETIME}}, indicated by CBOR tag 1001, profiled
-as follows:
+: The time at which the tst-info has been created by the TSA.
+Cf. genTime, {{Section 2.4.2 of -TSA}}.
+Encoded as extended time {{-CBOR-ETIME}}, indicated by CBOR tag 1001, profiled as follows:
 
 - The "base time" is encoded using key 1, indicating Posix time as int or float.
 - The stated "accuracy" is encoded using key -8, which indicates the maximum
-  allowed deviation from the value indicated by "base time".  The duration map
-  is profiled to disallow string keys.  This is an optional field.
+  allowed deviation from the value indicated by "base time". The duration map
+  is profiled to disallow string keys. This is an optional field.
 - The map MAY also contain one or more integer keys, which may encode
   supplementary information [^tf1].
 
@@ -278,22 +282,23 @@ as follows:
 
 {:vspace}
 ordering:
-: boolean indicating whether tst-info issued by the TSA can be ordered solely
-based on the "base time". This is an optional field, whose default value is
-"false".  Cf. ordering, {{Section 2.4.2 of -TSA}}.
+: boolean indicating whether tst-info issued by the TSA can be ordered solely based on the "base time".
+This is an optional field, whose default value is "false".
+Cf. ordering, {{Section 2.4.2 of -TSA}}.
 
 nonce:
-: int value echoing the nonce supplied by the requestor.  Cf. nonce, {{Section
-2.4.2 of -TSA}}.
+: int value echoing the nonce supplied by the requestor.
+Cf. nonce, {{Section 2.4.2 of -TSA}}.
 
 tsa:
-: a single-entry GeneralNames array {{Section 11.8 of -C509}} providing a hint
-in identifying the name of the TSA.  Cf. tsa, {{Section 2.4.2 of -TSA}}.
+: a single-entry GeneralNames array {{Section 11.8 of -C509}} providing a hint in identifying the name of the TSA.
+Cf. tsa, {{Section 2.4.2 of -TSA}}.
 
 $$TSTInfoExtensions:
-: A CDDL socket ({{Section 3.9 of -CDDL}}) to allow extensibility of the data
-format.  Note that any extensions appearing here MUST match an extension in the
-corresponding request.  Cf. extensions, {{Section 2.4.2 of -TSA}}.
+: A CDDL socket ({{Section 3.9 of -CDDL}}) to allow extensibility of the data format.
+Note that any extensions appearing here MUST match an extension in the
+corresponding request.
+Cf. extensions, {{Section 2.4.2 of -TSA}}.
 
 #### Creation
 
@@ -321,25 +326,30 @@ The following describes the epoch-tick type.
 
 epoch-tick:
 
-: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages {{-rats-arch}} to associate them with a certain epoch.
+: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data (`handle`) included in conceptual messages {{-rats-arch}} to associate them with a certain epoch, similar to a nonce.
+Technically, an Epoch Tick is not used just once (like a nonce), but by every Epoch Marker consumer involved.
 
 #### Creation
 
 The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
-### Multi-Nonce-List {#sec-epoch-tick-list}
+### Epoch Tick List {#sec-epoch-tick-list}
 
-A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce
+A list of Epoch Ticks send to multiple consumers.
+The consumers use each Epoch Tick in the list of sequentially, similar to a list of nonces.
+Technically, each sequential Epoch Tick in the distributed list is not used just once (like a nonce), but by every Epoch Marker consumer involved.
 
 ~~~~ cddl
 {::include cddl/multi-nonce-list.cddl}
 ~~~~
 
-The following describes the multi-nonce type.
+The following describes the Epoch Tick List type.
 
-multi-nonce-list:
+epoch-tick-list:
 
-: A sequence of byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess if that nonce is the appropriate next unused nonce from the multi-nonce-list.
+: A sequence of byte strings used by RATS roles in trust domain as extra data (`handle`) in the generation of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch.
+Each Epoch Tick in the list is used in a consecutive generation of a conceptual message.
+Asserting freshness of a conceptual message including an Epoch Tick from the epoch-tick-list requires some state on the receiver side to assess if that Epoch Tick is the appropriate next unused Epoch Tick from the epoch-tick-list.
 
 #### Creation
 
@@ -359,7 +369,7 @@ The following describes the strictly-monotonic-counter type.
 
 strictly-monotonic-counter:
 
-: An unsigned integer used by RATS roles in a trust domain as extra data in the production of of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.
+: An unsigned integer used by RATS roles in a trust domain as extra data in the production of conceptual messages as specified by the RATS architecture {{-rats-arch}} to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.
 
 ## Time Requirements {#sec-time-reqs}
 
@@ -367,7 +377,7 @@ Time MUST be sourced from a trusted clock.
 
 ## Nonce Requirements {#sec-nonce-reqs}
 
-A nonce MUST be freshly generated.
+A nonce value used in a protocol or message to retrieve an Epoch Marker MUST be freshly generated.
 The generated value MUST have at least 64 bits of entropy (before encoding).
 The generated value MUST be generated via a cryptographically secure random number generator.
 
@@ -393,7 +403,7 @@ IANA is requested to allocate the following tags in the "CBOR Tags" registry
 | Tag | Data Item | Semantics | Reference |
 | -- | -- | -- | -- |
 | 26980 | bytes | DER-encoded RFC3161 TSTInfo | {{sec-rfc3161-classic}} of {{&SELF}} |
-| 26981 | map | CBOR-encoding of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
+| 26981 | map | CBOR representation of RFC3161 TSTInfo semantics | {{sec-rfc3161-fancy}} of {{&SELF}} |
 | 26982 | tstr / bstr / int | a nonce that is shared among many participants but that can only be used once by each participant | {{sec-epoch-tick}} of {{&SELF}} |
 | 26983 | array | a list of multi-nonce | {{sec-epoch-tick-list}} of {{&SELF}} |
 | 26984 | uint | strictly monotonically increasing counter | {{sec-strictly-monotonic}} of {{&SELF}} |
@@ -414,14 +424,22 @@ This specification adds the following value to the "CBOR Web Token Claims" regis
 
 # Examples {#examples}
 
-The example in {{fig-ex-1}} shows an epoch marker with a cbor-epoch-id and no
-bell veracity proof.
+The example in {{fig-ex-1}} shows an Epoch Marker with an `etime` as the Epoch Marker type.
 
 ~~~~ cbor-diag
 {::include cddl/examples/1.diag}
 ~~~~
 {: #fig-ex-1 artwork-align="center"
-   title="CBOR epoch id without bell veracity proof"}
+   title="CBOR Epoch Marker based on `etime` (EDN)"}
+
+The encoded data item in CBOR pretty-printed form (hex with comments) is shown in {{fig-ex-1-pretty}}.
+
+~~~~ cbor-pretty
+{::include cddl/examples/1.pretty}
+~~~~
+{: #fig-ex-1-pretty artwork-align="center"
+   title="CBOR Epoch Marker based on `etime` (pretty hex)"}
+
 
 ## RFC 3161 TSTInfo {#classic-tstinfo}
 
