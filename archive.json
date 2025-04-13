@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T01:14:13.703997+00:00",
+  "timestamp": "2025-04-13T02:35:12.866813+00:00",
   "repo": "ietf-rats/draft-birkholz-rats-epoch-marker",
   "labels": [
     {
@@ -604,15 +604,15 @@
       "id": "I_kwDOHOmBp86vruOh",
       "title": "cbor-epoch-id isn't needed",
       "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/36",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "nedmsmith",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Technically cbor-epoch-id isn't tagged because it begins with a '['. \n\nCan it be given a CBOR tag as in:\n\ntagged-cbor-epoch-id = #6.TBA( [ cbor-epoch-id] )\n\nAlso, are:\n```\n$tagged-epoch-id /= tdate \n$tagged-epoch-id /= time \n```\nvalid epoch identifiers? If not, why not?\n\nAlso, shouldn't these be using \"TBA\" instead of actual values:\n```\n   $tagged-epoch-id /= #6.26980(classical-rfc3161-TST-info)\n   $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)\n   $tagged-epoch-id /= #6.26982(epoch-tick)\n   $tagged-epoch-id /= #6.26983(epoch-tick-list)\n   $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)\n```",
       "createdAt": "2025-03-25T18:47:41Z",
-      "updatedAt": "2025-03-27T17:06:50Z",
-      "closedAt": null,
+      "updatedAt": "2025-04-11T20:43:52Z",
+      "closedAt": "2025-04-11T20:43:52Z",
       "comments": [
         {
           "author": "nedmsmith",
@@ -2252,6 +2252,67 @@
           "createdAt": "2025-03-20T03:10:23Z",
           "updatedAt": "2025-03-20T03:10:23Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOHOmBp86STDnf",
+      "title": "Updates for -01 submission",
+      "url": "https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/pull/37",
+      "state": "MERGED",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "fixes #36\r\n\r\nand obsoletes #32 and #33 ",
+      "createdAt": "2025-04-11T18:09:32Z",
+      "updatedAt": "2025-04-11T20:43:51Z",
+      "baseRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "baseRefName": "main",
+      "baseRefOid": "b88ada305c1038a1388148c642a9a53d240bb678",
+      "headRepository": "ietf-rats/draft-birkholz-rats-epoch-marker",
+      "headRefName": "01-updates",
+      "headRefOid": "1b75adcb9204e03da5fa463ceac0624b86a61be5",
+      "closedAt": "2025-04-11T20:43:51Z",
+      "mergedAt": "2025-04-11T20:43:51Z",
+      "mergedBy": "cabo",
+      "mergeCommit": {
+        "oid": "e1847d8b24ad912b98d607e234bfdf4f5c2845d7"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHOmBp86klUPc",
+          "commit": {
+            "abbreviatedOid": "3440c19"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, thanks!",
+          "createdAt": "2025-04-11T18:32:46Z",
+          "updatedAt": "2025-04-11T18:44:22Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\r\nThis document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.\r\nEpoch Markers are similar to \"time ticks\" and are produced and distributed by a dedicated system known as the Epoch Bell.\r\nSystems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).\r\nInstead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.\r\nThis document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.\r\n```",
+              "createdAt": "2025-04-11T18:32:46Z",
+              "updatedAt": "2025-04-11T18:44:22Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\r\nIn essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock, with these ticks being conveyed over the Internet.\r\n```",
+              "createdAt": "2025-04-11T18:35:28Z",
+              "updatedAt": "2025-04-11T18:44:22Z"
+            },
+            {
+              "originalPosition": 82,
+              "body": "```suggestion\r\nThe default top-level structure of Epoch Markers described in this document is CBOR Web Tokens {{-CWT}}.\r\nAn extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs, is specified using CDDL {{-CDDL}}.\r\nCWTs are signed using COSE {{-COSE}} and benefit from wide tool support.\r\nHowever, CWTs are not the only containers in which Epoch Markers can be embedded.\r\nEpoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.\r\nExamples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.\r\n```",
+              "createdAt": "2025-04-11T18:37:28Z",
+              "updatedAt": "2025-04-11T18:44:22Z"
+            }
+          ]
         }
       ]
     }
