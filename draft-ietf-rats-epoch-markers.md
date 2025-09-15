@@ -384,6 +384,10 @@ The generated value MUST be generated via a cryptographically secure random numb
 A maximum nonce size of 512 bits is set to limit the memory requirements.
 All receivers MUST be able to accommodate the maximum size.
 
+# Signature Requirements {#sec-signature-reqs}
+
+The signature over a epoch marker MUST come from the Epoch Bell.
+
 # Security Considerations
 
 TODO
