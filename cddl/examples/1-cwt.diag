@@ -1,0 +1,14 @@
+18([
+  / protected / << {
+    / alg / 1: -7 / ECDSA 256 /
+  } >>,
+  / unprotected / {},
+  / payload << {
+    / iss / 1 : "ACME epoch bell", 
+    / aud / 3 : "ACME protocol clients",
+    / epoch marker / 2000: 26982(h'482e829ad29ac6ea6eda2d47d1d93a002bf41d9d88710ba972c36e59038f78b3')
+    / nbf / 5 : 1757929800,
+    / exp / 4 : 1757929860
+  } >>,
+  / signature / h'face5190'
+])
