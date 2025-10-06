@@ -425,6 +425,66 @@ This specification adds the following value to the "CBOR Web Token Claims" regis
 * Change Controller: IETF
 * Specification Document(s): {{sec-epoch-markers}} of {{&SELF}}
 
+## New Media Type `application/em+cbor`
+
+IANA is requested to add the `application/epoch-marker+cbor` media types to the "Media Types" registry {{!IANA.media-types}}, using the following template:
+
+{:compact}
+Type name:
+: application
+
+Subtype name:
+: epoch-marker+cbor
+
+Required parameters:
+: no
+
+Optional parameters:
+: no
+
+Encoding considerations:
+: binary (CBOR)
+
+Security considerations:
+: {{seccons}} of {{&SELF}}
+
+Interoperability considerations:
+: n/a
+
+Published specification:
+: {{&SELF}}
+
+Applications that use this media type:
+: RATS Attesters, Verifiers, Endorsers and Reference-Value providers, and Relying Parties that need to transfer Epoch Markers payloads over HTTP(S), CoAP(S), and other transports.
+
+Fragment identifier considerations:
+: The syntax and semantics of fragment identifiers are as specified for "application/cbor". (No fragment identification syntax is currently defined for "application/cbor".)
+
+Person & email address to contact for further information:
+: RATS WG mailing list (rats@ietf.org)
+
+Intended usage:
+: COMMON
+
+Restrictions on usage:
+: none
+
+Author/Change controller:
+: IETF
+
+Provisional registration:
+: no
+
+## New CoAP Content-Format
+
+IANA is requested to register the following Content-Format ID in the "CoAP Content-Formats" registry, within the "Constrained RESTful Environments (CoRE) Parameters" registry group {{!IANA.core-parameters}}:
+
+| Content-Type | Content Coding | ID | Reference |
+| application/epoch-marker+cbor | - | TBD1 | {{&SELF}} |
+{: align="left" title="New CoAP Content Format"}
+
+If possible, TBD1 should be assigned in the 256..9999 range.
+
 --- back
 
 # Examples {#examples}
