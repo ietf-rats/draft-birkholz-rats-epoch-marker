@@ -7,4 +7,5 @@ EPOCH_MARKER_FRAGS += strictly-monotonic-counter.cddl
 EPOCH_MARKER_FRAGS += tst-info.cddl
 EPOCH_MARKER_FRAGS += non-empty.cddl
 
-EPOCH_MARKER_EXAMPLES := $(wildcard examples/[1-9]+.diag)
+EPOCH_MARKER_EXAMPLES := examples/1.diag
+#EPOCH_MARKER_EXAMPLES += examples/1-cwt.diag
