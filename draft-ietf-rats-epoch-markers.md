@@ -94,7 +94,8 @@ This document defines Epoch Markers as a means to establish a notion of freshnes
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
 Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
-This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, and nonce-like structures.
+It also defines a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.
 
 --- middle
 
@@ -129,7 +130,7 @@ The present document specifies an extensible set of Epoch Marker types, along wi
 CWTs are signed using COSE {{-COSE}} and benefit from wide tool support.
 However, CWTs are not the only containers in which Epoch Markers can be embedded.
 Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
-Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.
+Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, Attestation Results formats such as {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.
 
 ## Requirements Notation
 
@@ -162,7 +163,7 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
 Epoch Markers are tagged CBOR data items.
 As a default, Epoch Markers are transported via the `em` Claim in CWTs.
 In cases of challenge-response interactions that employ a nonce to show recentness, the `em` Claim can be paired with a `Nonce` Claim to bind the nonce with the Epoch Marker as a response message in an ad-hoc request.
-This in fact means that it is possible to request an Epoch Marker via a challenge-response interaction using a nonce to than use the received CWT or the Epoch Marker included as a different nonce in a separate RATS reference interaction model.
+This in fact means that it is possible to request an Epoch Marker via a challenge-response interaction using a nonce to then use the received CWT or the Epoch Marker included as a different nonce in a separate RATS reference interaction model.
 
 ~~~~ cddl
 {::include cddl/epoch-marker.cddl}
@@ -184,15 +185,12 @@ This specification comes with a set of predefined Epoch Marker types.
 
 CBOR Time Tags are CBOR time representations choosing from CBOR tag 0 (`tdate`, RFC3339 time as a string), tag 1 (`time`, Posix time as int or float), or tag 1001 (extended time data item).
 
-See {{Section 3 of -CBOR-ETIME}} for the (many) details about the CBOR extended time format (tag 1001).
-See {{Sections 3.4.1 and 3.4.2 of RFC8949@-CBOR}} for `tdate` (tag 0) and `time` (tag 1).
-
 ~~~~ cddl
 {::include cddl/cbor-time-tag.cddl}
 ~~~~
 
 The CBOR Time Tag represents a freshly sourced timestamp represented as either `time` or `tdate`
-({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}), or `etime` {{-CBOR-ETIME}}.
+({{Sections 3.4.2 and 3.4.1 of RFC8949@-CBOR}}, {{Appendix D of -CDDL}}), or `etime` ({{Section 3 of -CBOR-ETIME}}).
 
 
 #### Creation
@@ -231,7 +229,7 @@ SEQUENCE {
 
 This is the sha-256 hash of the string "EPOCH_BELL".
 
-The TimeStampToken obtained by the TSA MUST be stripped of the TSA signature.
+The TimeStampToken obtained from the TSA MUST be stripped of the TSA signature.
 Only the TSTInfo is to be kept the rest MUST be discarded.
 The Epoch Bell COSE signature will replace the TSA signature.
 
@@ -326,8 +324,7 @@ The following describes the epoch-tick type.
 
 epoch-tick:
 
-: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data (`handle`) included in conceptual messages {{-rats-arch}} to associate them with a certain epoch, similar to a nonce.
-Technically, an Epoch Tick is not used just once (like a nonce), but by every Epoch Marker consumer involved.
+: Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data (`handle`) included in conceptual messages {{-rats-arch}}. Similarly to the use of nonces, this allows the conceptual messages to be associated with a certain epoch. However, unlike nonces (which require uniqueness), Epoch Markers can be used in multiple interactions by every consumer involved.
 
 #### Creation
 
@@ -335,9 +332,9 @@ The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 ### Epoch Tick List {#sec-epoch-tick-list}
 
-A list of Epoch Ticks send to multiple consumers.
-The consumers use each Epoch Tick in the list of sequentially, similar to a list of nonces.
-Technically, each sequential Epoch Tick in the distributed list is not used just once (like a nonce), but by every Epoch Marker consumer involved.
+A list of Epoch Ticks sent to multiple consumers.
+The consumers use each Epoch Tick in the list sequentially.
+Similarly to the use of nonces, this allows each interaction to be associated with a certain epoch. However, unlike nonces (which require uniqueness), Epoch Markers can be used in multiple interactions by every consumer involved.
 
 ~~~~ cddl
 {::include cddl/multi-nonce-list.cddl}
@@ -359,7 +356,7 @@ The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
 
 A strictly monotonically increasing counter.
 
-The counter context is defined by the Epoch bell.
+The counter context is defined by the Epoch Bell.
 
 ~~~~ cddl
 {::include cddl/strictly-monotonic-counter.cddl}
