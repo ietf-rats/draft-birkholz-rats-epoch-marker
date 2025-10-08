@@ -5,7 +5,7 @@
 RATS Working Group                                           H. Birkholz
 Internet-Draft                                            Fraunhofer SIT
 Intended status: Standards Track                              T. Fossati
-Expires: 11 April 2026                                       Arm Limited
+Expires: 11 April 2026                                            Linaro
                                                                   W. Pan
                                                      Huawei Technologies
                                                               C. Bormann
@@ -1043,9 +1043,9 @@ Authors' Addresses
 
 
    Thomas Fossati
-   Arm Limited
-   United Kingdom
-   Email: Thomas.Fossati@arm.com
+   Linaro
+   Switzerland
+   Email: Thomas.Fossati@linaro.org
 
 
    Wei Pan
