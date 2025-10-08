@@ -105,7 +105,7 @@ Table of Contents
    7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
      7.1.  New CBOR Tags . . . . . . . . . . . . . . . . . . . . . .  12
      7.2.   New EM CWT Claim . . . . . . . . . . . . . . . . . . . .  12
-   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
+     7.3.  New Media Type application/em+cbor  . . . . . . . . . . .  13
 
 
 
@@ -114,12 +114,14 @@ Birkholz, et al.          Expires 11 April 2026                 [Page 2]
 Internet-Draft                Epoch Markers                 October 2025
 
 
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  13
-     8.2.  Informative References  . . . . . . . . . . . . . . . . .  15
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  16
-     A.1.  RFC 3161 TSTInfo  . . . . . . . . . . . . . . . . . . . .  17
-   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+     7.4.  New CoAP Content-Format . . . . . . . . . . . . . . . . .  13
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .  14
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .  16
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  17
+     A.1.  RFC 3161 TSTInfo  . . . . . . . . . . . . . . . . . . . .  18
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
@@ -160,8 +162,6 @@ Internet-Draft                Epoch Markers                 October 2025
    of the Epoch ID types are themselves encoded in CBOR, a prominent
    format in this space is the TimeStampToken (TST) defined by
    [RFC3161], a DER-encoded TSTInfo value wrapped in a CMS envelope
-   [RFC5652].  TSTs are produced by Time-Stamp Authorities (TSA) and
-   exchanged via the Time-Stamp Protocol (TSP).  At the time of writing,
 
 
 
@@ -170,6 +170,8 @@ Birkholz, et al.          Expires 11 April 2026                 [Page 3]
 Internet-Draft                Epoch Markers                 October 2025
 
 
+   [RFC5652].  TSTs are produced by Time-Stamp Authorities (TSA) and
+   exchanged via the Time-Stamp Protocol (TSP).  At the time of writing,
    TSAs are the most common providers of secure time-stamping services.
    Therefore, reusing the core TSTInfo structure as an Epoch ID type for
    Epoch Markers is instrumental for enabling smooth migration paths and
@@ -215,8 +217,6 @@ Internet-Draft                Epoch Markers                 October 2025
    means to identify a new freshness epoch.  Some of these methods are
    introduced and discussed in Section 10.3 of [RFC9334] (the RATS
    architecture).
-
-
 
 
 
@@ -686,6 +686,61 @@ Internet-Draft                Epoch Markers                 October 2025
 
    *  Specification Document(s): Section 4 of RFCthis
 
+7.3.  New Media Type application/em+cbor
+
+   IANA is requested to add the application/epoch-marker+cbor media
+   types to the "Media Types" registry [IANA.media-types], using the
+   following template:
+
+   Type name:  application
+   Subtype name:  epoch-marker+cbor
+   Required parameters:  no
+   Optional parameters:  no
+   Encoding considerations:  binary (CBOR)
+   Security considerations:  Section 6 of RFCthis
+   Interoperability considerations:  n/a
+   Published specification:  RFCthis
+   Applications that use this media type:  RATS Attesters, Verifiers,
+      Endorsers and Reference-Value providers, and Relying Parties that
+      need to transfer Epoch Markers payloads over HTTP(S), CoAP(S), and
+      other transports.
+   Fragment identifier considerations:  The syntax and semantics of
+      fragment identifiers are as specified for "application/cbor".  (No
+      fragment identification syntax is currently defined for
+      "application/cbor".)
+   Person & email address to contact for further information:  RATS WG
+      mailing list (rats@ietf.org)
+   Intended usage:  COMMON
+   Restrictions on usage:  none
+   Author/Change controller:  IETF
+   Provisional registration:  no
+
+7.4.  New CoAP Content-Format
+
+   IANA is requested to register the following Content-Format ID in the
+   "CoAP Content-Formats" registry, within the "Constrained RESTful
+   Environments (CoRE) Parameters" registry group
+   [IANA.core-parameters]:
+
+
+
+
+Birkholz, et al.          Expires 11 April 2026                [Page 13]
+
+Internet-Draft                Epoch Markers                 October 2025
+
+
+   +===============================+================+======+===========+
+   | Content-Type                  | Content Coding | ID   | Reference |
+   +===============================+================+======+===========+
+   | application/                  | -              | TBD1 | RFCthis   |
+   | epoch-marker+cbor             |                |      |           |
+   +-------------------------------+----------------+------+-----------+
+
+                      Table 2: New CoAP Content Format
+
+   If possible, TBD1 should be assigned in the 256..9999 range.
+
 8.  References
 
 8.1.  Normative References
@@ -705,6 +760,15 @@ Internet-Draft                Epoch Markers                 October 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
               cbor-encoded-cert-15>.
 
+   [IANA.core-parameters]
+              IANA, "Constrained RESTful Environments (CoRE)
+              Parameters",
+              <https://www.iana.org/assignments/core-parameters>.
+
+   [IANA.media-types]
+              IANA, "Media Types",
+              <https://www.iana.org/assignments/media-types>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -715,6 +779,13 @@ Internet-Draft                Epoch Markers                 October 2025
               Protocol (TSP)", RFC 3161, DOI 10.17487/RFC3161, August
               2001, <https://www.rfc-editor.org/rfc/rfc3161>.
 
+
+
+Birkholz, et al.          Expires 11 April 2026                [Page 14]
+
+Internet-Draft                Epoch Markers                 October 2025
+
+
    [RFC5652]  Housley, R., "Cryptographic Message Syntax (CMS)", STD 70,
               RFC 5652, DOI 10.17487/RFC5652, September 2009,
               <https://www.rfc-editor.org/rfc/rfc5652>.
@@ -722,13 +793,6 @@ Internet-Draft                Epoch Markers                 October 2025
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-
-
-Birkholz, et al.          Expires 11 April 2026                [Page 13]
-
-Internet-Draft                Epoch Markers                 October 2025
-
 
    [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
               "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
@@ -767,6 +831,17 @@ Internet-Draft                Epoch Markers                 October 2025
               <https://www.rfc-editor.org/info/std96>.
               At the time of writing, this STD comprises the following:
 
+
+
+
+
+
+
+Birkholz, et al.          Expires 11 April 2026                [Page 15]
+
+Internet-Draft                Epoch Markers                 October 2025
+
+
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
               Structures and Process", STD 96, RFC 9052,
               DOI 10.17487/RFC9052, August 2022,
@@ -776,15 +851,6 @@ Internet-Draft                Epoch Markers                 October 2025
               Countersignatures", STD 96, RFC 9338,
               DOI 10.17487/RFC9338, December 2022,
               <https://www.rfc-editor.org/info/rfc9338>.
-
-
-
-
-
-Birkholz, et al.          Expires 11 April 2026                [Page 14]
-
-Internet-Draft                Epoch Markers                 October 2025
-
 
    [X.690]    International Telecommunications Union, "Information
               technology — ASN.1 encoding rules: Specification of Basic
@@ -825,6 +891,13 @@ Internet-Draft                Epoch Markers                 October 2025
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               reference-interaction-models-14>.
 
+
+
+Birkholz, et al.          Expires 11 April 2026                [Page 16]
+
+Internet-Draft                Epoch Markers                 October 2025
+
+
    [I-D.ietf-scitt-architecture]
               Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
               Y., and S. Lasker, "An Architecture for Trustworthy and
@@ -832,15 +905,6 @@ Internet-Draft                Epoch Markers                 October 2025
               Internet-Draft, draft-ietf-scitt-architecture-21, 30
               September 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-scitt-architecture-21>.
-
-
-
-
-
-Birkholz, et al.          Expires 11 April 2026                [Page 15]
-
-Internet-Draft                Epoch Markers                 October 2025
-
 
    [IANA.cbor-tags]
               IANA, "Concise Binary Object Representation (CBOR) Tags",
@@ -885,15 +949,7 @@ Appendix A.  Examples
 
 
 
-
-
-
-
-
-
-
-
-Birkholz, et al.          Expires 11 April 2026                [Page 16]
+Birkholz, et al.          Expires 11 April 2026                [Page 17]
 
 Internet-Draft                Epoch Markers                 October 2025
 
@@ -949,7 +1005,7 @@ A.1.  RFC 3161 TSTInfo
 
 
 
-Birkholz, et al.          Expires 11 April 2026                [Page 17]
+Birkholz, et al.          Expires 11 April 2026                [Page 18]
 
 Internet-Draft                Epoch Markers                 October 2025
 
@@ -1005,7 +1061,7 @@ Authors' Addresses
 
 
 
-Birkholz, et al.          Expires 11 April 2026                [Page 18]
+Birkholz, et al.          Expires 11 April 2026                [Page 19]
 
 Internet-Draft                Epoch Markers                 October 2025
 
@@ -1061,4 +1117,4 @@ Internet-Draft                Epoch Markers                 October 2025
 
 
 
-Birkholz, et al.          Expires 11 April 2026                [Page 19]
+Birkholz, et al.          Expires 11 April 2026                [Page 20]
