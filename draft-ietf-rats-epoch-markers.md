@@ -27,9 +27,9 @@ author:
   city: Darmstadt
   country: Germany
 - name: Thomas Fossati
-  organization: Arm Limited
-  email: Thomas.Fossati@arm.com
-  country: UK
+  organization: Linaro
+  email: Thomas.Fossati@linaro.org
+  country: CH
 - name: Wei Pan
   org: Huawei Technologies
   email: william.panwei@huawei.com
