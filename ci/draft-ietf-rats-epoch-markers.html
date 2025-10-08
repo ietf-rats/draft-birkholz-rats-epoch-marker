@@ -10,25 +10,29 @@
 <meta content="Wei Pan" name="author">
 <meta content="Carsten Bormann" name="author">
 <meta content='
-       This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients. 
+       This document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
+Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages. 
     ' name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.30.2" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-rats-epoch-markers-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
-    Python 3.12.9
+  xml2rfc 3.30.2
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
-    platformdirs 4.3.6
+    lxml 5.3.1
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
-    wcwidth 0.2.13
+    requests 2.32.5
+    setuptools 80.9.0
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-rats-epoch-markers.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1047,11 +1051,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Epoch Markers</td>
-<td class="right">March 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Birkholz, et al.</td>
-<td class="center">Expires 20 September 2025</td>
+<td class="center">Expires 11 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1068,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-rats-epoch-markers-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-19" class="published">19 March 2025</time>
+<time datetime="2025-10-08" class="published">8 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-20">20 September 2025</time></dd>
+<dd class="expires"><time datetime="2026-04-11">11 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1094,7 +1098,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Epoch Markers</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system. Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell. Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock). Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines Epoch Markers as a means to establish a notion of freshness among actors in a distributed system.
+Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system known as the Epoch Bell.
+Systems receiving Epoch Markers do not need to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Instead, the reception of a specific Epoch Marker establishes a new epoch that is shared among all recipients.
+This document defines Epoch Marker types, including CBOR time tags, RFC 3161 TimeStampToken, nonce-like structures, and a CWT Claim to embed Epoch Markers in RFC 8392 CBOR Web Tokens, which serve as vehicles for signed protocol messages.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1130,7 +1138,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1177,7 +1185,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-epoch-marker-structure" class="internal xref">Epoch Marker Structure</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-epoch-marker-payloads" class="internal xref">Epoch Marker Payloads</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-epoch-marker-types" class="internal xref">Epoch Marker Types</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
                     <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.  <a href="#name-cbor-time-tags" class="internal xref">CBOR Time Tags</a></p>
@@ -1192,7 +1200,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.1.2.4.1"><a href="#section-4.1.4" class="auto internal xref">4.1.4</a>.  <a href="#name-epoch-tick" class="internal xref">Epoch Tick</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.5">
-                    <p id="section-toc.1-1.4.2.1.2.5.1"><a href="#section-4.1.5" class="auto internal xref">4.1.5</a>.  <a href="#name-multi-nonce-list" class="internal xref">Multi-Nonce-List</a></p>
+                    <p id="section-toc.1-1.4.2.1.2.5.1"><a href="#section-4.1.5" class="auto internal xref">4.1.5</a>.  <a href="#name-epoch-tick-list" class="internal xref">Epoch Tick List</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.6">
                     <p id="section-toc.1-1.4.2.1.2.6.1"><a href="#section-4.1.6" class="auto internal xref">4.1.6</a>.  <a href="#name-strictly-monotonically-incr" class="internal xref">Strictly Monotonically Increasing Counter</a></p>
@@ -1208,43 +1216,46 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-signature-requirements" class="internal xref">Signature Requirements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-new-cbor-tags" class="internal xref">New CBOR Tags</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-new-em-cwt-claim" class="internal xref">New EM CWT Claim</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-new-cbor-tags" class="internal xref">New CBOR Tags</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-new-em-cwt-claim" class="internal xref">New EM CWT Claim</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-rfc-3161-tstinfo" class="internal xref">RFC 3161 TSTInfo</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-rfc-3161-tstinfo" class="internal xref">RFC 3161 TSTInfo</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1259,21 +1270,26 @@ svg :is([fill="white"], [fill^="#fff"]) {
 This is certainly the case in the domain of remote attestation procedures.
 In general, securely establishing a shared notion of freshness of the exchanged information among entities in a distributed system is not a simple task.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">The entire <span><a href="https://rfc-editor.org/rfc/rfc9334#appendix-A" class="relref">Appendix A</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> deals solely with the topic of freshness, which is in itself an indication of how relevant, and complex, it is to establish a trusted and shared understanding of freshness in a RATS system.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">This document defines Epoch Markers as a way to establish a notion of freshness among actors in a distributed system.
+<p id="section-1-3">This document defines Epoch Markers as a way to establish a notion of freshness among actors in distributed systems.
 Epoch Markers are similar to "time ticks" and are produced and distributed by a dedicated system, the Epoch Bell.
-Systems that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
+Actors in a system that receive Epoch Markers do not have to track freshness using their own understanding of time (e.g., via a local real-time clock).
 Instead, the reception of a certain Epoch Marker establishes a new epoch that is shared between all recipients.
-In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock where the ticks are conveyed by the Internet.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.  This introduces skew that needs to be taken into consideration when Epoch Markers are used.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "epoch id" types are defined to accommodate different use cases and diverse kinds of Epoch Bells.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">While Epoch Markers are encoded in CBOR <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and many of the epoch id types are themselves encoded in CBOR, a prominent format in this space is the Time-Stamp Token defined by <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>, a DER-encoded TSTInfo value wrapped in a CMS envelope <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.
-Time-Stamp Tokens (TST) are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
+In essence, the emissions and corresponding receptions of Epoch Markers are like the ticks of a clock, with these ticks being conveyed over the Internet.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">In general (barring highly symmetrical topologies), epoch ticking incurs differential latency due to the non-uniform distribution of receivers with respect to the Epoch Bell.
+This introduces skew that needs to be taken into consideration when Epoch Markers are used.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">While all Epoch Markers share the same core property of behaving like clock ticks in a shared domain, various "Epoch ID" values are defined as Epoch Marker types in this document to accommodate different use cases and diverse kinds of Epoch Bells.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">While most Epoch Markers types are encoded in CBOR <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, and many of the Epoch ID types are themselves encoded in CBOR, a prominent format in this space is the TimeStampToken (TST) defined by <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>, a DER-encoded TSTInfo value wrapped in a CMS envelope <span>[<a href="#RFC5652" class="cite xref">RFC5652</a>]</span>.
+TSTs are produced by Time-Stamp Authorities (TSA) and exchanged via the Time-Stamp Protocol (TSP).
 At the time of writing, TSAs are the most common providers of secure time-stamping services.
-Therefore, reusing the core TSTInfo structure as an epoch id type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
-There are, however, several other ways to represent a signed timestamp, and therefore other kinds of payloads that can be used to implement Epoch Markers.<a href="#section-1-6" class="pilcrow">¶</a></p>
+Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Markers is instrumental for enabling smooth migration paths and promote interoperability.
+There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <p id="section-1-7">To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The top-level structure of Epoch Markers and an initial set of epoch id types are specified using CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.
-To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the option to include a "veracity proof" in the form of attestation evidence, attestation results, or SCITT receipts <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span> associated with the trust status of the Epoch Bell.<a href="#section-1-7" class="pilcrow">¶</a></p>
+The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens (CWT) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>.
+The present document specifies an extensible set of Epoch Marker types, along with the <code>em</code> CWT claim to include them in CWTs.
+CWTs are signed using COSE <span>[<a href="#STD96" class="cite xref">STD96</a>]</span> and benefit from wide tool support.
+However, CWTs are not the only containers in which Epoch Markers can be embedded.
+Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
+Examples include the Collection CMW in <span>[<a href="#I-D.ietf-lamps-csr-attestation" class="cite xref">I-D.ietf-lamps-csr-attestation</a>]</span>, Evidence formats such as <span>[<a href="#TCG-CoEvidence" class="cite xref">TCG-CoEvidence</a>]</span> or <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>, <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>, or the CWT Claims Header Parameter of <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="requirements-notation">
 <section id="section-1.1">
         <h3 id="name-requirements-notation">
@@ -1283,7 +1299,7 @@ To increase trustworthiness in the Epoch Bell, Epoch Markers also provide the op
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> is used to describe the data formats.  The examples in <a href="#examples" class="auto internal xref">Appendix A</a> use CBOR diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#STD94" class="cite xref">STD94</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">In this document, CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> is used to describe the data formats.  The examples in <a href="#examples" class="auto internal xref">Appendix A</a> use the CBOR Extended Diagnostic Notation (EDN, <span>[<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span>).<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1294,7 +1310,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-epoch-ids" class="section-name selfRef">Epoch IDs</a>
       </h2>
 <p id="section-2-1">The RATS architecture introduces the concept of Epoch IDs that mark certain events during remote attestation procedures ranging from simple handshakes to rather complex interactions including elaborate freshness proofs.
-The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in Section 10.3 of the RATS architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+The Epoch Markers defined in this document are a solution that includes the lessons learned from TSAs, the concept of Epoch IDs defined in the RATS architecture, and provides several means to identify a new freshness epoch. Some of these methods are introduced and discussed in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-10.3" class="relref">Section 10.3</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> (the RATS architecture).<a href="#section-2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="interaction-models">
@@ -1302,22 +1318,23 @@ The Epoch Markers defined in this document are a solution that includes the less
       <h2 id="name-interaction-models">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-interaction-models" class="section-name selfRef">Interaction Models</a>
       </h2>
-<p id="section-3-1">The interaction models illustrated in this section are derived from the RATS Reference Interaction Models.
-In general, there are three interaction models:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The interaction models illustrated in this section are derived from the RATS Reference Interaction Models <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span>.
+In general, there are three major interaction models used in remote attestation:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-2.1">
-          <p id="section-3-2.1.1">ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to Section 7.1 in <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-3-2.1.1">ad-hoc requests (e.g., via challenge-response requests addressed at Epoch Bells), corresponding to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-14#section-7.1" class="relref">Section 7.1</a> of [<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-2.2">
-          <p id="section-3-2.2.1">unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to Section 7.2 in <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-3-2.2.1">unsolicited distribution (e.g., via uni-directional methods, such as broad- or multicasting from Epoch Bells), corresponding to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-14#section-7.2" class="relref">Section 7.2</a> of [<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-2.3">
-          <p id="section-3-2.3.1">solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to Section 7.3 in <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+          <p id="section-3-2.3.1">solicited distribution (e.g., via a subscription to Epoch Bells), corresponding to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-14#section-7.3" class="relref">Section 7.3</a> of [<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span><a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-3-3">In all three interaction models, Epoch Markers can be used as content for the generic information element 'handle'.
-Handles are most useful to establish freshness in unsolicited and solicited distribution by the Epoch Bell.
-An Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+<p id="section-3-3">In all three interaction models, Epoch Markers can be used as content for the generic information element <code>handle</code> as introduced by <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span>.
+Handles are used to establish freshness in ad-hoc, unsolicited, and solicited distribution mechanisms of an Epoch Bell.
+For example, an Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
+If embedded in a CWT, an Epoch Marker can be used as a <code>handle</code> by extracting the value of the <code>em</code> Claim or by using the complete CWT including an <code>em</code> Claim (e.g., functioning as a signed time-stamp token).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.<a href="#section-3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1326,29 +1343,18 @@ Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforeh
       <h2 id="name-epoch-marker-structure">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-epoch-marker-structure" class="section-name selfRef">Epoch Marker Structure</a>
       </h2>
-<p id="section-4-1">At the top level, an Epoch Marker is a CBOR array carrying the actual epoch id (<a href="#epoch-payloads" class="auto internal xref">Section 4.1</a>) and an optional veracity proof about the Epoch Bell.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<span id="name-epoch-marker-definition"></span><div id="fig-epoch-marker-cddl">
+<p id="section-4-1">Epoch Markers are tagged CBOR data items.
+As a default, Epoch Markers are transported via the <code>em</code> Claim in CWTs.
+In cases of challenge-response interactions that employ a nonce to show recentness, the <code>em</code> Claim can be paired with a <code>Nonce</code> Claim to bind the nonce with the Epoch Marker as a response message in an ad-hoc request.
+This in fact means that it is possible to request an Epoch Marker via a challenge-response interaction using a nonce to than use the received CWT or the Epoch Marker included as a different nonce in a separate RATS reference interaction model.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<span id="name-epoch-marker-types-tag-numb"></span><div id="fig-epoch-marker-cddl">
 <figure id="figure-1">
         <div class="alignLeft art-cddl art-text artwork" id="section-4-2.1">
 <pre>
-epoch-marker = [
-  $tagged-epoch-id
-  ? bell-veracity-proof
-]
-
-; veracity of the bell
-bell-veracity-proof = non-empty&lt;{
-  ? remote-attestation-evidence ; could be EAT or Concise Evidence
-  ? remote-attestation-result ; hopefully EAT with AR4SI Claims
-  ? scitt-receipt ; SCITT receipt
-}&gt;
-
-remote-attestation-evidence = (1: "PLEASE DEFINE")
-remote-attestation-result = (2: "PLEASE DEFINE")
-scitt-receipt = (3: "PLEASE DEFINE")
+epoch-marker = $tagged-epoch-id
 
 ; epoch-id types independent of interaction model
-$tagged-epoch-id /= cbor-epoch-id
+$tagged-epoch-id /= cbor-time
 $tagged-epoch-id /= #6.26980(classical-rfc3161-TST-info)
 $tagged-epoch-id /= #6.26981(TST-info-based-on-CBOR-time-tag)
 $tagged-epoch-id /= #6.26982(epoch-tick)
@@ -1357,58 +1363,49 @@ $tagged-epoch-id /= #6.26984(strictly-monotonic-counter)
 </pre>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
-<a href="#name-epoch-marker-definition" class="selfRef">Epoch Marker definition</a>
+<a href="#name-epoch-marker-types-tag-numb" class="selfRef">Epoch Marker types (tag numbers 2698x are suggested, not yet allocated)</a>
         </figcaption></figure>
 </div>
-<p id="section-4-3">The veracity proof can be encoded in an Evidence or Attestation Result conceptual message <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>, e.g., using <span>[<a href="#I-D.ietf-rats-eat" class="cite xref">I-D.ietf-rats-eat</a>]</span>, <span>[<a href="#TCG-CoEvidence" class="cite xref">TCG-CoEvidence</a>]</span>, <span>[<a href="#I-D.ietf-rats-ar4si" class="cite xref">I-D.ietf-rats-ar4si</a>]</span>, or SCITT receipts <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<span id="name-epoch-marker-as-a-cwt-claim"></span><div id="fig-epoch-marker-cwt">
+<figure id="figure-2">
+        <div class="alignLeft art-cddl art-text artwork" id="section-4-3.1">
+<pre>
+$$Claims-Set-Claims //= (&amp;(em: 2000) =&gt; epoch-marker)
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-epoch-marker-as-a-cwt-claim" class="selfRef">Epoch Marker as a CWT Claim (CWT claim number 2000 is suggested, not yet allocated)</a>
+        </figcaption></figure>
+</div>
 <div id="epoch-payloads">
 <section id="section-4.1">
-        <h3 id="name-epoch-marker-payloads">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-epoch-marker-payloads" class="section-name selfRef">Epoch Marker Payloads</a>
+        <h3 id="name-epoch-marker-types">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-epoch-marker-types" class="section-name selfRef">Epoch Marker Types</a>
         </h3>
-<p id="section-4.1-1">This memo comes with a set of predefined payloads.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This specification comes with a set of predefined Epoch Marker types.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div id="cbor-time-tags">
 <section id="section-4.1.1">
           <h4 id="name-cbor-time-tags">
 <a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-cbor-time-tags" class="section-name selfRef">CBOR Time Tags</a>
           </h4>
-<p id="section-4.1.1-1">A CBOR time representation choosing from CBOR tag 0 (<code>tdate</code>, RFC3339 time as a string), tag 1 (<code>time</code>, Posix time as int or float) or tag 1001 (extended time data item), optionally bundled with a nonce.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1-2">See <span><a href="https://rfc-editor.org/rfc/rfc9581#section-3" class="relref">Section 3</a> of [<a href="#RFC9581" class="cite xref">RFC9581</a>]</span> for the (many) details about the CBOR extended
-time format (tag 1001). See <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> for <code>tdate</code> (tag 0) and <code>time</code> (tag 1).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-1">CBOR Time Tags are CBOR time representations choosing from CBOR tag 0 (<code>tdate</code>, RFC3339 time as a string), tag 1 (<code>time</code>, Posix time as int or float), or tag 1001 (extended time data item).<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">See <span><a href="https://rfc-editor.org/rfc/rfc9581#section-3" class="relref">Section 3</a> of [<a href="#RFC9581" class="cite xref">RFC9581</a>]</span> for the (many) details about the CBOR extended time format (tag 1001).
+See Sections <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.1" class="relref">3.4.1</a> and <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.2" class="relref">3.4.2</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span> for <code>tdate</code> (tag 0) and <code>time</code> (tag 1).<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.1.1-3">
 <pre>
-cbor-epoch-id = [
-   cbor-time
-   ? nonce
-]
-
-etime = #6.1001({* (int/tstr) =&gt; any})
-
 cbor-time = tdate / time / etime
 
-nonce = tstr / bstr / int
+etime = #6.1001({* (int/tstr) =&gt; any})
 </pre><a href="#section-4.1.1-3" class="pilcrow">¶</a>
 </div>
-<p id="section-4.1.1-4">The following describes each member of the cbor-epoch-id map.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-4.1.1-5">
-            <dt id="section-4.1.1-5.1">etime:</dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-5.2">
-              <p id="section-4.1.1-5.2.1">A freshly sourced timestamp represented as either time or tdate (<span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>) or etime <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>.<a href="#section-4.1.1-5.2.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-4.1.1-5.3">nonce:</dt>
-            <dd style="margin-left: 1.5em" id="section-4.1.1-5.4">
-              <p id="section-4.1.1-5.4.1">An optional random byte string used as extra data in challenge-response interaction models (see <span>[<a href="#I-D.ietf-rats-reference-interaction-models" class="cite xref">I-D.ietf-rats-reference-interaction-models</a>]</span>).<a href="#section-4.1.1-5.4.1" class="pilcrow">¶</a></p>
-</dd>
-          <dd class="break"></dd>
-</dl>
+<p id="section-4.1.1-4">The CBOR Time Tag represents a freshly sourced timestamp represented as either <code>time</code> or <code>tdate</code>
+(Sections <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.2" class="relref">3.4.2</a> and <a href="https://rfc-editor.org/rfc/rfc8949#section-3.4.1" class="relref">3.4.1</a> of RFC 8949 <span>[<a href="#STD94" class="cite xref">STD94</a>]</span>, <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-D" class="relref">Appendix D</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>), or <code>etime</code> <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>.<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
 <div id="creation">
 <section id="section-4.1.1.1">
             <h5 id="name-creation">
 <a href="#section-4.1.1.1" class="section-number selfRef">4.1.1.1. </a><a href="#name-creation" class="section-name selfRef">Creation</a>
             </h5>
 <p id="section-4.1.1.1-1">To generate the cbor-time value, the emitter <span class="bcp14">MUST</span> follow the requirements in <a href="#sec-time-reqs" class="auto internal xref">Section 4.2</a>.<a href="#section-4.1.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.1.1-2">If a nonce is generated, the emitter <span class="bcp14">MUST</span> follow the requirements in <a href="#sec-nonce-reqs" class="auto internal xref">Section 4.3</a>.<a href="#section-4.1.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1464,8 +1461,7 @@ The Epoch Bell COSE signature will replace the TSA signature.<a href="#section-4
 <a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-cbor-encoded-rfc3161-tst-in" class="section-name selfRef">CBOR-encoded RFC3161 TST Info</a>
           </h4>
 <p id="section-4.1.3-1"><span class="cref" id="issue">Issue tracked at:</span> https://github.com/ietf-rats/draft-birkholz-rats-epoch-marker/issues/18<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
-<p id="section-4.1.3-2">The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical
-<span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> TSTInfo, rewritten using the CBOR type system.<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.3-2">The TST-info-based-on-CBOR-time-tag is semantically equivalent to classical <span>[<a href="#RFC3161" class="cite xref">RFC3161</a>]</span> TSTInfo, rewritten using the CBOR type system.<a href="#section-4.1.3-2" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.1.3-3">
 <pre>
 TST-info-based-on-CBOR-time-tag = {
@@ -1510,29 +1506,28 @@ GeneralName = [ GeneralNameType : int, GeneralNameValue : any ]
             <dd class="break"></dd>
 <dt id="section-4.1.3-5.3">policy:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-5.4">
-              <p id="section-4.1.3-5.4.1">A <span>[<a href="#RFC9090" class="cite xref">RFC9090</a>]</span> object identifier tag (111 or 112) representing the TSA's
-policy under which the tst-info was produced.  Cf. policy, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-5.4.1">A <span>[<a href="#RFC9090" class="cite xref">RFC9090</a>]</span> object identifier tag (111 or 112) representing the TSA's policy under which the tst-info was produced.
+Cf. policy, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-5.5">messageImprint:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-5.6">
               <p id="section-4.1.3-5.6.1">A <span>[<a href="#RFC9054" class="cite xref">RFC9054</a>]</span> COSE_Hash_Find array carrying the hash algorithm
-identifier and the hash value of the time-stamped datum.  Cf. messageImprint,
-<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.6.1" class="pilcrow">¶</a></p>
+identifier and the hash value of the time-stamped datum.
+Cf. messageImprint, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.6.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-5.7">serialNumber:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-5.8">
-              <p id="section-4.1.3-5.8.1">A unique integer value assigned by the TSA to each issued tst-info.  Cf.
-serialNumber, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.8.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-5.8.1">A unique integer value assigned by the TSA to each issued tst-info.
+Cf. serialNumber, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-5.8.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-5.9">eTime:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-5.10">
-              <p id="section-4.1.3-5.10.1">The time at which the tst-info has been created by the TSA.  Cf. genTime,
-<span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.
-Encoded as extended time <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>, indicated by CBOR tag 1001, profiled
-as follows:<a href="#section-4.1.3-5.10.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-5.10.1">The time at which the tst-info has been created by the TSA.
+Cf. genTime, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.
+Encoded as extended time <span>[<a href="#RFC9581" class="cite xref">RFC9581</a>]</span>, indicated by CBOR tag 1001, profiled as follows:<a href="#section-4.1.3-5.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1542,8 +1537,8 @@ as follows:<a href="#section-4.1.3-5.10.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.3-6.2">
               <p id="section-4.1.3-6.2.1">The stated "accuracy" is encoded using key -8, which indicates the maximum
-allowed deviation from the value indicated by "base time".  The duration map
-is profiled to disallow string keys.  This is an optional field.<a href="#section-4.1.3-6.2.1" class="pilcrow">¶</a></p>
+allowed deviation from the value indicated by "base time". The duration map
+is profiled to disallow string keys. This is an optional field.<a href="#section-4.1.3-6.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.1.3-6.3">
               <p id="section-4.1.3-6.3.1">The map <span class="bcp14">MAY</span> also contain one or more integer keys, which may encode
@@ -1553,27 +1548,29 @@ supplementary information <span class="cref" id="tf1">Allowing unsigned integer 
 <span class="break"></span><dl class="dlNewline" id="section-4.1.3-7">
             <dt id="section-4.1.3-7.1">ordering:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-7.2">
-              <p id="section-4.1.3-7.2.1">boolean indicating whether tst-info issued by the TSA can be ordered solely
-based on the "base time". This is an optional field, whose default value is
-"false".  Cf. ordering, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-7.2.1">boolean indicating whether tst-info issued by the TSA can be ordered solely based on the "base time".
+This is an optional field, whose default value is "false".
+Cf. ordering, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-7.3">nonce:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-7.4">
-              <p id="section-4.1.3-7.4.1">int value echoing the nonce supplied by the requestor.  Cf. nonce, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.4.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-7.4.1">int value echoing the nonce supplied by the requestor.
+Cf. nonce, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.4.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-7.5">tsa:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-7.6">
-              <p id="section-4.1.3-7.6.1">a single-entry GeneralNames array <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-13#section-11.8" class="relref">Section 11.8</a> of [<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span> providing a hint
-in identifying the name of the TSA.  Cf. tsa, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.6.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-7.6.1">a single-entry GeneralNames array <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15#section-11.8" class="relref">Section 11.8</a> of [<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span> providing a hint in identifying the name of the TSA.
+Cf. tsa, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.6.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
 <dt id="section-4.1.3-7.7">$$TSTInfoExtensions:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.3-7.8">
-              <p id="section-4.1.3-7.8.1">A CDDL socket (<span><a href="https://rfc-editor.org/rfc/rfc8610#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>) to allow extensibility of the data
-format.  Note that any extensions appearing here <span class="bcp14">MUST</span> match an extension in the
-corresponding request.  Cf. extensions, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.8.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.3-7.8.1">A CDDL socket (<span><a href="https://rfc-editor.org/rfc/rfc8610#section-3.9" class="relref">Section 3.9</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>) to allow extensibility of the data format.
+Note that any extensions appearing here <span class="bcp14">MUST</span> match an extension in the
+corresponding request.
+Cf. extensions, <span><a href="https://rfc-editor.org/rfc/rfc3161#section-2.4.2" class="relref">Section 2.4.2</a> of [<a href="#RFC3161" class="cite xref">RFC3161</a>]</span>.<a href="#section-4.1.3-7.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1614,7 +1611,8 @@ epoch-tick = tstr / bstr / int
 <span class="break"></span><dl class="dlParallel" id="section-4.1.4-4">
             <dt id="section-4.1.4-4.1">epoch-tick:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.4-4.2">
-              <p id="section-4.1.4-4.2.1">Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data included in conceptual messages <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch.<a href="#section-4.1.4-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.4-4.2.1">Either a string, a byte string, or an integer used by RATS roles within a trust domain as extra data (<code>handle</code>) included in conceptual messages <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch, similar to a nonce.
+Technically, an Epoch Tick is not used just once (like a nonce), but by every Epoch Marker consumer involved.<a href="#section-4.1.4-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1630,10 +1628,12 @@ epoch-tick = tstr / bstr / int
 </div>
 <div id="sec-epoch-tick-list">
 <section id="section-4.1.5">
-          <h4 id="name-multi-nonce-list">
-<a href="#section-4.1.5" class="section-number selfRef">4.1.5. </a><a href="#name-multi-nonce-list" class="section-name selfRef">Multi-Nonce-List</a>
+          <h4 id="name-epoch-tick-list">
+<a href="#section-4.1.5" class="section-number selfRef">4.1.5. </a><a href="#name-epoch-tick-list" class="section-name selfRef">Epoch Tick List</a>
           </h4>
-<p id="section-4.1.5-1">A list of nonces send to multiple consumer. The consumers use each Nonce in the list of Nonces sequentially. Technically, each sequential Nonce in the distributed list is not used just once, but by every Epoch Marker consumer involved. This renders each Nonce in the list a Multi-Nonce<a href="#section-4.1.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-1">A list of Epoch Ticks send to multiple consumers.
+The consumers use each Epoch Tick in the list of sequentially, similar to a list of nonces.
+Technically, each sequential Epoch Tick in the distributed list is not used just once (like a nonce), but by every Epoch Marker consumer involved.<a href="#section-4.1.5-1" class="pilcrow">¶</a></p>
 <div class="lang-cddl sourcecode" id="section-4.1.5-2">
 <pre>
 ; Epoch-Tick-List
@@ -1641,11 +1641,13 @@ epoch-tick = tstr / bstr / int
 epoch-tick-list = [ + epoch-tick ]
 </pre><a href="#section-4.1.5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-4.1.5-3">The following describes the multi-nonce type.<a href="#section-4.1.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.1.5-3">The following describes the Epoch Tick List type.<a href="#section-4.1.5-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-4.1.5-4">
-            <dt id="section-4.1.5-4.1">multi-nonce-list:</dt>
+            <dt id="section-4.1.5-4.1">epoch-tick-list:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.5-4.2">
-              <p id="section-4.1.5-4.2.1">A sequence of byte strings used by RATS roles in trust domain as extra data in the production of conceptual messages as specified by the RATS architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch. Each nonce in the list is used in a consecutive production of a conceptual messages. Asserting freshness of a conceptual message including a nonce from the multi-nonce-list requires some state on the receiver side to assess if that nonce is the appropriate next unused nonce from the multi-nonce-list.<a href="#section-4.1.5-4.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.5-4.2.1">A sequence of byte strings used by RATS roles in trust domain as extra data (<code>handle</code>) in the generation of conceptual messages as specified by the RATS architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch.
+Each Epoch Tick in the list is used in a consecutive generation of a conceptual message.
+Asserting freshness of a conceptual message including an Epoch Tick from the epoch-tick-list requires some state on the receiver side to assess if that Epoch Tick is the appropriate next unused Epoch Tick from the epoch-tick-list.<a href="#section-4.1.5-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1675,7 +1677,7 @@ strictly-monotonic-counter = uint
 <span class="break"></span><dl class="dlParallel" id="section-4.1.6-5">
             <dt id="section-4.1.6-5.1">strictly-monotonic-counter:</dt>
             <dd style="margin-left: 1.5em" id="section-4.1.6-5.2">
-              <p id="section-4.1.6-5.2.1">An unsigned integer used by RATS roles in a trust domain as extra data in the production of of conceptual messages as specified by the RATS architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.<a href="#section-4.1.6-5.2.1" class="pilcrow">¶</a></p>
+              <p id="section-4.1.6-5.2.1">An unsigned integer used by RATS roles in a trust domain as extra data in the production of conceptual messages as specified by the RATS architecture <span>[<a href="#RFC9334" class="cite xref">RFC9334</a>]</span> to associate them with a certain epoch. Each new strictly-monotonic-counter value must be higher than the last one.<a href="#section-4.1.6-5.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
@@ -1696,7 +1698,7 @@ strictly-monotonic-counter = uint
         <h3 id="name-nonce-requirements">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-nonce-requirements" class="section-name selfRef">Nonce Requirements</a>
         </h3>
-<p id="section-4.3-1">A nonce <span class="bcp14">MUST</span> be freshly generated.
+<p id="section-4.3-1">A nonce value used in a protocol or message to retrieve an Epoch Marker <span class="bcp14">MUST</span> be freshly generated.
 The generated value <span class="bcp14">MUST</span> have at least 64 bits of entropy (before encoding).
 The generated value <span class="bcp14">MUST</span> be generated via a cryptographically secure random number generator.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.3-2">A maximum nonce size of 512 bits is set to limit the memory requirements.
@@ -1705,28 +1707,37 @@ All receivers <span class="bcp14">MUST</span> be able to accommodate the maximum
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="sec-signature-reqs">
 <section id="section-5">
-      <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-signature-requirements">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-signature-requirements" class="section-name selfRef">Signature Requirements</a>
       </h2>
-<p id="section-5-1">TODO<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The signature over an Epoch Marker <span class="bcp14">MUST</span> be generated by the Epoch Bell.
+Conversely, applying the first signature to an Epoch Marker always makes the issuer of a signed message containing an Epoch Marker an Epoch Bell.<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">TODO<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-iana-cons">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1"><span class="cref" id="rfced-replace">RFC Editor: please replace RFCthis with the RFC
-number of this RFC and remove this note.</span><a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-7-1"><span class="cref" id="rfced-replace">RFC Editor: please replace RFCthis with the RFC
+number of this RFC and remove this note.</span><a href="#section-7-1" class="pilcrow">¶</a></p>
 <div id="sec-iana-cbor-tags">
-<section id="section-6.1">
+<section id="section-7.1">
         <h3 id="name-new-cbor-tags">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-new-cbor-tags" class="section-name selfRef">New CBOR Tags</a>
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-new-cbor-tags" class="section-name selfRef">New CBOR Tags</a>
         </h3>
-<p id="section-6.1-1">IANA is requested to allocate the following tags in the "CBOR Tags" registry
-<span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>, preferably with the specific CBOR tag value requested:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-1">IANA is requested to allocate the following tags in the "CBOR Tags" registry
+<span>[<a href="#IANA.cbor-tags" class="cite xref">IANA.cbor-tags</a>]</span>, preferably with the specific CBOR tag value requested:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <span id="name-new-cbor-tags-2"></span><div id="tbl-cbor-tags">
 <table class="left" id="table-1">
           <caption>
@@ -1752,7 +1763,7 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
             <tr>
               <td class="text-left" rowspan="1" colspan="1">26981</td>
               <td class="text-left" rowspan="1" colspan="1">map</td>
-              <td class="text-left" rowspan="1" colspan="1">CBOR-encoding of RFC3161 TSTInfo semantics</td>
+              <td class="text-left" rowspan="1" colspan="1">CBOR representation of RFC3161 TSTInfo semantics</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <a href="#sec-rfc3161-fancy" class="auto internal xref">Section 4.1.3</a> of RFCthis</td>
             </tr>
@@ -1783,29 +1794,29 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 </section>
 </div>
 <div id="sec-iana-em-claim">
-<section id="section-6.2">
+<section id="section-7.2">
         <h3 id="name-new-em-cwt-claim">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-new-em-cwt-claim" class="section-name selfRef">New EM CWT Claim</a>
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-new-em-cwt-claim" class="section-name selfRef">New EM CWT Claim</a>
         </h3>
-<p id="section-6.2-1">This specification adds the following value to the "CBOR Web Token Claims" registry <span>[<a href="#IANA.cwt" class="cite xref">IANA.cwt</a>]</span>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">This specification adds the following value to the "CBOR Web Token Claims" registry <span>[<a href="#IANA.cwt" class="cite xref">IANA.cwt</a>]</span>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.2-2.1">
-            <p id="section-6.2-2.1.1">Claim Name: em<a href="#section-6.2-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-7.2-2.1">
+            <p id="section-7.2-2.1.1">Claim Name: em<a href="#section-7.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.2-2.2">
-            <p id="section-6.2-2.2.1">Claim Description: Epoch Marker<a href="#section-6.2-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-7.2-2.2">
+            <p id="section-7.2-2.2.1">Claim Description: Epoch Marker<a href="#section-7.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.2-2.3">
-            <p id="section-6.2-2.3.1">Claim Key: 2000 (IANA: suggested assignment)<a href="#section-6.2-2.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-7.2-2.3">
+            <p id="section-7.2-2.3.1">Claim Key: 2000 (IANA: suggested assignment)<a href="#section-7.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.2-2.4">
-            <p id="section-6.2-2.4.1">Claim Value Type(s): CBOR array<a href="#section-6.2-2.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-7.2-2.4">
+            <p id="section-7.2-2.4.1">Claim Value Type(s): CBOR array<a href="#section-7.2-2.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.2-2.5">
-            <p id="section-6.2-2.5.1">Change Controller: IETF<a href="#section-6.2-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-7.2-2.5">
+            <p id="section-7.2-2.5.1">Change Controller: IETF<a href="#section-7.2-2.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.2-2.6">
-            <p id="section-6.2-2.6.1">Specification Document(s): <a href="#sec-epoch-markers" class="auto internal xref">Section 4</a> of RFCthis<a href="#section-6.2-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-7.2-2.6">
+            <p id="section-7.2-2.6.1">Specification Document(s): <a href="#sec-epoch-markers" class="auto internal xref">Section 4</a> of RFCthis<a href="#section-7.2-2.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1813,19 +1824,23 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-7.1">
+<section id="section-8.1">
         <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
+        <dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-18</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-18</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
         <dd>
-<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-13</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-13">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-15</span>, <time datetime="2025-08-18" class="refDate">18 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1842,6 +1857,10 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8610">[RFC8610]</dt>
         <dd>
@@ -1861,11 +1880,21 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dd class="break"></dd>
 <dt id="STD94">[STD94]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8949">https://www.rfc-editor.org/rfc/rfc8949</a>&gt;</span>. </dd>
+<div class="refInstance">Internet Standard 94, <span>&lt;<a href="https://www.rfc-editor.org/info/std94">https://www.rfc-editor.org/info/std94</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC8949">
+            <span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">STD 94</span>, <span class="seriesInfo">RFC 8949</span>, <span class="seriesInfo">DOI 10.17487/RFC8949</span>, <time datetime="2020-12" class="refDate">December 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8949">https://www.rfc-editor.org/info/rfc8949</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 <dt id="STD96">[STD96]</dt>
         <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9052">https://www.rfc-editor.org/rfc/rfc9052</a>&gt;</span>. </dd>
+<div class="refInstance">Internet Standard 96, <span>&lt;<a href="https://www.rfc-editor.org/info/std96">https://www.rfc-editor.org/info/std96</a>&gt;</span>.<br><span>At the time of writing, this STD comprises the following:</span>
+</div>
+<div class="refInstance" id="RFC9052">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Structures and Process"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9052</span>, <span class="seriesInfo">DOI 10.17487/RFC9052</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9052">https://www.rfc-editor.org/info/rfc9052</a>&gt;</span>. </div>
+<div class="refInstance" id="RFC9338">
+            <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Countersignatures"</span>, <span class="seriesInfo">STD 96</span>, <span class="seriesInfo">RFC 9338</span>, <span class="seriesInfo">DOI 10.17487/RFC9338</span>, <time datetime="2022-12" class="refDate">December 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9338">https://www.rfc-editor.org/info/rfc9338</a>&gt;</span>. </div>
+</dd>
 <dd class="break"></dd>
 <dt id="X.690">[X.690]</dt>
       <dd>
@@ -1875,14 +1904,18 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-7.2">
+<section id="section-8.2">
         <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-lamps-csr-attestation">[I-D.ietf-lamps-csr-attestation]</dt>
+        <dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Wiseman, M.</span>, and <span class="refAuthor">N. Smith</span>, <span class="refTitle">"Use of Remote Attestation with Certification Signing Requests"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-csr-attestation-21</span>, <time datetime="2025-10-05" class="refDate">5 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-csr-attestation-21</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-rats-ar4si">[I-D.ietf-rats-ar4si]</dt>
         <dd>
-<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-08</span>, <time datetime="2025-02-06" class="refDate">6 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-09</span>, <time datetime="2025-08-15" class="refDate">15 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-eat">[I-D.ietf-rats-eat]</dt>
         <dd>
@@ -1890,11 +1923,11 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
 <dd class="break"></dd>
 <dt id="I-D.ietf-rats-reference-interaction-models">[I-D.ietf-rats-reference-interaction-models]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Eckel, M.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">E. Voit</span>, <span class="refTitle">"Reference Interaction Models for Remote Attestation Procedures"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-reference-interaction-models-13</span>, <time datetime="2025-02-26" class="refDate">26 February 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-13">https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Eckel, M.</span>, <span class="refAuthor">Pan, W.</span>, and <span class="refAuthor">E. Voit</span>, <span class="refTitle">"Reference Interaction Models for Remote Attestation Procedures"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-reference-interaction-models-14</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-14">https://datatracker.ietf.org/doc/html/draft-ietf-rats-reference-interaction-models-14</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-scitt-architecture">[I-D.ietf-scitt-architecture]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-11</span>, <time datetime="2025-03-03" class="refDate">3 March 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-11">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-21</span>, <time datetime="2025-09-30" class="refDate">30 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-21">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.cbor-tags">[IANA.cbor-tags]</dt>
         <dd>
@@ -1922,27 +1955,74 @@ number of this RFC and remove this note.</span><a href="#section-6-1" class="pil
       <h2 id="name-examples">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
-<p id="appendix-A-1">The example in <a href="#fig-ex-1" class="auto internal xref">Figure 2</a> shows an epoch marker with a cbor-epoch-id and no
-bell veracity proof.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<span id="name-cbor-epoch-id-without-bell-"></span><div id="fig-ex-1">
-<figure id="figure-2">
+<p id="appendix-A-1">The example in <a href="#fig-ex-1" class="auto internal xref">Figure 3</a> shows an Epoch Marker with an <code>etime</code> as the Epoch Marker type.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<span id="name-cbor-epoch-marker-based-on-"></span><div id="fig-ex-1">
+<figure id="figure-3">
         <div class="alignCenter art-cbor-diag art-text artwork" id="appendix-A-2.1">
 <pre>
-[
-  / cbor-epoch-id / [
-    / 1996-12-19T16:39:57-08:00[America//Los_Angeles][u-ca=hebrew] /
-    / etime / 1001({
-        1: 851042397,
-      -10: "America/Los_Angeles",
-      -11: { "u-ca": "hebrew" }
-    })
-  ]
-  / no bell veracity proof /
-]
+/ epoch-marker for
+  1996-12-19T16:39:57-08:00[America//Los_Angeles][u-ca=hebrew] /
+/ etime / 1001({
+    1: 851042397,
+  -10: "America/Los_Angeles",
+  -11: { "u-ca": "hebrew" }
+})
 </pre>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-cbor-epoch-id-without-bell-" class="selfRef">CBOR epoch id without bell veracity proof</a>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-cbor-epoch-marker-based-on-" class="selfRef">CBOR Epoch Marker based on `etime` (EDN)</a>
+        </figcaption></figure>
+</div>
+<p id="appendix-A-3">The encoded data item in CBOR pretty-printed form (hex with comments) is shown in <a href="#fig-ex-1-pretty" class="auto internal xref">Figure 4</a>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<span id="name-cbor-epoch-marker-based-on-e"></span><div id="fig-ex-1-pretty">
+<figure id="figure-4">
+        <div class="alignCenter art-cbor-pretty art-text artwork" id="appendix-A-4.1">
+<pre>
+d9 03e9                                 # tag(1001)
+   a3                                   # map(3)
+      01                                # unsigned(1)
+      1a 32b9e05d                       # unsigned(851042397)
+      29                                # negative(9)
+      73                                # text(19)
+         416d65726963612f4c6f735f416e67656c6573 # "America/Los_Angeles"
+      2a                                # negative(10)
+      a1                                # map(1)
+         64                             # text(4)
+            752d6361                    # "u-ca"
+         66                             # text(6)
+            686562726577                # "hebrew"
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-cbor-epoch-marker-based-on-e" class="selfRef">CBOR Epoch Marker based on `etime` (pretty hex)</a>
+        </figcaption></figure>
+</div>
+<p id="appendix-A-5">The example in <a href="#fig-ex-2" class="auto internal xref">Figure 5</a> shows a CWT-signed Epoch Marker with <code>epoch-tick</code> as the Epoch Marker type.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+<span id="name-cwt-epoch-marker-based-on-e"></span><div id="fig-ex-2">
+<figure id="figure-5">
+        <div class="alignCenter art-cbor-diag art-text artwork" id="appendix-A-6.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+18([
+  / protected / &lt;&lt; {
+    / alg / 1: -7 / ECDSA 256 /
+  } &gt;&gt;,
+  / unprotected / {},
+  / payload / &lt;&lt; {
+    / iss / 1 : "ACME epoch bell",
+    / aud / 3 : "ACME protocol clients",
+    / epoch marker / 2000: 26982(h'\
+   482e829ad29ac6ea6eda2d47d1d93a002bf41d9d88710ba972c36e59038f78b3')
+    / nbf / 5 : 1757929800,
+    / exp / 4 : 1757929860
+  } &gt;&gt;,
+  / signature / h'face5190'
+])
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-cwt-epoch-marker-based-on-e" class="selfRef">CWT Epoch Marker based on `epoch-tick` (EDN)</a>
         </figcaption></figure>
 </div>
 <div id="classic-tstinfo">
