@@ -17,9 +17,10 @@ endif
 
 include cddl/frag.mk
 
-# $(drafts_xml):: cddl/epoch-marker-autogen.cddl
-
 cddl/epoch-marker-autogen.cddl: $(addprefix cddl/,$(EPOCH_MARKER_FRAGS))
 	$(MAKE) -C cddl check-epoch-marker check-epoch-marker-examples
+
+cddl/examples/1.pretty:
+	$(MAKE) -C cddl check-epoch-marker-examples
 
 clean:: ; $(MAKE) -C cddl clean
