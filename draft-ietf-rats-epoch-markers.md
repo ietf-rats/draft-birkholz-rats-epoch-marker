@@ -134,7 +134,7 @@ Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats su
 
 ## Terminology
 
-This document borrows the following terms from other documents:
+This document makes use of the following terms from other documents:
 
 * "conceptual messages" as defined in {{Section 8 of -rats-arch}}
 * "freshness" and "epoch" as defined in {{Section 10 of -rats-arch}}
