@@ -1056,7 +1056,7 @@ A.1.  RFC 3161 TSTInfo
 
 Acknowledgements
 
-   TBD
+   Thank you Ionuț Mihalcea, for your fixes and improvements.
 
 
 
