@@ -132,7 +132,14 @@ However, CWTs are not the only containers in which Epoch Markers can be embedded
 Epoch Markers can be included in any type of message that allows for the embedding of opaque bytes or CBOR data items.
 Examples include the Collection CMW in {{-csr-attestation}}, Evidence formats such as {{TCG-CoEvidence}} or {{-rats-eat}}, Attestation Results formats such as {{-rats-ar4si}}, or the CWT Claims Header Parameter of {{-scitt-receipts}}.
 
-## Requirements Notation
+## Terminology
+
+This document makes use of the following terms from other documents:
+
+* "conceptual messages" as defined in {{Section 8 of -rats-arch}}
+* "freshness" and "epoch" as defined in {{Section 10 of -rats-arch}}
+* "handle" as defined in {{Section 6 of -rats-models}}
+* "Time-Stamp Authority" as defined by {{-TSA}}
 
 {::boilerplate bcp14-tagged}
 
@@ -370,7 +377,7 @@ strictly-monotonic-counter:
 
 ## Time Requirements {#sec-time-reqs}
 
-Time MUST be sourced from a trusted clock.
+Time MUST be sourced from a trusted clock (see {{Section 10.1 of -rats-arch}}).
 
 ## Nonce Requirements {#sec-nonce-reqs}
 
