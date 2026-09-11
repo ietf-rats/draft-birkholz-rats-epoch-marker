@@ -131,7 +131,7 @@ Therefore, reusing the core TSTInfo structure as an Epoch ID type for Epoch Mark
 There are, however, several other ways to represent a signed timestamp or the start of a new freshness epoch, respectively, and therefore other Epoch Marker types.
 
 To inform the design, this document discusses a number of interaction models in which Epoch Markers are expected to be exchanged.
-The default top-level structure of Epoch Markers described in this document is CBOR Web Tokens (CWT) {{-CWT}}.
+The default container for Epoch Bell-signed Epoch Markers described in this document is CBOR Web Tokens (CWT) {{-CWT}}.
 The present document specifies an extensible set of Epoch Marker types, along with the `em` CWT claim to include them in CWTs.
 CWTs are signed using COSE {{-COSE}} and benefit from wide tool support.
 However, CWTs are not the only containers in which Epoch Markers can be embedded.
@@ -180,7 +180,7 @@ In general, there are three major interaction models used in remote attestation:
 In all three interaction models, Epoch Markers can be used as content for the generic information element `handle` as introduced by {{-rats-models}}.
 Handles are used to establish freshness in ad-hoc, unsolicited, and solicited distribution mechanisms of an Epoch Bell.
 For example, an Epoch Marker can be used as a nonce in challenge-response remote attestation (e.g., for limiting the number of ad-hoc requests by a Verifier).
-If embedded in a CWT, an Epoch Marker can be used as a `handle` by extracting the value of the `em` Claim or by using the complete CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
+If embedded in a CWT, an Epoch Marker can be used as a `handle` by extracting the value of the `em` Claim or by using the complete Epoch Bell-signed CWT including an `em` Claim (e.g., functioning as a signed time-stamp token).
 Using an Epoch Marker requires the challenger to acquire an Epoch Marker beforehand, which may introduce a sensible overhead compared to using a simple nonce.
 
 When an Epoch Marker is used as the `handle` in the Passport or Background-Check challenge-response flows defined by {{-rats-models}}, the Verifier MUST follow the relevant Epoch Marker validation and acceptance policy.
@@ -197,7 +197,8 @@ The specification of such "outer" structures and protocols and the means how to 
 This document defines the different types of Epoch Markers in {{sec-iana-cbor-tags}}.
 When the media type `application/epoch-marker+cbor` is used to label content as an Epoch Marker, the `em-type` media type parameter can optionally specify the Epoch Marker type by referencing its CBOR tag number.
 For example, an Epoch Marker can be used to construct a CBOR-based trusted time stamp token, similar in function to a {{-TSA}} TimeStampToken, using CWT and the `em` Claim defined in this document (see {{fig-ex-2}} for an illustration).
-The value(s) that an Epoch Marker represents are intended to demonstrate freshness of messages and protocols, but they can also serve other purposes in cases where trusted timestamps or time intervals are required.
+The value(s) that an Epoch Marker represents are intended to demonstrate freshness of messages and protocols.
+Epoch Bell-signed Epoch Markers can also serve other purposes in cases where trusted timestamps or time intervals are required.
 Taken as an opaque value, it is possible to use Epoch Markers as values for a nonce field in existing data structures or protocols that already support extra data fields, such as `extraData` in TPMS_ATTEST {{TCG-TPM2}}.
 Similarities in the usage of nonces and Epoch Markers can sometimes lead to applications where both are used in the same interaction, albeit in different places and for different purposes.
 One example of such an application scenario is the "nested" use of classical nonces and Epoch Markers, whereby an Epoch Marker is requested to be used as a nonce value for a specific data structure, while a locally generated nonce is used to retrieve that Epoch Marker via an "outer" ad hoc interaction (e.g., nonce retrieval protocols that interact with an Epoch Bell to fetch an Epoch Marker to be used as a nonce).
@@ -275,7 +276,8 @@ This is the sha-256 hash of the string "EPOCH_BELL".
 
 The TimeStampToken obtained from the TSA MUST be stripped of the TSA signature.
 Only the TSTInfo is to be kept the rest MUST be discarded.
-The Epoch Bell COSE signature will replace the TSA signature.
+A TSTInfo structure is conveyed in an Epoch Bell-signed Epoch Marker.
+The COSE signature supplies the protection formerly supplied by the discarded TSA envelope.
 
 ### CBOR-encoded RFC3161 TST Info {#sec-rfc3161-fancy}
 
@@ -395,6 +397,10 @@ epoch-tick-list:
 Each Epoch Tick in the list is used in a consecutive generation of a conceptual message.
 Asserting freshness of a conceptual message including an Epoch Tick from the epoch-tick-list requires some state on the receiver side to assess if that Epoch Tick is the appropriate next unused Epoch Tick from the epoch-tick-list.
 
+The Epoch Bell MUST provide the entire epoch-tick-list as an Epoch Bell-signed Epoch Marker.
+Once a receiver has verified and retained that list, it can use each extracted Epoch Tick value independently, with no attached Epoch Bell signature.
+Epoch Tick List cannot be used in cases where the issuer needs to be verified for each Epoch Tick individually during use.
+
 #### Creation
 
 The emitter MUST follow the requirements in {{sec-nonce-reqs}}.
@@ -433,7 +439,7 @@ One alternative is to use time-synchronized servers that share a symmetric key a
 This means that a nonce minted by one server can be processed by any other server, avoiding the need for session "stickiness".
 
 An `epoclet` is an Epoch ID variant that supports the above use case by encoding a POSIX time (i.e., the epoch identifier) alongside a minimal set of metadata.
-This is all authenticated with a symmetric key in a self-contained and compact token that fits within 64 bytes.
+This is all data-origin-authenticated with a symmetric key in a self-contained and compact token that fits within 64 bytes.
 This makes it easy to use with common Evidence retrieval ABIs, which tend to limit the size of the challenge parameter to 64 bytes.
 
 ~~~~ cddl
@@ -500,12 +506,17 @@ Systems that use Epoch Markers SHOULD document whether they use global epoch tra
 
 # Signature Requirements {#sec-signature-reqs}
 
-The signature over an Epoch Marker MUST be generated by the Epoch Bell.
-Conversely, applying the first signature to an Epoch Marker always makes the issuer of a signed message containing an Epoch Marker an Epoch Bell.
+An Epoch Marker does not intrinsically include a signature.
+An Epoch Bell-signed Epoch Marker is an Epoch Marker conveyed in a signed data structure whose signature was generated by an Epoch Bell.
+When a recipient needs to establish that an Epoch Marker was issued by an authorized Epoch Bell, the Epoch Marker MUST be an Epoch Bell-signed Epoch Marker and its Epoch Bell signature MUST be validated.
+This is an alternative Epoch Marker distribution mechanism to the one described in {{sec-epoclet}}.
+
+An Epoch ID value is often intended to be extracted from an Epoch Bell-signed Epoch Marker and included in another protected message, or conveyed via a secure channel.
+Protection of that other message does not by itself make the extracted value an Epoch Bell-signed Epoch Marker, nor does it make its signer an Epoch Bell.
 
 # Epoch Bell Certification {#sec-epoch-bell-cert}
 
-Relying Parties that receive Epoch Markers directly or as part of other RATS conceptual messages need a way to determine whether the signing key that produced an Epoch Marker was authorized to do so.
+Relying Parties that receive Epoch Bell-signed Epoch Markers directly or as part of other RATS conceptual messages need a way to determine whether the Bell signing key was authorized to do so.
 This section defines a mechanism for conveying that authorization when the Epoch Bell is certified using an X.509 public-key certificate {{-PKIX}}.
 Authorization of Epoch Bells that are not certified using X.509 (e.g., ecosystems that convey authorization semantics via CBOR-native structures) is out of scope of this document.
 
@@ -517,7 +528,7 @@ Certificates conforming to this specification:
 * MUST NOT include the anyExtendedKeyUsage value in the EKU extension; and
 * SHOULD NOT include EKU values other than `id-kp-epochBell`, so that the key is not authorized for any purpose besides generating Epoch Markers.
 
-Relying parties that require X.509-certified Epoch Bells MUST reject an Epoch Marker whose signing certificate does not satisfy these constraints.
+Relying parties that require X.509-certified Epoch Bells MUST reject Epoch Bell-signed Epoch Markers whose signing certificate does not satisfy these constraints.
 
 The following module adheres to ASN.1 specifications {{X.680}} and {{X.690}}.
 
@@ -546,24 +557,24 @@ END
 # Security Considerations {#sec-seccons}
 
 In distributed systems that rely on Epoch Markers for conveyance of freshness, the Epoch Bell plays a significant role in the assumed trust model.
-Freshness decisions derived from Epoch Markers depend on the Epoch Bell’s key(s) and correct behavior.
-If the Epoch Bell key is compromised, or the Bell is malicious/misconfigured, an attacker can emit valid-looking “fresh” Epoch Markers.
+Freshness decisions derived from Epoch Bell-signed Epoch Markers depend on the Epoch Bell’s key(s) and correct behavior.
+If the Epoch Bell key is compromised, or the Bell is malicious/misconfigured, an attacker can emit valid-looking “fresh” Epoch Bell-signed Epoch Markers.
 System deployments using Epoch Markers generally need to protect Bell signing keys (secure storage, rotation, revocation) and scope acceptance to the intended trust domain (e.g., expected issuer/trust anchor).
 Similarly, the Bell's clock needs to be securely sourced and managed, to prevent attacks that skew the Bell's perception of time.
 
 ## Epoch Bell Authorization
 
-Because Epoch Markers are only as trustworthy as the process that authorizes an entity to act as an Epoch Bell, relying parties need means to verify that a signing key was actually authorized for that purpose, and that the key is not shared with, or reused for, unrelated duties.
+Because Epoch Bell-signed Epoch Markers are only as trustworthy as the process that authorizes an entity to act as an Epoch Bell, relying parties need means to verify that a signing key was actually authorized for that purpose, and that the key is not shared with, or reused for, unrelated duties.
 
 Deployments that certify Epoch Bells via X.509 SHOULD rely on the `id-kp-epochBell` Extended Key Usage defined in {{sec-epoch-bell-cert}} to authorize and constrain Epoch Bell signing keys.
-Extended Key Usage is checked by conforming path-validation implementations and, when a single-purpose EKU is asserted critical (as mandated in {{sec-epoch-bell-cert}}), provides an explicit, enforceable signal that a key's use is restricted to generating Epoch Markers.
+Extended Key Usage is checked by conforming path-validation implementations and, when a single-purpose EKU is asserted critical (as mandated in {{sec-epoch-bell-cert}}), provides an explicit, enforceable signal that a key's use is restricted to signing Epoch Markers.
 
 This mechanism only addresses X.509-certified Epoch Bells; it is an intermediate approach pending broader work on expressing authorization semantics for CBOR-native trust structures, which is out of scope of this document.
 
 ## Epoch Signalling Issues
 
 {{Section 12.3 of -rats-arch}} provides a good introduction to attacks on conveyance of Epoch Markers.
-A network adversary can replay validly signed Epoch Markers or delay distribution, and differential latency can lead to different parties having different views of the “current” epoch.
+A network adversary can replay valid Epoch Bell-signed Epoch Markers or delay distribution, and differential latency can lead to different parties having different views of the “current” epoch.
 
 The epoch (acceptable window) duration is an operational security parameter: if too long, an Attester can create “good” Evidence in a good state and release it later while the epoch is still acceptable (notably for epoch-tick, epoch-tick-list, and strictly-monotonic-counter); if too short, distant Attesters may be rejected as stale due to latency.
 Epoch Markers are also designed to be reusable by multiple consumers, unlike nonces.
@@ -574,17 +585,17 @@ Finally, system deployments using Epoch Markers are normally required to pin whi
 
 The following illustrative cases highlight “reasonable best practice” choices for balancing freshness, replay protection, and scalability.
 
-* *Nonce-bound Bell interaction*: When a Verifier uses a nonce challenge to trigger Evidence creation, the Attester can forward that nonce to the Epoch Bell to request an Epoch Marker with the nonce echoed inside.
+* *Nonce-bound Bell interaction*: When a Verifier uses a nonce challenge to trigger Evidence creation, the Attester can forward that nonce to the Epoch Bell to request an Epoch Bell-signed Epoch Marker with the nonce echoed inside.
 For reuse and caching, the typical pattern is to keep the marker generic and embed the Verifier nonce alongside the marker in the Evidence: if the Bell signs a nonce-echoed marker, that marker is not reusable across sessions.
 The nonce and marker are thus either bound by the Bell's signature, or by the attester's signature on the Evidence.
-The Verifier checks that (1) the nonce matches its challenge, (2) the Epoch Marker signature chains to the expected Bell key, and (3) the marker satisfies the acceptance policy (e.g., highest-seen counter or time window).
+The Verifier checks that (1) the nonce matches its challenge, (2) the Epoch Marker signature chains to the expected signing key (either the Bell's signing key, or the attester's Attesting Key), and (3) the marker satisfies the acceptance policy (e.g., highest-seen counter or time window).
 This pairing gives per-session uniqueness while still allowing Epoch Marker reuse by multiple consumers.
 
 * *Long-latency paths (e.g., LoRaWAN or DTN profiles)*: High propagation and queuing delays make tight epoch windows brittle.
 In system deployments using Epoch Markers, epoch-tick-list can be pre-provisioned to Attesters so that each interaction consumes the next tick, with the Verifier keeping per-Attester sequencing state ({{sec-state-seq-mgmt}}).
 Epoch duration should cover worst-case delivery plus clock skew of the Bell, and acceptance policies should allow an overlap (e.g., current and immediately previous epoch) to absorb in-flight drift while still rejecting replays beyond that window.
 
-* *Large fleets sharing a Bell*: When many Attesters reuse the same Epoch Marker, per-Attester state at the Verifier may be impractical.
+* *Large fleets sharing a Bell*: When many Attesters reuse the same Epoch Marker value, per-Attester state at the Verifier may be impractical.
 One approach is to accept a global highest-seen epoch (with a bounded replay window) while requiring each Evidence record to bind the Epoch Marker to the Attester identity and, when feasible, a Verifier-provided nonce.
 This limits cross-attester replay of a single Epoch Marker while keeping the Bell stateless, which allows Epoch Markers to be cached and enables their broadcast distribution at scale.
 
